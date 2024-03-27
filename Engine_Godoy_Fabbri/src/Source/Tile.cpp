@@ -18,6 +18,6 @@ namespace ToToEng
 
     void Tile::loadTexture(const char* texturePath)
     {
-        textureId = TextureImporter::loadTexture(texturePath);
+        textureId = TextureImporter::loadTexture(texturePath, texWidth, texHeight);
     }
 }

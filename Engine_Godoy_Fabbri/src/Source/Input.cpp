@@ -17,7 +17,11 @@ namespace ToToEng
 		instance = this;
 
 		window = Window::getInstance()->getWindow();
-		
+
+		mouseLastPos = { 0, 0 };
+		mouseDelta = { 0, 0 };
+
+		glfwSetCursorPosCallback(window, mouseCallback);
 		glfwSetKeyCallback(window, keyCallback);
 	}
 
@@ -52,6 +56,34 @@ namespace ToToEng
 		}
 
 		return false;
+	}
+
+	glm::vec2 Input::getMouseDelta()
+	{
+		glm::vec2 delta = getInstance()->mouseDelta;
+		getInstance()->mouseDelta = glm::vec2(0, 0);
+		
+		return delta;
+	}
+
+	bool Input::setCursorVisibility(bool visibility)
+	{
+		if (visibility)
+			glfwSetInputMode(Window::getInstance()->getWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		else
+			glfwSetInputMode(Window::getInstance()->getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		return visibility;
+	}
+
+	void Input::updateCursor(double xpos, double ypos)
+	{
+		instance->mouseDelta = glm::vec2(instance->mouseLastPos.x - xpos, instance->mouseLastPos.y - ypos);
+		instance->mouseLastPos = glm::vec2(xpos, ypos);
+	}
+
+	void mouseCallback(GLFWwindow* window, double xpos, double ypos)
+	{
+		Input::updateCursor(xpos, ypos);
 	}
 
 	void keyCallback(GLFWwindow* window, int key, int scancode, const int action, int mods)

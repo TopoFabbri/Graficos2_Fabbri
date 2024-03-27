@@ -20,7 +20,7 @@ ToToEng::Entity2D::Entity2D(Renderer* renderer): Entity(renderer)
     indexQty = 6;
     id = 1;
 
-    transform.setScale({100.f, 100.f, 100.f});
+    // transform.setScale({100.f, 100.f, 100.f});
 
     positions = new float[vertexQty * 3]
     {

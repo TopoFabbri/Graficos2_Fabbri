@@ -23,7 +23,7 @@ namespace ToToEng
         Camera* camera;
 
     public:
-        BaseGame(bool is3D, int width, int height, const char* title);
+        BaseGame(int width, int height, const char* title);
         virtual ~BaseGame();
 
         void run();

@@ -5,15 +5,15 @@
 
 namespace ToToEng
 {
-	BaseGame::BaseGame(bool is3D, int width, int height, const char* title)
+	BaseGame::BaseGame(int width, int height, const char* title)
 	{
 		camera = new Camera();
 		window = new Window(width, height, title);
-		renderer = new Renderer(window, camera, is3D);
+		renderer = new Renderer(window, camera);
 		collisionManager = new CollisionManager();
 
-		camera->transform.setPos({ 0, 0, 1 });
-
+		Input::setCursorVisibility(false);
+		
 		GameTime::resetTime();
 	}
 
@@ -41,7 +41,7 @@ namespace ToToEng
 		while (!window->shouldClose())
 		{
 			GameTime::update();
-			renderer->setView(lookAt(camera->transform.getPos(), camera->transform.getPos() + camera->transform.forward(), camera->transform.up()));
+			renderer->setView(camera->getView());
 			
 			for (Entity* entity : entities)
 				entity->update();

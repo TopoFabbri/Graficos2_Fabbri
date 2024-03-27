@@ -1,22 +1,14 @@
 #include "Game.h"
 
-#include "Character.h"
+#include "Headers/Sprite.h"
 
-Game::Game(bool is3D, int width, int height, const char* title) : BaseGame(is3D, width, height, title)
+Game::Game(int width, int height, const char* title) : BaseGame(width, height, title)
 {
     entities.push_back(new Sprite(renderer));
-    dynamic_cast<Sprite*>(entities.back())->loadTexture("../res/textures/BG.png");
-    dynamic_cast<Sprite*>(entities.back())->setTrigger(true);
-    dynamic_cast<Sprite*>(entities.back())->transform.setScale({1600.f, 1600.f, 0.f});
-
-    entities.push_back(new Character(renderer));
-    character = dynamic_cast<Character*>(entities.back());
-
+    entities.back()->transform.setScale({1, 1, 1});
     entities.push_back(new Sprite(renderer));
-    dynamic_cast<Sprite*>(entities.back())->setTrigger(false);
-
-    dynamic_cast<Sprite*>(entities.back())->addAnimation(2.f, 5, {132.f, 323.f}, {49.f, 120.f}, "../res/textures/Sonic_Mania_Sprite_Sheet.png");
-    dynamic_cast<Sprite*>(entities.back())->animation->setAnimByIndex(6);
+    entities.back()->transform.setScale({1, 1, 1});
+    entities.back()->transform.setPos({1, 1, 1});
 }
 
 Game::~Game()
@@ -25,5 +17,28 @@ Game::~Game()
 
 void Game::update()
 {
-    camera->transform.lerpPos2D(character->transform.getPos() - vec3(400.f, 300.f, 0), .1f);
+    float camSpeed = 1.f;
+    float camSens = 5.f;
+
+    if (Input::getKey(Input::a, Input::Repeated))
+        camera->moveRight(-camSpeed * GameTime::getDelta());
+    if (Input::getKey(Input::d, Input::Repeated))
+        camera->moveRight(camSpeed * GameTime::getDelta());
+
+    if (Input::getKey(Input::w, Input::Repeated))
+        camera->moveForward(camSpeed * GameTime::getDelta());
+    if (Input::getKey(Input::s, Input::Repeated))
+        camera->moveForward(-camSpeed * GameTime::getDelta());
+
+    if (Input::getKey(Input::e, Input::Repeated))
+        camera->moveUp(camSpeed * GameTime::getDelta());
+    if (Input::getKey(Input::q, Input::Repeated))
+        camera->moveUp(-camSpeed * GameTime::getDelta());
+
+    const vec2 mouseDelta = Input::getMouseDelta();
+
+    if (abs(mouseDelta.x) > 0.0001f)
+        camera->rotateYaw(-camSens * mouseDelta.x * GameTime::getDelta());
+    if (abs(mouseDelta.y) > 0.0001f)
+        camera->rotatePitch(camSens * mouseDelta.y * GameTime::getDelta());
 }

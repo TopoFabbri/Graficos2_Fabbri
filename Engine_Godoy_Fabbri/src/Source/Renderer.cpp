@@ -4,7 +4,7 @@
 
 namespace ToToEng
 {
-    Renderer::Renderer(Window* window, Camera* camera, bool is3D)
+    Renderer::Renderer(Window* window, Camera* camera)
     {
         this->window = window;
 
@@ -18,23 +18,26 @@ namespace ToToEng
 
         glCall(u_TransformLocation = glGetUniformLocation(shader, "u_Transform"));
         _ASSERT(u_TransformLocation != -1);
-        
+
         glCall(u_ShapeTransformLocation = glGetUniformLocation(shapeShader, "u_Transform"));
         _ASSERT(u_TransformLocation != -1);
 
-        if (is3D)
-        {
-            setProjection(perspective(radians(45.f),
-                                      static_cast<float>(window->getWidth()) / static_cast<float>(window->getHeight()),
-                                      0.1f, 100.f));
-            cameraPos = vec3(0.0f, 0.0f, 3.0f);
-        }
-        else
-        {
-            setProjection(ortho(0.0f, static_cast<float>(window->getWidth()), 0.0f,
-                                static_cast<float>(window->getHeight()), 0.1f, 500.f));
-            cameraPos = vec3(0.0f, 0.0f, 1.0f);
-        }
+        glCall(glEnable(GL_DEPTH_TEST));
+        glCall(glDepthFunc(GL_LESS));
+        
+        glCall(glEnable(GL_BLEND));
+        glCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+        
+        glCall(glEnable(GL_SAMPLE_ALPHA_TO_COVERAGE));
+        glCall(glEnable(GL_SAMPLE_ALPHA_TO_ONE));
+        
+        glCall(glEnable(GL_ALPHA_TEST));
+        glCall(glAlphaFunc(GL_GREATER, 0.1f));
+        
+        setProjection(perspective(radians(45.f),
+                                  static_cast<float>(window->getWidth()) / static_cast<float>(window->getHeight()),
+                                  0.1f, 100.f));
+        cameraPos = vec3(0.0f, 0.0f, 3.0f);
 
         view = lookAt(cameraPos, {0, 0, 0}, {0, 1, 0});
     }
@@ -46,7 +49,7 @@ namespace ToToEng
 
     void Renderer::beginDraw()
     {
-        glCall(glClear(GL_COLOR_BUFFER_BIT));
+        glCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
     }
 
     void Renderer::endDraw()
@@ -79,8 +82,7 @@ namespace ToToEng
         glCall(glEnableVertexAttribArray(2));
     }
 
-    void Renderer::genIndexBuffer(unsigned int& IBO,
-                                  unsigned int indices[], unsigned int id, unsigned int qty)
+    void Renderer::genIndexBuffer(unsigned int& IBO, unsigned int indices[], unsigned int id, unsigned int qty)
     {
         glCall(glGenBuffers(id, &IBO));
         glCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO));

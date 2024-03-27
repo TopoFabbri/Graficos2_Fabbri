@@ -15,6 +15,8 @@
 	ASSERT(glLogCall(#x, __FILE__, __LINE__))
 #pragma endregion
 
+using namespace glm; 
+
 namespace ToToEng
 {
 	class Renderer
@@ -44,7 +46,7 @@ namespace ToToEng
 		static bool glLogCall(const char* function, const char* file, int line);
 
 	public:
-		Renderer(Window* window, Camera* camera, bool is3D);
+		Renderer(Window* window, Camera* camera);
 		~Renderer();
 
 		void beginDraw();

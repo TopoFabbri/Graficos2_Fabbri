@@ -8,6 +8,8 @@ namespace ToToEng
         int id;
         int x;
         int y;
+        int texWidth;
+        int texHeight;
         unsigned int textureId;
     
     public:
