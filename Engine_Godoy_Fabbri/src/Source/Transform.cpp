@@ -22,6 +22,21 @@ namespace ToToEng
     {
     }
 
+    void Transform::moveForward(float dist)
+    {
+        setPos(pos + forward() * dist);
+    }
+
+    void Transform::moveRight(float dist)
+    {
+        setPos(pos + right() * dist);
+    }
+
+    void Transform::moveUp(float dist)
+    {
+        setPos(pos + up() * dist);
+    }
+
     vec3 Transform::getPos()
     {
         return pos;

@@ -29,6 +29,10 @@ namespace ToToEng
 		Transform();
 		~Transform();
 
+		void moveForward(float dist);
+		void moveRight(float dist);
+		void moveUp(float dist);
+
 #pragma region GETTERS
 
 		vec3 getPos();

@@ -12,9 +12,6 @@ namespace ToToEng
 
     void Camera::updateRotation()
     {
-        system("cls");
-        std::cout << rot.x << std::endl;
-        
         forward.x = cos(glm::radians(rot.y)) * cos(glm::radians(rot.x));
         forward.y = sin(glm::radians(rot.x));
         forward.z = sin(glm::radians(rot.y)) * cos(glm::radians(rot.x));
@@ -22,7 +19,7 @@ namespace ToToEng
 
     Camera::Camera()
     {
-        pos = glm::vec3(0.0f, 0.0f, -1.0f);
+        pos = glm::vec3(0.0f, 0.0f, 2.0f);
         forward = glm::vec3(0.0f, 0.0f, 1.0f);
         up = glm::vec3(0.0f, 1.0f, 0.0f);
         rot = glm::vec3(0.0f, -90.0f, 0.0f);
@@ -55,13 +52,20 @@ namespace ToToEng
     void Camera::rotateYaw(float amount)
     {
         rot.y += amount;
+
+        if (rot.y > 360.0f)
+            rot.y -= 360.0f;
+        else if (rot.y < 0.0f)
+            rot.y += 360.0f;
+
         updateRotation();
     }
 
     void Camera::rotatePitch(float amount)
     {
         rot.x += amount;
-
+        rot.x = glm::clamp(rot.x, -89.9f, 89.9f);
+        
         updateRotation();
     }
 }

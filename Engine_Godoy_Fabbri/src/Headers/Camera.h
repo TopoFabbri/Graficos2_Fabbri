@@ -8,7 +8,7 @@ namespace ToToEng
 {
 	class TOTO_API Camera
 	{
-	private:
+	protected:
 		glm::vec3 pos;
 		glm::vec3 forward;
 		glm::vec3 up;
@@ -19,13 +19,14 @@ namespace ToToEng
 	
 	public:
 		Camera();
-		~Camera();
+		virtual ~Camera();
 
 		glm::mat4 getView();
 
 		void moveUp(float amount);
 		void moveRight(float amount);
 		void moveForward(float amount);
+		
 		void rotateYaw(float amount);
 		void rotatePitch(float amount);
 	};
