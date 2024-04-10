@@ -122,6 +122,28 @@ namespace ToToEng
         glCall(glUseProgram(0));
     }
 
+    void Renderer::drawEntity3D(unsigned& VAO, unsigned indexQty, vec4 color, mat4 trans)
+    {
+        mat4 pvm = projection * view * trans;
+        
+        const vec3 ambient = ambientStrength * ambientColor;
+        color = vec4(ambient * vec3 (color.x, color.y, color.z), color.w);
+        
+        glCall(glUseProgram(shapeShader));
+        glCall(u_ColorLocation = glGetUniformLocation(shapeShader, "u_Color"));
+
+        glCall(glUniform4f(u_ColorLocation, color.x, color.y, color.z, color.w));
+
+        glCall(glBindVertexArray(VAO));
+
+        glCall(glUniformMatrix4fv(u_ShapeTransformLocation, 1, GL_FALSE, glm::value_ptr(pvm)));
+
+        glCall(glDrawElements(GL_TRIANGLES, indexQty, GL_UNSIGNED_INT, 0));
+
+        glCall(glBindVertexArray(0));
+        glCall(glUseProgram(0));
+    }
+
     void Renderer::drawShape(unsigned& VAO, unsigned indexQty, vec4 color, mat4 trans)
     {
         mat4 pvm = projection * view * trans;
@@ -149,6 +171,11 @@ namespace ToToEng
     void Renderer::setView(mat4 view)
     {
         this->view = view;
+    }
+
+    void Renderer::setAmbientStrength(float ambientStrength)
+    {
+        this->ambientStrength = ambientStrength;
     }
 
     unsigned int Renderer::compileShader(unsigned int type, const char* source)

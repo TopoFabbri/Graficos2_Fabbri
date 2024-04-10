@@ -6,6 +6,8 @@ Entity3D::Entity3D(ToToEng::Renderer* renderer) : Entity(renderer)
     indexQty = 36;
     id = 1;
 
+    color = vec4(1.0f, 0.5f, 0.31f, 1.f);
+
     positions = new float[vertexQty * 3]
     {
         -.5f, -.5f, -.5f,
@@ -41,35 +43,35 @@ Entity3D::Entity3D(ToToEng::Renderer* renderer) : Entity(renderer)
 
     colors = new float[vertexQty * 4]
     {
-        1.0f, 0.5f, 0.31f, 1.f,
-        1.0f, 0.5f, 0.31f, 1.f,
-        1.0f, 0.5f, 0.31f, 1.f,
-        1.0f, 0.5f, 0.31f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
         
-        1.0f, 0.5f, 0.31f, 1.f,
-        1.0f, 0.5f, 0.31f, 1.f,
-        1.0f, 0.5f, 0.31f, 1.f,
-        1.0f, 0.5f, 0.31f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
         
-        1.0f, 0.5f, 0.31f, 1.f,
-        1.0f, 0.5f, 0.31f, 1.f,
-        1.0f, 0.5f, 0.31f, 1.f,
-        1.0f, 0.5f, 0.31f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
         
-        1.0f, 0.5f, 0.31f, 1.f,
-        1.0f, 0.5f, 0.31f, 1.f,
-        1.0f, 0.5f, 0.31f, 1.f,
-        1.0f, 0.5f, 0.31f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
         
-        1.0f, 0.5f, 0.31f, 1.f,
-        1.0f, 0.5f, 0.31f, 1.f,
-        1.0f, 0.5f, 0.31f, 1.f,
-        1.0f, 0.5f, 0.31f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
         
-        1.0f, 0.5f, 0.31f, 1.f,
-        1.0f, 0.5f, 0.31f, 1.f,
-        1.0f, 0.5f, 0.31f, 1.f,
-        1.0f, 0.5f, 0.31f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f, 1.f
     };
 
     textureCoords = new float[vertexQty * 2]
@@ -135,5 +137,5 @@ Entity3D::~Entity3D()
 
 void Entity3D::draw()
 {
-    renderer->drawShape(VAO, indexQty, color, transform.getTransformMatrix());
+    renderer->drawEntity3D(VAO, indexQty, color, transform.getTransformMatrix());
 }
