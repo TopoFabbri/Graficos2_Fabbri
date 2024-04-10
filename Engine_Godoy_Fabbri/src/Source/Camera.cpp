@@ -63,8 +63,7 @@ namespace ToToEng
 
     void Camera::rotatePitch(float amount)
     {
-        rot.x += amount;
-        rot.x = glm::clamp(rot.x, -89.9f, 89.9f);
+        rot.x = glm::clamp(rot.x + amount, -89.9f, 89.9f);
         
         updateRotation();
     }

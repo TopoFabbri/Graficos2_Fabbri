@@ -75,15 +75,15 @@ namespace ToToEng
 		return visibility;
 	}
 
-	void Input::updateCursor(double xpos, double ypos)
+	void Input::updateCursor(const double xPos, const double yPos)
 	{
-		instance->mouseDelta = glm::vec2(instance->mouseLastPos.x - xpos, instance->mouseLastPos.y - ypos);
-		instance->mouseLastPos = glm::vec2(xpos, ypos);
+		instance->mouseDelta = glm::vec2(instance->mouseLastPos.x - xPos, instance->mouseLastPos.y - yPos);
+		instance->mouseLastPos = glm::vec2(xPos, yPos);
 	}
 
-	void mouseCallback(GLFWwindow* window, double xpos, double ypos)
+	void mouseCallback(GLFWwindow* window, const double xPos, const double yPos)
 	{
-		Input::updateCursor(xpos, ypos);
+		Input::updateCursor(xPos, yPos);
 	}
 
 	void keyCallback(GLFWwindow* window, int key, int scancode, const int action, int mods)

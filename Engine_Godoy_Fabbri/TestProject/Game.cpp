@@ -1,15 +1,13 @@
 #include "Game.h"
 
+#include "Headers/Entity3D.h"
 #include "Headers/Sprite.h"
 #include "Headers/TpCamera.h"
 
 Game::Game(int width, int height, const char* title) : BaseGame(width, height, title)
 {
-    entities.push_back(new Sprite(renderer));
+    entities.push_back(new Entity3D(renderer));
     entities.back()->transform.setScale({1, 1, 1});
-    entities.push_back(new Sprite(renderer));
-    entities.back()->transform.setScale({1, 1, 1});
-    entities.back()->transform.setPos({0, 0, 1});
 }
 
 Game::~Game()

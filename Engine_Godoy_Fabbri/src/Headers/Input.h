@@ -71,9 +71,9 @@ namespace ToToEng
         static bool getKey(KeyCode keyCode, Action action);
         static glm::vec2 getMouseDelta();
         static bool setCursorVisibility(bool visibility);
-        static void updateCursor(double xpos, double ypos);
+        static void updateCursor(double xPos, double yPos);
     };
 
-    void mouseCallback(GLFWwindow* window, double xpos, double ypos);
+    void mouseCallback(GLFWwindow* window, double xPos, double yPos);
     void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 }
