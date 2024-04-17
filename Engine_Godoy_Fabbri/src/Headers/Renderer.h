@@ -35,13 +35,13 @@ namespace ToToEng
 		unsigned int shader3D;
 		int u_TransformLocation;
 		int u_ShapeTransformLocation;
-		int u_3DTransformLocation;
 		int u_ColorLocation;
 		mat4 projection;
 		mat4 view;
 		vec3 cameraPos;
 
 		vec3 ambientColor = { 1.f, 1.f, 1.f };
+		vec3 lightPos = { 1.f, 0.f, 1.f };
 		float ambientStrength = 0.1f;
 
 		static unsigned int compileShader(unsigned int type, const char* source);

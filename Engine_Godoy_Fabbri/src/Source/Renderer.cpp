@@ -26,10 +26,6 @@ namespace ToToEng
         glCall(u_ShapeTransformLocation = glGetUniformLocation(shapeShader, "u_Transform"));
         _ASSERT(u_TransformLocation != -1);
 
-
-        glCall(u_3DTransformLocation = glGetUniformLocation(shader3D, "u_Transform"));
-        _ASSERT(u_TransformLocation != -1);
-
         glCall(glEnable(GL_DEPTH_TEST));
         glCall(glDepthFunc(GL_LESS));
 
@@ -130,19 +126,19 @@ namespace ToToEng
     }
 
     void Renderer::drawEntity3D(unsigned& VAO, unsigned indexQty, vec4 color, mat4 trans)
-    {
-        mat4 pvm = projection * view * trans;
-
+    {        
         glCall(glUseProgram(shader3D));
-        glCall(u_ColorLocation = glGetUniformLocation(shader3D, "u_Color"));
 
-        glCall(glUniform4f(u_ColorLocation, color.x, color.y, color.z, color.w));
+        glCall(glUniformMatrix4fv(glGetUniformLocation(shader3D, "model"), 1, GL_FALSE, glm::value_ptr(trans)));
+        glCall(glUniformMatrix4fv(glGetUniformLocation(shader3D, "view"), 1, GL_FALSE, glm::value_ptr(view)));
+        glCall(glUniformMatrix4fv(glGetUniformLocation(shader3D, "projection"), 1, GL_FALSE, glm::value_ptr(projection)));
+
+        glCall(glUniform3f(glGetUniformLocation(shader3D, "objectColor"), color.x, color.y, color.z));
         glCall(glUniform3f(glGetUniformLocation(shader3D, "lightColor"), ambientColor.x, ambientColor.y, ambientColor.z));
         glCall(glUniform1f(glGetUniformLocation(shader3D, "ambientStrength"), ambientStrength));
+        glCall(__glewUniform3f(glGetUniformLocation(shader3D, "lightPos"), lightPos.x, lightPos.y, lightPos.z));
 
         glCall(glBindVertexArray(VAO));
-
-        glCall(glUniformMatrix4fv(u_3DTransformLocation, 1, GL_FALSE, glm::value_ptr(pvm)));
 
         glCall(glDrawElements(GL_TRIANGLES, indexQty, GL_UNSIGNED_INT, 0));
 

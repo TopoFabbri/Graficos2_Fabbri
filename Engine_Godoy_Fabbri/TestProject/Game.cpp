@@ -16,7 +16,7 @@ Game::~Game()
 
 void Game::update()
 {
-    float speed = 1.f;
+    float speed = 2.f;
     float camSens = 5.f;
 
     if (Input::getKey(Input::a, Input::Repeated))

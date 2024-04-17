@@ -41,6 +41,39 @@ Entity3D::Entity3D(ToToEng::Renderer* renderer) : Entity(renderer)
         .5f, .5f, .5f
     };
 
+    normals = new float[vertexQty * 3]
+    {
+        0.f, 0.f, -1.f,
+        0.f, 0.f, -1.f,
+        0.f, 0.f, -1.f,
+        0.f, 0.f, -1.f,
+
+        1.f, 0.f, 0.f,
+        1.f, 0.f, 0.f,
+        1.f, 0.f, 0.f,
+        1.f, 0.f, 0.f,
+
+        -1.f, 0.f, 0.f,
+        -1.f, 0.f, 0.f,
+        -1.f, 0.f, 0.f,
+        -1.f, 0.f, 0.f,
+
+        0.f, 1.f, 0.f,
+        0.f, 1.f, 0.f,
+        0.f, 1.f, 0.f,
+        0.f, 1.f, 0.f,
+
+        0.f, -1.f, 0.f,
+        0.f, -1.f, 0.f,
+        0.f, -1.f, 0.f,
+        0.f, -1.f, 0.f,
+
+        0.f, 0.f, 1.f,
+        0.f, 0.f, 1.f,
+        0.f, 0.f, 1.f,
+        0.f, 0.f, 1.f
+    };
+    
     colors = new float[vertexQty * 4]
     {
         1.f, 1.f, 1.f, 1.f,
@@ -72,39 +105,6 @@ Entity3D::Entity3D(ToToEng::Renderer* renderer) : Entity(renderer)
         1.f, 1.f, 1.f, 1.f,
         1.f, 1.f, 1.f, 1.f,
         1.f, 1.f, 1.f, 1.f
-    };
-
-    normals = new float[vertexQty * 3]
-    {
-        1.f, 1.f, 1.f,
-        1.f, 1.f, 1.f,
-        1.f, 1.f, 1.f,
-        1.f, 1.f, 1.f,
-
-        1.f, 1.f, 1.f,
-        1.f, 1.f, 1.f,
-        1.f, 1.f, 1.f,
-        1.f, 1.f, 1.f,
-
-        1.f, 1.f, 1.f,
-        1.f, 1.f, 1.f,
-        1.f, 1.f, 1.f,
-        1.f, 1.f, 1.f,
-
-        1.f, 1.f, 1.f,
-        1.f, 1.f, 1.f,
-        1.f, 1.f, 1.f,
-        1.f, 1.f, 1.f,
-
-        1.f, 1.f, 1.f,
-        1.f, 1.f, 1.f,
-        1.f, 1.f, 1.f,
-        1.f, 1.f, 1.f,
-
-        1.f, 1.f, 1.f,
-        1.f, 1.f, 1.f,
-        1.f, 1.f, 1.f,
-        1.f, 1.f, 1.f
     };
 
     textureCoords = new float[vertexQty * 2]

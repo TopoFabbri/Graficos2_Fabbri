@@ -9,10 +9,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59b83834-1b16-455b-92bb-7e2412bbcbcc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/res/shaders/3D.shader" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/Entity3D.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Entity3D.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/shaders/3D.shader" beforeDir="false" afterPath="$PROJECT_DIR$/res/shaders/3D.shader" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Headers/Renderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Renderer.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Source/Entity3D.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Entity3D.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Source/Renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Renderer.cpp" afterDir="false" />
@@ -33,28 +30,27 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "TopoFabbri"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;TopoFabbri&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/TopoFabbri/Graficos2_Fabbri.git",
-    "accountId": "3c168789-73b5-460d-9fc2-bb694db85923"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/TopoFabbri/Graficos2_Fabbri.git&quot;,
+    &quot;accountId&quot;: &quot;3c168789-73b5-460d-9fc2-bb694db85923&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/glfw3.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/glm/detail/func_trigonometric.inl" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/glm/detail/type_vec2.inl" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/glm/detail/type_vec3.inl" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/glm/ext/matrix_transform.inl" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/glm/fwd.hpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Da Archive/Repos/TSDV-PG1-Fabbri-Godoy/Engine_Godoy_Fabbri/src/Source/Camera.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Da Archive/Repos/TSDV-PG1-Fabbri-Godoy/Engine_Godoy_Fabbri/src/Source/Camera.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Da Archive/Repos/TSDV-PG1-Fabbri-Godoy/Engine_Godoy_Fabbri/src/Source/Entity3D.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="false" />
   <component name="ProblemsViewState">
@@ -84,7 +80,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.sourceCode.C++",
+    "settings.editor.selected.configurable": "com.intellij.platform.ide.impl.presentationAssistant.PresentationAssistantConfigurable",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -246,6 +242,7 @@
       <workItem from="1712599949922" duration="487000" />
       <workItem from="1712785524366" duration="7620000" />
       <workItem from="1713293324728" duration="683000" />
+      <workItem from="1713377490344" duration="7061000" />
     </task>
     <task id="LOCAL-00001" summary="Re-do singleton input">
       <option name="closed" value="true" />
@@ -343,7 +340,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712790034126</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Fixed ambient lighting">
+      <option name="closed" value="true" />
+      <created>1713381313323</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1713381313323</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -376,6 +381,7 @@
     <MESSAGE value="Added 3rd person camera" />
     <MESSAGE value="Added 3d cube" />
     <MESSAGE value="Implemented ambient lighting" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented ambient lighting" />
+    <MESSAGE value="Fixed ambient lighting" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed ambient lighting" />
   </component>
 </project>
