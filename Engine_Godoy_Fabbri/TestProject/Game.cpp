@@ -8,6 +8,9 @@ Game::Game(int width, int height, const char* title) : BaseGame(width, height, t
 {
     entities.push_back(new Entity3D(renderer));
     entities.back()->transform.setScale({1, 1, 1});
+    entities.push_back(new Entity3D(renderer));
+    entities.back()->transform.setScale({100, 100, 100});
+    entities.back()->setColor({.3f, .5f, 1.f, 1.f});
 }
 
 Game::~Game()

@@ -136,7 +136,8 @@ namespace ToToEng
         glCall(glUniform3f(glGetUniformLocation(shader3D, "objectColor"), color.x, color.y, color.z));
         glCall(glUniform3f(glGetUniformLocation(shader3D, "lightColor"), ambientColor.x, ambientColor.y, ambientColor.z));
         glCall(glUniform1f(glGetUniformLocation(shader3D, "ambientStrength"), ambientStrength));
-        glCall(__glewUniform3f(glGetUniformLocation(shader3D, "lightPos"), lightPos.x, lightPos.y, lightPos.z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, "lightPos"), lightPos.x, lightPos.y, lightPos.z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, "viewPos"), cameraPos.x, cameraPos.y, cameraPos.z));
 
         glCall(glBindVertexArray(VAO));
 

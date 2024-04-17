@@ -42,7 +42,7 @@ namespace ToToEng
 
 		vec3 ambientColor = { 1.f, 1.f, 1.f };
 		vec3 lightPos = { 1.f, 0.f, 1.f };
-		float ambientStrength = 0.1f;
+		float ambientStrength = 0.5f;
 
 		static unsigned int compileShader(unsigned int type, const char* source);
 		static unsigned int createShader(const char* vShader, const char* fShader);
