@@ -14,7 +14,7 @@ Entity3D::Entity3D(ToToEng::Renderer* renderer) : Entity(renderer)
         .5f, -.5f, -.5f,
         -.5f, .5f, -.5f,
         .5f, .5f, -.5f,
-        
+
         .5f, -.5f, -.5f,
         .5f, -.5f, .5f,
         .5f, .5f, -.5f,
@@ -47,31 +47,64 @@ Entity3D::Entity3D(ToToEng::Renderer* renderer) : Entity(renderer)
         1.f, 1.f, 1.f, 1.f,
         1.f, 1.f, 1.f, 1.f,
         1.f, 1.f, 1.f, 1.f,
-        
+
         1.f, 1.f, 1.f, 1.f,
         1.f, 1.f, 1.f, 1.f,
         1.f, 1.f, 1.f, 1.f,
         1.f, 1.f, 1.f, 1.f,
-        
+
         1.f, 1.f, 1.f, 1.f,
         1.f, 1.f, 1.f, 1.f,
         1.f, 1.f, 1.f, 1.f,
         1.f, 1.f, 1.f, 1.f,
-        
+
         1.f, 1.f, 1.f, 1.f,
         1.f, 1.f, 1.f, 1.f,
         1.f, 1.f, 1.f, 1.f,
         1.f, 1.f, 1.f, 1.f,
-        
+
         1.f, 1.f, 1.f, 1.f,
         1.f, 1.f, 1.f, 1.f,
         1.f, 1.f, 1.f, 1.f,
         1.f, 1.f, 1.f, 1.f,
-        
+
         1.f, 1.f, 1.f, 1.f,
         1.f, 1.f, 1.f, 1.f,
         1.f, 1.f, 1.f, 1.f,
         1.f, 1.f, 1.f, 1.f
+    };
+
+    normals = new float[vertexQty * 3]
+    {
+        1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f,
+
+        1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f,
+
+        1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f,
+
+        1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f,
+
+        1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f,
+
+        1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f,
+        1.f, 1.f, 1.f
     };
 
     textureCoords = new float[vertexQty * 2]
@@ -80,11 +113,6 @@ Entity3D::Entity3D(ToToEng::Renderer* renderer) : Entity(renderer)
         1.f, 1.f,
         0.f, 0.f,
         0.f, 1.f,
-        
-        0.f, 1.f,
-        1.f, 1.f,
-        0.f, 0.f,
-        0.f, 1.f,
 
         0.f, 1.f,
         1.f, 1.f,
@@ -100,7 +128,12 @@ Entity3D::Entity3D(ToToEng::Renderer* renderer) : Entity(renderer)
         1.f, 1.f,
         0.f, 0.f,
         0.f, 1.f,
-        
+
+        0.f, 1.f,
+        1.f, 1.f,
+        0.f, 0.f,
+        0.f, 1.f,
+
         0.f, 1.f,
         1.f, 1.f,
         0.f, 0.f,
@@ -111,7 +144,7 @@ Entity3D::Entity3D(ToToEng::Renderer* renderer) : Entity(renderer)
     {
         0, 1, 2,
         1, 2, 3,
-        
+
         4, 5, 6,
         5, 6, 7,
 
@@ -133,9 +166,37 @@ Entity3D::Entity3D(ToToEng::Renderer* renderer) : Entity(renderer)
 
 Entity3D::~Entity3D()
 {
+    delete normals;
 }
 
 void Entity3D::draw()
 {
     renderer->drawEntity3D(VAO, indexQty, color, transform.getTransformMatrix());
+}
+
+void Entity3D::updateVao()
+{
+    delete vertices;
+
+    vertices = new float[vertexQty * 12];
+
+    for (unsigned int i = 0; i < vertexQty; i++)
+    {
+        vertices[12 * i] = positions[i * 3];
+        vertices[12 * i + 1] = positions[i * 3 + 1];
+        vertices[12 * i + 2] = positions[i * 3 + 2];
+
+        vertices[12 * i + 3] = colors[i * 4];
+        vertices[12 * i + 4] = colors[i * 4 + 1];
+        vertices[12 * i + 5] = colors[i * 4 + 2];
+        vertices[12 * i + 6] = colors[i * 4 + 3];
+
+        vertices[12 * i + 7] = normals[i * 3];
+        vertices[12 * i + 8] = normals[i * 3 + 1];
+
+        vertices[12 * i + 7] = textureCoords[i * 2];
+        vertices[12 * i + 8] = textureCoords[i * 2 + 1];
+    }
+
+    genBuffers();
 }

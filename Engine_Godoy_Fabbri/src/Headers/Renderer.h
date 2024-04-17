@@ -32,8 +32,10 @@ namespace ToToEng
 		Camera* camera;
 		unsigned int shader;
 		unsigned int shapeShader;
+		unsigned int shader3D;
 		int u_TransformLocation;
 		int u_ShapeTransformLocation;
+		int u_3DTransformLocation;
 		int u_ColorLocation;
 		mat4 projection;
 		mat4 view;

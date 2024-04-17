@@ -16,24 +16,32 @@ namespace ToToEng
         std::cout << glGetString(GL_VERSION) << std::endl;
         shapeShader = createShader(shaderSource.vertexSource.c_str(), shaderSource.fragmentSource.c_str());
 
+        shaderSource = parseShader("../res/shaders/3D.shader");
+        std::cout << glGetString(GL_VERSION) << std::endl;
+        shader3D = createShader(shaderSource.vertexSource.c_str(), shaderSource.fragmentSource.c_str());
+
         glCall(u_TransformLocation = glGetUniformLocation(shader, "u_Transform"));
         _ASSERT(u_TransformLocation != -1);
 
         glCall(u_ShapeTransformLocation = glGetUniformLocation(shapeShader, "u_Transform"));
         _ASSERT(u_TransformLocation != -1);
 
+
+        glCall(u_3DTransformLocation = glGetUniformLocation(shader3D, "u_Transform"));
+        _ASSERT(u_TransformLocation != -1);
+
         glCall(glEnable(GL_DEPTH_TEST));
         glCall(glDepthFunc(GL_LESS));
-        
+
         glCall(glEnable(GL_BLEND));
         glCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-        
+
         glCall(glEnable(GL_SAMPLE_ALPHA_TO_COVERAGE));
         glCall(glEnable(GL_SAMPLE_ALPHA_TO_ONE));
-        
+
         glCall(glEnable(GL_ALPHA_TEST));
         glCall(glAlphaFunc(GL_GREATER, 0.1f));
-        
+
         setProjection(perspective(radians(45.f),
                                   static_cast<float>(window->getWidth()) / static_cast<float>(window->getHeight()),
                                   0.1f, 100.f));
@@ -66,19 +74,18 @@ namespace ToToEng
         glCall(glBindVertexArray(VAO));
 
         glCall(glBindBuffer(GL_ARRAY_BUFFER, VBO));
-        glCall(glBufferData(GL_ARRAY_BUFFER, sizeof(float) * qty * 9, vertices, GL_STATIC_DRAW));
+        glCall(glBufferData(GL_ARRAY_BUFFER, sizeof(float) * qty * 12, vertices, GL_STATIC_DRAW));
 
-        glCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), static_cast<void*>(0)));
+        glCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 12 * sizeof(float), static_cast<void*>(0)));
         glCall(glEnableVertexAttribArray(0));
 
-        glCall(
-            glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 9 * sizeof(float), reinterpret_cast<void*>(3 * sizeof(float)
-            )));
+        glCall(glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 12 * sizeof(float), reinterpret_cast<void*>(3 * sizeof(float))));
         glCall(glEnableVertexAttribArray(1));
 
-        glCall(
-            glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 9 * sizeof(float), reinterpret_cast<void*>(7 * sizeof(float)
-            )));
+        glCall(glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 12 * sizeof(float), reinterpret_cast<void*>(3 * sizeof(float))));
+        glCall(glEnableVertexAttribArray(1));
+
+        glCall(glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 12 * sizeof(float), reinterpret_cast<void*>(7 * sizeof(float))));
         glCall(glEnableVertexAttribArray(2));
     }
 
@@ -125,18 +132,17 @@ namespace ToToEng
     void Renderer::drawEntity3D(unsigned& VAO, unsigned indexQty, vec4 color, mat4 trans)
     {
         mat4 pvm = projection * view * trans;
-        
-        const vec3 ambient = ambientStrength * ambientColor;
-        color = vec4(ambient * vec3 (color.x, color.y, color.z), color.w);
-        
-        glCall(glUseProgram(shapeShader));
-        glCall(u_ColorLocation = glGetUniformLocation(shapeShader, "u_Color"));
+
+        glCall(glUseProgram(shader3D));
+        glCall(u_ColorLocation = glGetUniformLocation(shader3D, "u_Color"));
 
         glCall(glUniform4f(u_ColorLocation, color.x, color.y, color.z, color.w));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, "lightColor"), ambientColor.x, ambientColor.y, ambientColor.z));
+        glCall(glUniform1f(glGetUniformLocation(shader3D, "ambientStrength"), ambientStrength));
 
         glCall(glBindVertexArray(VAO));
 
-        glCall(glUniformMatrix4fv(u_ShapeTransformLocation, 1, GL_FALSE, glm::value_ptr(pvm)));
+        glCall(glUniformMatrix4fv(u_3DTransformLocation, 1, GL_FALSE, glm::value_ptr(pvm)));
 
         glCall(glDrawElements(GL_TRIANGLES, indexQty, GL_UNSIGNED_INT, 0));
 
