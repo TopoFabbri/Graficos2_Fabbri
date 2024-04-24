@@ -1,14 +1,21 @@
 #pragma once
 #include "Entity.h"
+#include "Material.h"
 
-class TOTO_API Entity3D : public ToToEng::Entity
+namespace ToToEng
 {
-    float* normals;
+    class TOTO_API Entity3D : public ToToEng::Entity
+    {
+        Material* material;
+        float* normals;
     
-public:
-    explicit Entity3D(ToToEng::Renderer* renderer);
-    ~Entity3D() override;
+    public:
+        explicit Entity3D(ToToEng::Renderer* renderer);
+        ~Entity3D() override;
     
-    void draw() override;
-    void updateVao() override;
-};
+        void draw() override;
+        void updateVao() override;
+
+        void setMaterial(Material* material);
+    };
+}

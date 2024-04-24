@@ -7,6 +7,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Camera.h"
+#include "Material.h"
 
 #pragma region MACROS
 #define ASSERT(x) if (!(x)) __debugbreak()
@@ -40,9 +41,8 @@ namespace ToToEng
 		mat4 view;
 		vec3 cameraPos;
 
-		vec3 ambientColor = { 1.f, 1.f, 1.f };
+		vec3 lightColor = { 1.f, 1.f, 1.f };
 		vec3 lightPos = { 1.f, 0.f, 1.f };
-		float ambientStrength = 0.5f;
 
 		static unsigned int compileShader(unsigned int type, const char* source);
 		static unsigned int createShader(const char* vShader, const char* fShader);
@@ -61,11 +61,10 @@ namespace ToToEng
 			unsigned int indices[], unsigned int id, unsigned int qty);
 		void deleteBuffers(unsigned int& VBO, unsigned int& IBO, unsigned int& EBO, unsigned int id);
 		void drawEntity2D(unsigned int& VAO, unsigned int indexQty, vec4 color, mat4 trans, unsigned int texture);
-		void drawEntity3D(unsigned int& VAO, unsigned int indexQty, vec4 color, mat4 trans);
+		void drawEntity3D(unsigned int& VAO, unsigned int indexQty, Material mat, mat4 trans);
 		void drawShape(unsigned int& VAO, unsigned int indexQty, vec4 color, mat4 trans);
 		void setProjection(mat4 projection);
 		void setView(mat4 view);
 		unsigned int loadTexture(const char* filePath);
-		void setAmbientStrength(float ambientStrength);
 	};
 }

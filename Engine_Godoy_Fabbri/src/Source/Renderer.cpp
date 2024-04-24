@@ -125,7 +125,7 @@ namespace ToToEng
         glCall(glUseProgram(0));
     }
 
-    void Renderer::drawEntity3D(unsigned& VAO, unsigned indexQty, vec4 color, mat4 trans)
+    void Renderer::drawEntity3D(unsigned& VAO, unsigned indexQty, Material mat, mat4 trans)
     {        
         glCall(glUseProgram(shader3D));
 
@@ -133,9 +133,11 @@ namespace ToToEng
         glCall(glUniformMatrix4fv(glGetUniformLocation(shader3D, "view"), 1, GL_FALSE, glm::value_ptr(view)));
         glCall(glUniformMatrix4fv(glGetUniformLocation(shader3D, "projection"), 1, GL_FALSE, glm::value_ptr(projection)));
 
-        glCall(glUniform3f(glGetUniformLocation(shader3D, "objectColor"), color.x, color.y, color.z));
-        glCall(glUniform3f(glGetUniformLocation(shader3D, "lightColor"), ambientColor.x, ambientColor.y, ambientColor.z));
-        glCall(glUniform1f(glGetUniformLocation(shader3D, "ambientStrength"), ambientStrength));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, "material.ambient"), mat.getAmbient().x, mat.getAmbient().y, mat.getAmbient().z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, "material.diffuse"), mat.getDiffuse().x, mat.getDiffuse().y, mat.getDiffuse().z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, "material.specular"), mat.getSpecular().x, mat.getSpecular().y, mat.getSpecular().z));
+        glCall(glUniform1f(glGetUniformLocation(shader3D, "material.shininess"), mat.getShininess()));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, "lightColor"), lightColor.x, lightColor.y, lightColor.z));
         glCall(glUniform3f(glGetUniformLocation(shader3D, "lightPos"), lightPos.x, lightPos.y, lightPos.z));
         glCall(glUniform3f(glGetUniformLocation(shader3D, "viewPos"), cameraPos.x, cameraPos.y, cameraPos.z));
 
@@ -174,11 +176,6 @@ namespace ToToEng
     void Renderer::setView(mat4 view)
     {
         this->view = view;
-    }
-
-    void Renderer::setAmbientStrength(float ambientStrength)
-    {
-        this->ambientStrength = ambientStrength;
     }
 
     unsigned int Renderer::compileShader(unsigned int type, const char* source)
