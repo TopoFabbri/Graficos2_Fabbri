@@ -42,7 +42,7 @@ namespace ToToEng
 		vec3 cameraPos;
 
 		vec3 lightColor = { 1.f, 1.f, 1.f };
-		vec3 lightPos = { 1.f, 0.f, 1.f };
+		vec3 lightPos = { 5.f, 10.f, 5.f };
 
 		static unsigned int compileShader(unsigned int type, const char* source);
 		static unsigned int createShader(const char* vShader, const char* fShader);
