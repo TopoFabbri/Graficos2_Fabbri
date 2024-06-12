@@ -137,8 +137,12 @@ namespace ToToEng
         glCall(glUniform3f(glGetUniformLocation(shader3D, "material.diffuse"), mat.getDiffuse().x, mat.getDiffuse().y, mat.getDiffuse().z));
         glCall(glUniform3f(glGetUniformLocation(shader3D, "material.specular"), mat.getSpecular().x, mat.getSpecular().y, mat.getSpecular().z));
         glCall(glUniform1f(glGetUniformLocation(shader3D, "material.shininess"), mat.getShininess()));
-        glCall(glUniform3f(glGetUniformLocation(shader3D, "lightColor"), lightColor.x, lightColor.y, lightColor.z));
-        glCall(glUniform3f(glGetUniformLocation(shader3D, "lightPos"), lightPos.x, lightPos.y, lightPos.z));
+        
+        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.ambient"), light.getAmbient().x, light.getAmbient().y, light.getAmbient().z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.diffuse"), light.getDiffuse().x, light.getDiffuse().y, light.getDiffuse().z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.specular"), light.getSpecular().x, light.getSpecular().y, light.getSpecular().z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.position"), light.getPos().x, light.getPos().y, light.getPos().z));
+
         glCall(glUniform3f(glGetUniformLocation(shader3D, "viewPos"), cameraPos.x, cameraPos.y, cameraPos.z));
 
         glCall(glBindVertexArray(VAO));

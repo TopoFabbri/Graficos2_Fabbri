@@ -7,6 +7,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Camera.h"
+#include "LightSource.h"
 #include "Material.h"
 
 #pragma region MACROS
@@ -41,8 +42,7 @@ namespace ToToEng
 		mat4 view;
 		vec3 cameraPos;
 
-		vec3 lightColor = { 1.f, 1.f, 1.f };
-		vec3 lightPos = { 5.f, 10.f, 5.f };
+		LightSource light;
 
 		static unsigned int compileShader(unsigned int type, const char* source);
 		static unsigned int createShader(const char* vShader, const char* fShader);
