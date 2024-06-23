@@ -24,3 +24,23 @@ glm::vec3 LightSource::getDiffuse() const
 
 glm::vec3 LightSource::getSpecular() const
 { return specular; }
+
+void LightSource::setPos(glm::vec3 pos)
+{
+    this->pos = pos;
+}
+
+void LightSource::setAmbient(glm::vec3 ambient)
+{
+    this->ambient = ambient;
+}
+
+void LightSource::setDiffuse(glm::vec3 diffuse)
+{
+    this->diffuse = diffuse;
+}
+
+void LightSource::setSpecular(glm::vec3 specular)
+{
+    this->specular = specular;
+}

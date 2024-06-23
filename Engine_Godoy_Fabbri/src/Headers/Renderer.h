@@ -7,6 +7,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Camera.h"
+#include "DirectionalLight.h"
 #include "LightSource.h"
 #include "Material.h"
 
@@ -42,7 +43,7 @@ namespace ToToEng
 		mat4 view;
 		vec3 cameraPos;
 
-		LightSource light;
+		DirectionalLight light;
 
 		static unsigned int compileShader(unsigned int type, const char* source);
 		static unsigned int createShader(const char* vShader, const char* fShader);

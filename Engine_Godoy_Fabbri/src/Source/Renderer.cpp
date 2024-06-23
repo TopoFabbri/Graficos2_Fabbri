@@ -126,7 +126,7 @@ namespace ToToEng
     }
 
     void Renderer::drawEntity3D(unsigned& VAO, unsigned indexQty, Material mat, mat4 trans)
-    {        
+    {
         glCall(glUseProgram(shader3D));
 
         glCall(glUniformMatrix4fv(glGetUniformLocation(shader3D, "model"), 1, GL_FALSE, glm::value_ptr(trans)));
@@ -141,7 +141,7 @@ namespace ToToEng
         glCall(glUniform3f(glGetUniformLocation(shader3D, "light.ambient"), light.getAmbient().x, light.getAmbient().y, light.getAmbient().z));
         glCall(glUniform3f(glGetUniformLocation(shader3D, "light.diffuse"), light.getDiffuse().x, light.getDiffuse().y, light.getDiffuse().z));
         glCall(glUniform3f(glGetUniformLocation(shader3D, "light.specular"), light.getSpecular().x, light.getSpecular().y, light.getSpecular().z));
-        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.position"), light.getPos().x, light.getPos().y, light.getPos().z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.direction"), light.getDirection().x, light.getPos().y, light.getPos().z));
 
         glCall(glUniform3f(glGetUniformLocation(shader3D, "viewPos"), cameraPos.x, cameraPos.y, cameraPos.z));
 
