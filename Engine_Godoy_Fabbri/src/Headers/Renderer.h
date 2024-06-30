@@ -10,6 +10,7 @@
 #include "DirectionalLight.h"
 #include "LightSource.h"
 #include "Material.h"
+#include "PointLight.h"
 
 #pragma region MACROS
 #define ASSERT(x) if (!(x)) __debugbreak()
@@ -43,7 +44,7 @@ namespace ToToEng
 		mat4 view;
 		vec3 cameraPos;
 
-		DirectionalLight light;
+		PointLight light;
 
 		static unsigned int compileShader(unsigned int type, const char* source);
 		static unsigned int createShader(const char* vShader, const char* fShader);

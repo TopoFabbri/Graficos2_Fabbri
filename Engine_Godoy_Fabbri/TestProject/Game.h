@@ -8,6 +8,7 @@ class Game :
 	public BaseGame
 {
 private:
+	std::list<vec3> rotations = std::list<vec3>();
 	
 public:
 	Game(int width, int height, const char* title);
