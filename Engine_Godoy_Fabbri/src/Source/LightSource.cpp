@@ -13,6 +13,7 @@ LightSource::LightSource()
 
 LightSource::~LightSource()
 {
+    lights.remove(this);
 }
 
 LightSource::Type LightSource::getType() const

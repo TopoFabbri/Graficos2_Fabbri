@@ -76,6 +76,9 @@ void Game::update()
     if (Input::getKey(Input::q, Input::Repeated))
         camera->moveUp(-speed * GameTime::getDelta());
 
+    if (Input::getKey(Input::esc, Input::Pressed))
+        endGame();
+    
     const vec2 mouseDelta = Input::getMouseDelta();
 
     if (abs(mouseDelta.x) > 0.0001f)

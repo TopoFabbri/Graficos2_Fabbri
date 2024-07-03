@@ -27,5 +27,7 @@ namespace ToToEng
 
 		int getWidth();
 		int getHeight();
+
+		void close();
 	};
 }

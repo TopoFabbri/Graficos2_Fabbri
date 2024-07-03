@@ -56,4 +56,9 @@ namespace ToToEng
 			glfwPollEvents();
 		}
 	}
+
+	void BaseGame::endGame()
+	{
+		window->close();
+	}
 }

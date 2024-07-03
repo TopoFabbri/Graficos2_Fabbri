@@ -101,4 +101,9 @@ namespace ToToEng
 	{
 		return height;
 	}
+
+	void Window::close()
+	{
+		glfwSetWindowShouldClose(window, true);
+	}
 }

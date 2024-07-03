@@ -28,6 +28,8 @@ namespace ToToEng
 
         void run();
 
+        void endGame();
+
         virtual void update() = 0;
     };
 }

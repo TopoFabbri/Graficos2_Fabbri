@@ -23,6 +23,7 @@ namespace ToToEng
     public:
         enum KeyCode
         {
+            esc = GLFW_KEY_ESCAPE,
             a = GLFW_KEY_A,
             b = GLFW_KEY_B,
             c = GLFW_KEY_C,
