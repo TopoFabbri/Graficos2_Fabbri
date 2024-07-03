@@ -2,6 +2,7 @@
 
 PointLight::PointLight()
 {
+    position = glm::vec3(0.0f, 0.0f, 0.0f);
     attenuation = glm::vec3(1.0f, 0.09f, 0.032f);
 }
 
@@ -17,4 +18,14 @@ void PointLight::setAttenuation(glm::vec3 attenuation)
 glm::vec3 PointLight::getAttenuation() const
 {
     return attenuation;
+}
+
+glm::vec3 PointLight::getPosition() const
+{
+    return position;
+}
+
+void PointLight::setPosition(glm::vec3 position)
+{
+    this->position = position;
 }

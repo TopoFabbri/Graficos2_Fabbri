@@ -7,10 +7,8 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Camera.h"
-#include "DirectionalLight.h"
-#include "LightSource.h"
 #include "Material.h"
-#include "PointLight.h"
+#include "SpotLight.h"
 
 #pragma region MACROS
 #define ASSERT(x) if (!(x)) __debugbreak()
@@ -33,7 +31,6 @@ namespace ToToEng
 		};
 
 		Window* window;
-		Camera* camera;
 		unsigned int shader;
 		unsigned int shapeShader;
 		unsigned int shader3D;
@@ -41,10 +38,8 @@ namespace ToToEng
 		int u_ShapeTransformLocation;
 		int u_ColorLocation;
 		mat4 projection;
-		mat4 view;
-		vec3 cameraPos;
 
-		PointLight light;
+		SpotLight light;
 
 		static unsigned int compileShader(unsigned int type, const char* source);
 		static unsigned int createShader(const char* vShader, const char* fShader);
@@ -53,7 +48,7 @@ namespace ToToEng
 		static bool glLogCall(const char* function, const char* file, int line);
 
 	public:
-		Renderer(Window* window, Camera* camera);
+		Renderer(Window* window);
 		~Renderer();
 
 		void beginDraw();

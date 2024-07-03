@@ -4,7 +4,9 @@
 
 namespace ToToEng
 {
-    Renderer::Renderer(Window* window, Camera* camera)
+    Camera* Camera::main = nullptr;
+    
+    Renderer::Renderer(Window* window)
     {
         this->window = window;
 
@@ -41,9 +43,6 @@ namespace ToToEng
         setProjection(perspective(radians(45.f),
                                   static_cast<float>(window->getWidth()) / static_cast<float>(window->getHeight()),
                                   0.1f, 100.f));
-        cameraPos = vec3(0.0f, 0.0f, 3.0f);
-
-        view = lookAt(cameraPos, {0, 0, 0}, {0, 1, 0});
     }
 
     Renderer::~Renderer()
@@ -105,7 +104,7 @@ namespace ToToEng
 
     void Renderer::drawEntity2D(unsigned int& VAO, unsigned int indexQty, vec4 color, mat4 trans, unsigned int texture)
     {
-        mat4 pvm = projection * view * trans;
+        mat4 pvm = projection * Camera::main->getView() * trans;
 
         glCall(glUseProgram(shader));
         glCall(glUniform1i(glGetUniformLocation(shader, "ourTexture"), 0));
@@ -130,7 +129,7 @@ namespace ToToEng
         glCall(glUseProgram(shader3D));
 
         glCall(glUniformMatrix4fv(glGetUniformLocation(shader3D, "model"), 1, GL_FALSE, glm::value_ptr(trans)));
-        glCall(glUniformMatrix4fv(glGetUniformLocation(shader3D, "view"), 1, GL_FALSE, glm::value_ptr(view)));
+        glCall(glUniformMatrix4fv(glGetUniformLocation(shader3D, "view"), 1, GL_FALSE, glm::value_ptr(Camera::main->getView())));
         glCall(glUniformMatrix4fv(glGetUniformLocation(shader3D, "projection"), 1, GL_FALSE, glm::value_ptr(projection)));
 
         glCall(glUniform3f(glGetUniformLocation(shader3D, "material.ambient"), mat.getAmbient().x, mat.getAmbient().y, mat.getAmbient().z));
@@ -141,10 +140,13 @@ namespace ToToEng
         glCall(glUniform3f(glGetUniformLocation(shader3D, "light.ambient"), light.getAmbient().x, light.getAmbient().y, light.getAmbient().z));
         glCall(glUniform3f(glGetUniformLocation(shader3D, "light.diffuse"), light.getDiffuse().x, light.getDiffuse().y, light.getDiffuse().z));
         glCall(glUniform3f(glGetUniformLocation(shader3D, "light.specular"), light.getSpecular().x, light.getSpecular().y, light.getSpecular().z));
-        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.position"), light.getPos().x, light.getPos().y, light.getPos().z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.position"), Camera::main->getPos().x, Camera::main->getPos().y, Camera::main->getPos().z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.direction"), Camera::main->getForward().x, Camera::main->getForward().y, Camera::main->getForward().z));
+        glCall(glUniform1f(glGetUniformLocation(shader3D, "light.cutoff"), light.getCutoff()));
+        glCall(glUniform1f(glGetUniformLocation(shader3D, "light.outerCutoff"), light.getOuterCutoff()));
         glCall(glUniform3f(glGetUniformLocation(shader3D, "light.attenuation"), light.getAttenuation().x, light.getAttenuation().y, light.getAttenuation().z));
 
-        glCall(glUniform3f(glGetUniformLocation(shader3D, "viewPos"), cameraPos.x, cameraPos.y, cameraPos.z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, "viewPos"), Camera::main->getPos().x, Camera::main->getPos().y, Camera::main->getPos().z));
 
         glCall(glBindVertexArray(VAO));
 
@@ -156,7 +158,7 @@ namespace ToToEng
 
     void Renderer::drawShape(unsigned& VAO, unsigned indexQty, vec4 color, mat4 trans)
     {
-        mat4 pvm = projection * view * trans;
+        mat4 pvm = projection * Camera::main->getView() * trans;
 
         glCall(glUseProgram(shapeShader));
         glCall(u_ColorLocation = glGetUniformLocation(shapeShader, "u_Color"));
@@ -176,11 +178,6 @@ namespace ToToEng
     void Renderer::setProjection(mat4 projection)
     {
         this->projection = projection;
-    }
-
-    void Renderer::setView(mat4 view)
-    {
-        this->view = view;
     }
 
     unsigned int Renderer::compileShader(unsigned int type, const char* source)

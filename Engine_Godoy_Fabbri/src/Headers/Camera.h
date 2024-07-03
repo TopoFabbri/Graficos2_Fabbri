@@ -18,10 +18,15 @@ namespace ToToEng
 		void updateRotation();
 	
 	public:
+		static Camera* main;
+
 		Camera();
 		virtual ~Camera();
 
 		glm::mat4 getView();
+
+		glm::vec3 getPos();
+		glm::vec3 getForward();
 
 		void moveUp(float amount);
 		void moveRight(float amount);

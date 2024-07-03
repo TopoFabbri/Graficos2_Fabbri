@@ -19,6 +19,9 @@ namespace ToToEng
 
     Camera::Camera()
     {
+        if (main == nullptr)
+            main = this;
+        
         pos = glm::vec3(0.0f, 0.0f, 2.0f);
         forward = glm::vec3(0.0f, 0.0f, 1.0f);
         up = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -27,11 +30,23 @@ namespace ToToEng
 
     Camera::~Camera()
     {
+        if (main == this)
+            main = nullptr;
     }
 
     glm::mat4 Camera::getView()
     {
         return lookAt(pos, pos + forward, up);
+    }
+
+    glm::vec3 Camera::getPos()
+    {
+        return pos;
+    }
+
+    glm::vec3 Camera::getForward()
+    {
+        return forward;
     }
 
     void Camera::moveUp(float amount)

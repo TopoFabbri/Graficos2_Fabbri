@@ -9,7 +9,7 @@ namespace ToToEng
 	{
 		camera = new Camera();
 		window = new Window(width, height, title);
-		renderer = new Renderer(window, camera);
+		renderer = new Renderer(window);
 		collisionManager = new CollisionManager();
 
 		Input::setCursorVisibility(false);
@@ -41,7 +41,6 @@ namespace ToToEng
 		while (!window->shouldClose())
 		{
 			GameTime::update();
-			renderer->setView(camera->getView());
 			
 			for (Entity* entity : entities)
 				entity->update();
