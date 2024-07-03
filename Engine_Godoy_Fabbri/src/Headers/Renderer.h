@@ -8,6 +8,7 @@
 
 #include "Camera.h"
 #include "Material.h"
+#include "DirectionalLight.h"
 #include "SpotLight.h"
 
 #pragma region MACROS
@@ -38,8 +39,6 @@ namespace ToToEng
 		int u_ShapeTransformLocation;
 		int u_ColorLocation;
 		mat4 projection;
-
-		SpotLight light;
 
 		static unsigned int compileShader(unsigned int type, const char* source);
 		static unsigned int createShader(const char* vShader, const char* fShader);

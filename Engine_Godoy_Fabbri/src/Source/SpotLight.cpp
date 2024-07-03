@@ -4,6 +4,8 @@
 
 SpotLight::SpotLight()
 {
+    type = Type::Spot;
+    
     direction = glm::vec3(0.0f, -1.0f, 0.0f);
     cutOff = glm::cos(glm::radians(12.5f));
     outerCutoff = glm::cos(glm::radians(17.5f));

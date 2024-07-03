@@ -136,15 +136,33 @@ namespace ToToEng
         glCall(glUniform3f(glGetUniformLocation(shader3D, "material.diffuse"), mat.getDiffuse().x, mat.getDiffuse().y, mat.getDiffuse().z));
         glCall(glUniform3f(glGetUniformLocation(shader3D, "material.specular"), mat.getSpecular().x, mat.getSpecular().y, mat.getSpecular().z));
         glCall(glUniform1f(glGetUniformLocation(shader3D, "material.shininess"), mat.getShininess()));
+
+        LightSource* light = LightSource::lights.front();
         
-        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.ambient"), light.getAmbient().x, light.getAmbient().y, light.getAmbient().z));
-        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.diffuse"), light.getDiffuse().x, light.getDiffuse().y, light.getDiffuse().z));
-        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.specular"), light.getSpecular().x, light.getSpecular().y, light.getSpecular().z));
-        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.position"), Camera::main->getPos().x, Camera::main->getPos().y, Camera::main->getPos().z));
-        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.direction"), Camera::main->getForward().x, Camera::main->getForward().y, Camera::main->getForward().z));
-        glCall(glUniform1f(glGetUniformLocation(shader3D, "light.cutoff"), light.getCutoff()));
-        glCall(glUniform1f(glGetUniformLocation(shader3D, "light.outerCutoff"), light.getOuterCutoff()));
-        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.attenuation"), light.getAttenuation().x, light.getAttenuation().y, light.getAttenuation().z));
+        glCall(glUniform1i(glGetUniformLocation(shader3D, "light.type"), static_cast<int>(light->getType())));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.ambient"), light->getAmbient().x, light->getAmbient().y, light->getAmbient().z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.diffuse"), light->getDiffuse().x, light->getDiffuse().y, light->getDiffuse().z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.specular"), light->getSpecular().x, light->getSpecular().y, light->getSpecular().z));
+        
+        switch (light->getType())
+        {
+        case LightSource::Type::Dir:
+            glCall(glUniform3f(glGetUniformLocation(shader3D, "light.direction"), static_cast<DirectionalLight*>(light)->getDirection().x, static_cast<DirectionalLight*>(light)->getDirection().y, static_cast<DirectionalLight*>(light)->getDirection().z));
+            break;
+            
+        case LightSource::Type::Point:
+            glCall(glUniform3f(glGetUniformLocation(shader3D, "light.position"), static_cast<PointLight*>(light)->getPos().x, static_cast<PointLight*>(light)->getPos().y, static_cast<PointLight*>(light)->getPos().z));
+            glCall(glUniform3f(glGetUniformLocation(shader3D, "light.attenuation"), static_cast<PointLight*>(light)->getAttenuation().x, static_cast<PointLight*>(light)->getAttenuation().y, static_cast<PointLight*>(light)->getAttenuation().z));
+            break;
+            
+        case LightSource::Type::Spot:
+            glCall(glUniform3f(glGetUniformLocation(shader3D, "light.position"), static_cast<SpotLight*>(light)->getPos().x, static_cast<SpotLight*>(light)->getPos().y, static_cast<SpotLight*>(light)->getPos().z));
+            glCall(glUniform3f(glGetUniformLocation(shader3D, "light.direction"), static_cast<SpotLight*>(light)->getDirection().x, static_cast<SpotLight*>(light)->getDirection().y, static_cast<SpotLight*>(light)->getDirection().z));
+            glCall(glUniform1f(glGetUniformLocation(shader3D, "light.cutoff"), static_cast<SpotLight*>(light)->getCutoff()));
+            glCall(glUniform1f(glGetUniformLocation(shader3D, "light.outerCutoff"), static_cast<SpotLight*>(light)->getOuterCutoff()));
+            glCall(glUniform3f(glGetUniformLocation(shader3D, "light.attenuation"), static_cast<SpotLight*>(light)->getAttenuation().x, static_cast<SpotLight*>(light)->getAttenuation().y, static_cast<SpotLight*>(light)->getAttenuation().z));
+            break;
+        }
 
         glCall(glUniform3f(glGetUniformLocation(shader3D, "viewPos"), Camera::main->getPos().x, Camera::main->getPos().y, Camera::main->getPos().z));
 

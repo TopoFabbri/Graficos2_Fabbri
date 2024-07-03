@@ -31,6 +31,7 @@ struct Material
 
 struct Light
 {
+    int type;
     vec3 position;
     vec3 direction;
 
@@ -43,6 +44,8 @@ struct Light
     float outerCutoff;
 };
 
+vec3 calculateDirLight(Light pointLight);
+vec3 calculatePointLight(Light pointLight);
 vec3 calculateSpotLight(Light spotLight);
 
 in vec3 FragPos;
@@ -56,7 +59,63 @@ uniform vec3 viewPos;
 
 void main()
 {
-    FragColor = vec4(calculateSpotLight(light), 1.0);
+    vec3 calculatedLight;
+
+    if (light.type == 0)
+    {
+        calculatedLight = calculateDirLight(light);
+    }
+    else if (light.type == 1)
+    {
+        calculatedLight = calculatePointLight(light);
+    }
+    else
+    {
+        calculatedLight = calculateSpotLight(light);
+    }
+    
+    FragColor = vec4(calculatedLight, 1.0);
+}
+
+vec3 calculateDirLight(Light dirLight)
+{
+    vec3 ambient = dirLight.ambient * material.ambient;
+    
+    vec3 norm = normalize(Normal);
+    vec3 lightDir = normalize(dirLight.direction);
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = dirLight.diffuse * (diff * material.diffuse);
+    
+    vec3 viewDir = normalize(viewPos - FragPos);
+    vec3 reflectDir = reflect(-lightDir, norm);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+    vec3 specular = dirLight.specular * (spec * material.specular);
+    
+    return ambient + diffuse + specular;
+}
+
+vec3 calculatePointLight(Light pointLight)
+{
+    vec3 ambient = pointLight.ambient * material.ambient;
+    
+    vec3 norm = normalize(Normal);
+    vec3 lightDir = normalize(pointLight.position - FragPos);
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = pointLight.diffuse * (diff * material.diffuse);
+    
+    vec3 viewDir = normalize(viewPos - FragPos);
+    vec3 reflectDir = reflect(-lightDir, norm);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+    vec3 specular = pointLight.specular * (spec * material.specular);
+    
+    float distance = length(pointLight.position - FragPos);
+    float attenuation = 1.0 / (pointLight.attenuation.x + pointLight.attenuation.y * distance + pointLight.attenuation.z * distance * distance);
+    
+    ambient *= attenuation;
+    diffuse *= attenuation;
+    specular *= attenuation;
+    
+    return ambient + diffuse + specular;
 }
 
 vec3 calculateSpotLight(Light spotLight)

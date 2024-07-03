@@ -6,6 +6,8 @@
 
 Game::Game(int width, int height, const char* title) : BaseGame(width, height, title)
 {
+    LightSource* light = new DirectionalLight();
+    
     entities.push_back(new Entity3D(renderer));
     dynamic_cast<Entity3D*>(entities.back())->setMaterial(Material::ruby());
     entities.back()->transform.setPos({0.0f,  0.0f,  0.0f});

@@ -1,7 +1,9 @@
 #pragma once
+#include <glew.h>
+
 #include "PointLight.h"
 
-class SpotLight : public PointLight
+class TOTO_API SpotLight : public PointLight
 {
 private:
     glm::vec3 direction;

@@ -8,16 +8,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59b83834-1b16-455b-92bb-7e2412bbcbcc" name="Changes" comment="">
+    <list default="true" id="59b83834-1b16-455b-92bb-7e2412bbcbcc" name="Changes" comment="Imlpemented spot light">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/res/shaders/3D.shader" beforeDir="false" afterPath="$PROJECT_DIR$/res/shaders/3D.shader" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/Camera.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Camera.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/textures/AstonBirra.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/textures/BG.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/textures/Sonic_Mania_Sprite_Sheet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/textures/dragon.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Headers/LightSource.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/LightSource.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Headers/PointLight.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/PointLight.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Headers/Renderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Renderer.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Headers/SpotLight.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/SpotLight.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Source/BaseGame.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/BaseGame.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Source/Camera.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Camera.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Source/DirectionalLight.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/DirectionalLight.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Source/LightSource.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/LightSource.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Source/PointLight.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/PointLight.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Source/Renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Renderer.cpp" afterDir="false" />
@@ -277,7 +279,7 @@
       <workItem from="1719759590336" duration="12355000" />
       <workItem from="1719778530120" duration="6263000" />
       <workItem from="1719793026623" duration="4057000" />
-      <workItem from="1720022573722" duration="15621000" />
+      <workItem from="1720022573722" duration="19117000" />
     </task>
     <task id="LOCAL-00001" summary="Re-do singleton input">
       <option name="closed" value="true" />
@@ -423,7 +425,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719769631257</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Imlpemented spot light">
+      <option name="closed" value="true" />
+      <created>1720044781497</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1720044781497</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -462,6 +472,7 @@
     <MESSAGE value="Added proposed materials" />
     <MESSAGE value="Added light source" />
     <MESSAGE value="Implemented point light" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented point light" />
+    <MESSAGE value="Imlpemented spot light" />
+    <option name="LAST_COMMIT_MESSAGE" value="Imlpemented spot light" />
   </component>
 </project>
