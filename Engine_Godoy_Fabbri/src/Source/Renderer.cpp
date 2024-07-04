@@ -78,10 +78,10 @@ namespace ToToEng
         glCall(glEnableVertexAttribArray(1));
 
         glCall(glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 12 * sizeof(float), reinterpret_cast<void*>(7 * sizeof(float))));
-        glCall(glEnableVertexAttribArray(1));
+        glCall(glEnableVertexAttribArray(2));
 
         glCall(glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 12 * sizeof(float), reinterpret_cast<void*>(10 * sizeof(float))));
-        glCall(glEnableVertexAttribArray(2));
+        glCall(glEnableVertexAttribArray(3));
     }
 
     void Renderer::genIndexBuffer(unsigned int& IBO, unsigned int indices[], unsigned int id, unsigned int qty)

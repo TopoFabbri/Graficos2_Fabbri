@@ -198,9 +198,10 @@ namespace ToToEng
 
             vertices[12 * i + 7] = normals[i * 3];
             vertices[12 * i + 8] = normals[i * 3 + 1];
+            vertices[12 * i + 9] = normals[i * 3 + 2];
 
-            vertices[12 * i + 7] = textureCoords[i * 2];
-            vertices[12 * i + 8] = textureCoords[i * 2 + 1];
+            vertices[12 * i + 10] = textureCoords[i * 2];
+            vertices[12 * i + 11] = textureCoords[i * 2 + 1];
         }
 
         genBuffers();
