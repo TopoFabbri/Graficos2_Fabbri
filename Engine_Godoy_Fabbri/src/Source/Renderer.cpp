@@ -77,10 +77,10 @@ namespace ToToEng
         glCall(glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 12 * sizeof(float), reinterpret_cast<void*>(3 * sizeof(float))));
         glCall(glEnableVertexAttribArray(1));
 
-        glCall(glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 12 * sizeof(float), reinterpret_cast<void*>(3 * sizeof(float))));
+        glCall(glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 12 * sizeof(float), reinterpret_cast<void*>(7 * sizeof(float))));
         glCall(glEnableVertexAttribArray(1));
 
-        glCall(glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 12 * sizeof(float), reinterpret_cast<void*>(7 * sizeof(float))));
+        glCall(glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 12 * sizeof(float), reinterpret_cast<void*>(10 * sizeof(float))));
         glCall(glEnableVertexAttribArray(2));
     }
 
@@ -132,11 +132,15 @@ namespace ToToEng
         glCall(glUniformMatrix4fv(glGetUniformLocation(shader3D, "view"), 1, GL_FALSE, glm::value_ptr(Camera::main->getView())));
         glCall(glUniformMatrix4fv(glGetUniformLocation(shader3D, "projection"), 1, GL_FALSE, glm::value_ptr(projection)));
 
-        glCall(glUniform3f(glGetUniformLocation(shader3D, "material.ambient"), mat.getAmbient().x, mat.getAmbient().y, mat.getAmbient().z));
-        glCall(glUniform3f(glGetUniformLocation(shader3D, "material.diffuse"), mat.getDiffuse().x, mat.getDiffuse().y, mat.getDiffuse().z));
-        glCall(glUniform3f(glGetUniformLocation(shader3D, "material.specular"), mat.getSpecular().x, mat.getSpecular().y, mat.getSpecular().z));
+        glCall(glUniform1i(glGetUniformLocation(shader3D, "material.diffuse"), 0));
+        glCall(glUniform1i(glGetUniformLocation(shader3D, "material.specular"), 1));
         glCall(glUniform1f(glGetUniformLocation(shader3D, "material.shininess"), mat.getShininess()));
 
+        glCall(glActiveTexture(GL_TEXTURE0));
+        glCall(glBindTexture(GL_TEXTURE_2D, mat.getDiffuse()));
+        glCall(glActiveTexture(GL_TEXTURE1));
+        glCall(glBindTexture(GL_TEXTURE_2D, mat.getSpecular()));
+        
         LightSource* light = LightSource::lights.front();
         
         glCall(glUniform1i(glGetUniformLocation(shader3D, "light.type"), static_cast<int>(light->getType())));

@@ -5,7 +5,8 @@
 SpotLight::SpotLight()
 {
     type = Type::Spot;
-    
+
+    setAttenuation({1.0f, 0.022f, 0.0019f});
     direction = glm::vec3(0.0f, -1.0f, 0.0f);
     cutOff = glm::cos(glm::radians(12.5f));
     outerCutoff = glm::cos(glm::radians(17.5f));

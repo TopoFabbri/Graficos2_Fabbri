@@ -6,46 +6,36 @@
 
 Game::Game(int width, int height, const char* title) : BaseGame(width, height, title)
 {
-    LightSource* light = new DirectionalLight();
+    SpotLight* light = new SpotLight();
     
     entities.push_back(new Entity3D(renderer));
-    dynamic_cast<Entity3D*>(entities.back())->setMaterial(Material::ruby());
     entities.back()->transform.setPos({0.0f,  0.0f,  0.0f});
 
     entities.push_back(new Entity3D(renderer));
-    dynamic_cast<Entity3D*>(entities.back())->setMaterial(Material::ruby());
     entities.back()->transform.setPos({2.0f,  5.0f, -15.0f});
     
     entities.push_back(new Entity3D(renderer));
-    dynamic_cast<Entity3D*>(entities.back())->setMaterial(Material::ruby());
     entities.back()->transform.setPos({-1.5f, -2.2f, -2.5f});
     
     entities.push_back(new Entity3D(renderer));
-    dynamic_cast<Entity3D*>(entities.back())->setMaterial(Material::ruby());
     entities.back()->transform.setPos({-3.8f, -2.0f, -12.3f});
     
     entities.push_back(new Entity3D(renderer));
-    dynamic_cast<Entity3D*>(entities.back())->setMaterial(Material::ruby());
     entities.back()->transform.setPos({2.4f, -0.4f, -3.5f});
     
     entities.push_back(new Entity3D(renderer));
-    dynamic_cast<Entity3D*>(entities.back())->setMaterial(Material::ruby());
     entities.back()->transform.setPos({-1.7f,  3.0f, -7.5f});
     
     entities.push_back(new Entity3D(renderer));
-    dynamic_cast<Entity3D*>(entities.back())->setMaterial(Material::ruby());
     entities.back()->transform.setPos({1.3f, -2.0f, -2.5f});
     
     entities.push_back(new Entity3D(renderer));
-    dynamic_cast<Entity3D*>(entities.back())->setMaterial(Material::ruby());
     entities.back()->transform.setPos({1.5f,  2.0f, -2.5f});
     
     entities.push_back(new Entity3D(renderer));
-    dynamic_cast<Entity3D*>(entities.back())->setMaterial(Material::ruby());
     entities.back()->transform.setPos({1.5f,  0.2f, -1.5f});
     
     entities.push_back(new Entity3D(renderer));
-    dynamic_cast<Entity3D*>(entities.back())->setMaterial(Material::ruby());
     entities.back()->transform.setPos({-1.3f,  1.0f, -1.5f});
 
     for (Entity* entity : entities)
@@ -58,7 +48,7 @@ Game::~Game()
 
 void Game::update()
 {
-    float speed = 2.f;
+    float speed = 10.f;
     float camSens = 5.f;
 
     if (Input::getKey(Input::a, Input::Repeated))
@@ -86,13 +76,18 @@ void Game::update()
     if (abs(mouseDelta.y) > 0.0001f)
         camera->rotatePitch(camSens * mouseDelta.y * GameTime::getDelta());
 
-    // for (Entity* entity : entities)
-    // {
-    //     entity->transform.rotateX(rotations.front().x * GameTime::getDelta());
-    //     entity->transform.rotateY(rotations.front().y * GameTime::getDelta());
-    //     entity->transform.rotateZ(rotations.front().z * GameTime::getDelta());
-    //     
-    //     rotations.push_back(rotations.front());
-    //     rotations.pop_front();
-    // }
+    SpotLight* light = static_cast<SpotLight*>(LightSource::lights.front());
+
+    light->setPosition(camera->getPos());
+    light->setDirection(camera->getForward());
+    
+    for (Entity* entity : entities)
+    {
+        entity->transform.rotateX(rotations.front().x * GameTime::getDelta());
+        entity->transform.rotateY(rotations.front().y * GameTime::getDelta());
+        entity->transform.rotateZ(rotations.front().z * GameTime::getDelta());
+        
+        rotations.push_back(rotations.front());
+        rotations.pop_front();
+    }
 }

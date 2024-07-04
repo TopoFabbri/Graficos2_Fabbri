@@ -15,7 +15,7 @@ void ToToEng::Sprite::update()
 
 ToToEng::Sprite::Sprite(Renderer* renderer) : Entity2D(renderer)
 {
-    loadTexture("../res/textures/AstonBirra.png");
+    loadTexture("../res/textures/BaseTexture.png");
 
     animation = nullptr;
     

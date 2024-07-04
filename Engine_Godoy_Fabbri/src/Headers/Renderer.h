@@ -60,7 +60,6 @@ namespace ToToEng
 		void drawEntity3D(unsigned int& VAO, unsigned int indexQty, Material mat, mat4 trans);
 		void drawShape(unsigned int& VAO, unsigned int indexQty, vec4 color, mat4 trans);
 		void setProjection(mat4 projection);
-		void setView(mat4 view);
 		unsigned int loadTexture(const char* filePath);
 	};
 }
