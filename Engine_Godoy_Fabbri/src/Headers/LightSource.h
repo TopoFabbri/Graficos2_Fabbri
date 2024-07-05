@@ -32,7 +32,7 @@ public:
     glm::vec3 getAmbient() const;
     glm::vec3 getDiffuse() const;
     glm::vec3 getSpecular() const;
-    
+
     void setAmbient(glm::vec3 ambient);
     void setDiffuse(glm::vec3 diffuse);
     void setSpecular(glm::vec3 specular);

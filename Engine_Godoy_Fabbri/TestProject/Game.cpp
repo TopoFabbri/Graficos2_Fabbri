@@ -6,7 +6,8 @@
 
 Game::Game(int width, int height, const char* title) : BaseGame(width, height, title)
 {
-    SpotLight* light = new SpotLight();
+    DirectionalLight* light = new DirectionalLight();
+    SpotLight* spotLight = new SpotLight();
     
     entities.push_back(new Entity3D(renderer));
     entities.back()->transform.setPos({0.0f,  0.0f,  0.0f});
@@ -76,10 +77,9 @@ void Game::update()
     if (abs(mouseDelta.y) > 0.0001f)
         camera->rotatePitch(camSens * mouseDelta.y * GameTime::getDelta());
 
-    SpotLight* light = static_cast<SpotLight*>(LightSource::lights.front());
-
-    light->setPosition(camera->getPos());
+    SpotLight* light = static_cast<SpotLight*>(LightSource::lights.back());
     light->setDirection(camera->getForward());
+    light->setPosition(camera->getPos());
     
     for (Entity* entity : entities)
     {

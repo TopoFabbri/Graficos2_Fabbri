@@ -31,6 +31,8 @@ namespace ToToEng
 			std::string fragmentSource;
 		};
 
+		const int maxLights = 8;
+		
 		Window* window;
 		unsigned int shader;
 		unsigned int shapeShader;
@@ -60,6 +62,8 @@ namespace ToToEng
 		void drawEntity3D(unsigned int& VAO, unsigned int indexQty, Material mat, mat4 trans);
 		void drawShape(unsigned int& VAO, unsigned int indexQty, vec4 color, mat4 trans);
 		void setProjection(mat4 projection);
-		unsigned int loadTexture(const char* filePath);
+		void sendDirectionalLight(DirectionalLight* light, int i);
+		void sendPointLight(PointLight* light, int i);
+		void sendSpotLight(SpotLight* light, int i);
 	};
 }

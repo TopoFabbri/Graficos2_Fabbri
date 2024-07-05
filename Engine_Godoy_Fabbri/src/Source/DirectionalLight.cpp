@@ -6,7 +6,7 @@
 DirectionalLight::DirectionalLight()
 {
     type = Type::Dir;
-    direction = glm::vec3(-0.2f, -1.0f, -0.3f);
+    direction = glm::vec3(-0.2f, 1.0f, -0.3f);
 }
 
 DirectionalLight::~DirectionalLight() = default;

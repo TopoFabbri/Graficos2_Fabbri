@@ -140,32 +140,40 @@ namespace ToToEng
         glCall(glBindTexture(GL_TEXTURE_2D, mat.getDiffuse()));
         glCall(glActiveTexture(GL_TEXTURE1));
         glCall(glBindTexture(GL_TEXTURE_2D, mat.getSpecular()));
+
+        int i = 0;
+
+        sendDirectionalLight(static_cast<DirectionalLight*>(LightSource::lights.front()), 0);
         
-        LightSource* light = LightSource::lights.front();
-        
-        glCall(glUniform1i(glGetUniformLocation(shader3D, "light.type"), static_cast<int>(light->getType())));
-        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.ambient"), light->getAmbient().x, light->getAmbient().y, light->getAmbient().z));
-        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.diffuse"), light->getDiffuse().x, light->getDiffuse().y, light->getDiffuse().z));
-        glCall(glUniform3f(glGetUniformLocation(shader3D, "light.specular"), light->getSpecular().x, light->getSpecular().y, light->getSpecular().z));
-        
-        switch (light->getType())
+        for (LightSource* light : LightSource::lights)
         {
-        case LightSource::Type::Dir:
-            glCall(glUniform3f(glGetUniformLocation(shader3D, "light.direction"), static_cast<DirectionalLight*>(light)->getDirection().x, static_cast<DirectionalLight*>(light)->getDirection().y, static_cast<DirectionalLight*>(light)->getDirection().z));
-            break;
+            switch (light->getType())
+            {
+            case LightSource::Type::Dir:
+                sendDirectionalLight(static_cast<DirectionalLight*>(light), i);
+                break;
             
-        case LightSource::Type::Point:
-            glCall(glUniform3f(glGetUniformLocation(shader3D, "light.position"), static_cast<PointLight*>(light)->getPos().x, static_cast<PointLight*>(light)->getPos().y, static_cast<PointLight*>(light)->getPos().z));
-            glCall(glUniform3f(glGetUniformLocation(shader3D, "light.attenuation"), static_cast<PointLight*>(light)->getAttenuation().x, static_cast<PointLight*>(light)->getAttenuation().y, static_cast<PointLight*>(light)->getAttenuation().z));
-            break;
+            case LightSource::Type::Point:
+                sendPointLight(static_cast<PointLight*>(light), i);
+                break;
             
-        case LightSource::Type::Spot:
-            glCall(glUniform3f(glGetUniformLocation(shader3D, "light.position"), static_cast<SpotLight*>(light)->getPos().x, static_cast<SpotLight*>(light)->getPos().y, static_cast<SpotLight*>(light)->getPos().z));
-            glCall(glUniform3f(glGetUniformLocation(shader3D, "light.direction"), static_cast<SpotLight*>(light)->getDirection().x, static_cast<SpotLight*>(light)->getDirection().y, static_cast<SpotLight*>(light)->getDirection().z));
-            glCall(glUniform1f(glGetUniformLocation(shader3D, "light.cutoff"), static_cast<SpotLight*>(light)->getCutoff()));
-            glCall(glUniform1f(glGetUniformLocation(shader3D, "light.outerCutoff"), static_cast<SpotLight*>(light)->getOuterCutoff()));
-            glCall(glUniform3f(glGetUniformLocation(shader3D, "light.attenuation"), static_cast<SpotLight*>(light)->getAttenuation().x, static_cast<SpotLight*>(light)->getAttenuation().y, static_cast<SpotLight*>(light)->getAttenuation().z));
-            break;
+            case LightSource::Type::Spot:
+                sendSpotLight(static_cast<SpotLight*>(light), i);
+                break;
+            }
+        
+            i++;
+        }
+        
+        for (int j = i; j < maxLights; j++)
+        {
+            DirectionalLight* light = new DirectionalLight();
+            light->setAmbient({ 0.0f, 0.0f, 0.0f });
+            light->setDiffuse({ 0.0f, 0.0f, 0.0f });
+            light->setSpecular({ 0.0f, 0.0f, 0.0f });
+            sendDirectionalLight(light, j);
+        
+            delete light;
         }
 
         glCall(glUniform3f(glGetUniformLocation(shader3D, "viewPos"), Camera::main->getPos().x, Camera::main->getPos().y, Camera::main->getPos().z));
@@ -200,6 +208,47 @@ namespace ToToEng
     void Renderer::setProjection(mat4 projection)
     {
         this->projection = projection;
+    }
+
+    void Renderer::sendDirectionalLight(DirectionalLight* light, int i)
+    {
+        std::string index = "lights[" + std::to_string(i) + "].";
+        
+        glCall(glUniform1i(glGetUniformLocation(shader3D, (index + "type").c_str()), static_cast<int>(light->getType())));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, (index + "ambient").c_str()), light->getAmbient().x, light->getAmbient().y, light->getAmbient().z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, (index + "diffuse").c_str()), light->getDiffuse().x, light->getDiffuse().y, light->getDiffuse().z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, (index + "specular").c_str()), light->getSpecular().x, light->getSpecular().y, light->getSpecular().z));
+
+        glCall(glUniform3f(glGetUniformLocation(shader3D, (index + "direction").c_str()), light->getDirection().x, light->getDirection().y, light->getDirection().z));
+    }
+
+    void Renderer::sendPointLight(PointLight* light, int i)
+    {
+        std::string index = "lights[" + std::to_string(i) + "].";
+        
+        glCall(glUniform1i(glGetUniformLocation(shader3D, (index + "type").c_str()), static_cast<int>(light->getType())));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, (index + "ambient").c_str()), light->getAmbient().x, light->getAmbient().y, light->getAmbient().z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, (index + "diffuse").c_str()), light->getDiffuse().x, light->getDiffuse().y, light->getDiffuse().z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, (index + "specular").c_str()), light->getSpecular().x, light->getSpecular().y, light->getSpecular().z));
+
+        glCall(glUniform3f(glGetUniformLocation(shader3D, (index + "position").c_str()), light->getPos().x, light->getPos().y, light->getPos().z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, (index + "attenuation").c_str()), light->getAttenuation().x, light->getAttenuation().y, light->getAttenuation().z));
+    }
+
+    void Renderer::sendSpotLight(SpotLight* light, int i)
+    {
+        std::string index = "lights[" + std::to_string(i) + "].";
+        
+        glCall(glUniform1i(glGetUniformLocation(shader3D, (index + "type").c_str()), static_cast<int>(light->getType())));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, (index + "ambient").c_str()), light->getAmbient().x, light->getAmbient().y, light->getAmbient().z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, (index + "diffuse").c_str()), light->getDiffuse().x, light->getDiffuse().y, light->getDiffuse().z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, (index + "specular").c_str()), light->getSpecular().x, light->getSpecular().y, light->getSpecular().z));
+
+        glCall(glUniform3f(glGetUniformLocation(shader3D, (index + "position").c_str()), light->getPos().x, light->getPos().y, light->getPos().z));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, (index + "direction").c_str()), light->getDirection().x, light->getDirection().y, light->getDirection().z));
+        glCall(glUniform1f(glGetUniformLocation(shader3D, (index + "cutoff").c_str()), light->getCutoff()));
+        glCall(glUniform1f(glGetUniformLocation(shader3D, (index + "outerCutoff").c_str()), light->getOuterCutoff()));
+        glCall(glUniform3f(glGetUniformLocation(shader3D, (index + "attenuation").c_str()), light->getAttenuation().x, light->getAttenuation().y, light->getAttenuation().z));
     }
 
     unsigned int Renderer::compileShader(unsigned int type, const char* source)
