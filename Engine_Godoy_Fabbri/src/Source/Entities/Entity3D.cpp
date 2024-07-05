@@ -77,40 +77,7 @@ namespace ToToEng
             0.f, 0.f, 1.f,
             0.f, 0.f, 1.f
         };
-    
-        colors = new float[vertexQty * 4]
-        {
-            1.f, 1.f, 1.f, 1.f,
-            1.f, 1.f, 1.f, 1.f,
-            1.f, 1.f, 1.f, 1.f,
-            1.f, 1.f, 1.f, 1.f,
-
-            1.f, 1.f, 1.f, 1.f,
-            1.f, 1.f, 1.f, 1.f,
-            1.f, 1.f, 1.f, 1.f,
-            1.f, 1.f, 1.f, 1.f,
-
-            1.f, 1.f, 1.f, 1.f,
-            1.f, 1.f, 1.f, 1.f,
-            1.f, 1.f, 1.f, 1.f,
-            1.f, 1.f, 1.f, 1.f,
-
-            1.f, 1.f, 1.f, 1.f,
-            1.f, 1.f, 1.f, 1.f,
-            1.f, 1.f, 1.f, 1.f,
-            1.f, 1.f, 1.f, 1.f,
-
-            1.f, 1.f, 1.f, 1.f,
-            1.f, 1.f, 1.f, 1.f,
-            1.f, 1.f, 1.f, 1.f,
-            1.f, 1.f, 1.f, 1.f,
-
-            1.f, 1.f, 1.f, 1.f,
-            1.f, 1.f, 1.f, 1.f,
-            1.f, 1.f, 1.f, 1.f,
-            1.f, 1.f, 1.f, 1.f
-        };
-
+        
         textureCoords = new float[vertexQty * 2]
         {
             0.0f, 0.0f,
@@ -183,25 +150,20 @@ namespace ToToEng
     {
         delete vertices;
 
-        vertices = new float[vertexQty * 12];
+        vertices = new float[vertexQty * 8];
 
         for (unsigned int i = 0; i < vertexQty; i++)
         {
-            vertices[12 * i] = positions[i * 3];
-            vertices[12 * i + 1] = positions[i * 3 + 1];
-            vertices[12 * i + 2] = positions[i * 3 + 2];
+            vertices[8 * i] = positions[i * 3];
+            vertices[8 * i + 1] = positions[i * 3 + 1];
+            vertices[8 * i + 2] = positions[i * 3 + 2];
 
-            vertices[12 * i + 3] = colors[i * 4];
-            vertices[12 * i + 4] = colors[i * 4 + 1];
-            vertices[12 * i + 5] = colors[i * 4 + 2];
-            vertices[12 * i + 6] = colors[i * 4 + 3];
+            vertices[8 * i + 3] = normals[i * 3];
+            vertices[8 * i + 4] = normals[i * 3 + 1];
+            vertices[8 * i + 5] = normals[i * 3 + 2];
 
-            vertices[12 * i + 7] = normals[i * 3];
-            vertices[12 * i + 8] = normals[i * 3 + 1];
-            vertices[12 * i + 9] = normals[i * 3 + 2];
-
-            vertices[12 * i + 10] = textureCoords[i * 2];
-            vertices[12 * i + 11] = textureCoords[i * 2 + 1];
+            vertices[8 * i + 6] = textureCoords[i * 2];
+            vertices[8 * i + 7] = textureCoords[i * 2 + 1];
         }
 
         genBuffers();

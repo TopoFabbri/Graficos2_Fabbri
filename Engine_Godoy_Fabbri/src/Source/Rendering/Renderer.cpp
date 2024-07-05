@@ -60,8 +60,7 @@ namespace ToToEng
         glCall(glfwSwapBuffers(window->getWindow()));
     }
 
-    void Renderer::genVertexBuffer(unsigned int& VBO, unsigned int& VAO, float vertices[], unsigned int id,
-                                   unsigned int qty)
+    void Renderer::genVertexBuffer(unsigned int& VBO, unsigned int& VAO, float vertices[], unsigned int id, unsigned int qty)
     {
         glCall(glGenVertexArrays(id, &VAO));
         glCall(glGenBuffers(id, &VBO));
@@ -69,18 +68,15 @@ namespace ToToEng
         glCall(glBindVertexArray(VAO));
 
         glCall(glBindBuffer(GL_ARRAY_BUFFER, VBO));
-        glCall(glBufferData(GL_ARRAY_BUFFER, sizeof(float) * qty * 12, vertices, GL_STATIC_DRAW));
+        glCall(glBufferData(GL_ARRAY_BUFFER, sizeof(float) * qty * 8, vertices, GL_STATIC_DRAW));
 
-        glCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 12 * sizeof(float), static_cast<void*>(0)));
+        glCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), static_cast<void*>(0)));
         glCall(glEnableVertexAttribArray(0));
 
-        glCall(glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 12 * sizeof(float), reinterpret_cast<void*>(3 * sizeof(float))));
-        glCall(glEnableVertexAttribArray(1));
-
-        glCall(glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 12 * sizeof(float), reinterpret_cast<void*>(7 * sizeof(float))));
+        glCall(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), reinterpret_cast<void*>(3 * sizeof(float))));
         glCall(glEnableVertexAttribArray(2));
 
-        glCall(glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 12 * sizeof(float), reinterpret_cast<void*>(10 * sizeof(float))));
+        glCall(glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), reinterpret_cast<void*>(6 * sizeof(float))));
         glCall(glEnableVertexAttribArray(3));
     }
 

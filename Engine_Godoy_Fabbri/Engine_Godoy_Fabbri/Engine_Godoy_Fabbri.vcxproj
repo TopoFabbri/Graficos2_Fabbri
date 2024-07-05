@@ -1369,6 +1369,7 @@
       <AdditionalIncludeDirectories>D:\Da Archive\Repos\TSDV-PG1-Fabbri-Godoy\Engine_Godoy_Fabbri\lib;D:\Da Archive\Repos\TSDV-PG1-Fabbri-Godoy\Engine_Godoy_Fabbri\src\Headers</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="..\src\Source\Model\Mesh.cpp" />
     <ClCompile Include="..\src\Source\Rendering\Renderer.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1899,6 +1900,7 @@
     <ClInclude Include="..\src\Headers\DirectionalLight.h" />
     <ClInclude Include="..\src\Headers\LightSource.h" />
     <ClInclude Include="..\src\Headers\Material.h" />
+    <ClInclude Include="..\src\Headers\Mesh.h" />
     <ClInclude Include="..\src\Headers\PointLight.h" />
     <ClInclude Include="..\src\Headers\SpotLight.h" />
     <ClInclude Include="..\src\Headers\TpCamera.h" />
@@ -1993,6 +1995,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin</OutDir>
+    <IntDir>$(SolutionDir)obj</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -2008,7 +2012,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;glew32s.lib;</AdditionalDependencies>
+      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;glew32s.lib;assimp-vc142-mtd.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)lib</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
