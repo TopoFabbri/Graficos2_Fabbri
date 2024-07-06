@@ -20,14 +20,14 @@ void ToToEng::ModelTexture::loadTexture()
     textureId = TextureImporter::loadTexture(filePath.c_str(), width, height);
 }
 
-void ToToEng::ModelTexture::bindTexture()
+void ToToEng::ModelTexture::bind()
 {
     glEnable(GL_TEXTURE_2D);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureId);
 }
 
-void ToToEng::ModelTexture::unbindTexture()
+void ToToEng::ModelTexture::unbind()
 {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindTexture(GL_TEXTURE_2D, 0);

@@ -6,8 +6,6 @@ namespace ToToEng
     class TOTO_API Mesh : public Entity3D
     {
     private:
-        unsigned int indexCount;
-
         uint positionLocation;
         uint texLocation;
         uint normalLocation;
@@ -16,8 +14,8 @@ namespace ToToEng
         Mesh(Renderer* renderer);
         ~Mesh();
 
-        void createMesh(float* vertices, int vertexCount, unsigned int* indices, int indexCount);
-        void drawMesh();
+        void createMesh(float* vertices, int vertexCount, unsigned int* indices, int indexQty);
+        void draw() override;
         void clearMesh();
     };
 }

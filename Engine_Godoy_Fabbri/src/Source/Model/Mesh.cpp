@@ -7,7 +7,7 @@ namespace ToToEng
         VAO = 0;
         VBO = 0;
         IBO = 0;
-        indexCount = 0;
+        indexQty = 0;
     }
 
     Mesh::~Mesh()
@@ -15,13 +15,13 @@ namespace ToToEng
         clearMesh();
     }
 
-    void Mesh::createMesh(float* vertices, int vertexCount, unsigned int* indices, int indexCount)
+    void Mesh::createMesh(float* vertices, int vertexCount, unsigned int* indices, int indexQty)
     {
-        this->indexCount = indexCount;
+        this->indexQty = indexQty;
 
         glGenBuffers(1, &IBO);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * indexCount, indices, GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * indexQty, indices, GL_STATIC_DRAW);
 
         glGenBuffers(1, &VBO);
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -43,9 +43,9 @@ namespace ToToEng
 
     }
 
-    void Mesh::drawMesh()
+    void Mesh::draw()
     {
-        renderer->drawEntity3D(VAO, indexCount, *material, transform.getTransformMatrix());
+        renderer->drawEntity3D(VAO, indexQty, *material, transform.getTransformMatrix());
     }
 
     void Mesh::clearMesh()
@@ -67,6 +67,6 @@ namespace ToToEng
             VAO = 0;
         }
 
-        indexCount = 0;
+        indexQty = 0;
     }
 }

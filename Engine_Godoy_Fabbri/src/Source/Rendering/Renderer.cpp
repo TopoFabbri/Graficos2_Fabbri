@@ -247,6 +247,11 @@ namespace ToToEng
         glCall(glUniform3f(glGetUniformLocation(shader3D, (index + "attenuation").c_str()), light->getAttenuation().x, light->getAttenuation().y, light->getAttenuation().z));
     }
 
+    void Renderer::sendMaterial(Material mat)
+    {
+        
+    }
+
     unsigned int Renderer::compileShader(unsigned int type, const char* source)
     {
         unsigned int id = glCreateShader(type);

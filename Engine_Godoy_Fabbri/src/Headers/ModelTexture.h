@@ -20,8 +20,8 @@ namespace ToToEng
         ~ModelTexture();
 
         void loadTexture();
-        void bindTexture();
-        void unbindTexture();
+        void bind();
+        void unbind();
         void deleteTexture();
     };
 }
