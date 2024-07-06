@@ -4,13 +4,14 @@
 
 namespace ToToEng
 {
-    class TOTO_API Entity3D : public ToToEng::Entity
+    class TOTO_API Entity3D : public Entity
     {
+    protected:
         Material* material;
         float* normals;
     
     public:
-        explicit Entity3D(ToToEng::Renderer* renderer);
+        explicit Entity3D(Renderer* renderer);
         ~Entity3D() override;
     
         void draw() override;
