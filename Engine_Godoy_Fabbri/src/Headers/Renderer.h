@@ -1,14 +1,12 @@
   #pragma once
 
+#include <glm/gtc/type_ptr.hpp>
 #include <string>
-#include <sstream>
 
 #include "Window.h"
-#include <glm/gtc/type_ptr.hpp>
-
-#include "Camera.h"
 #include "Material.h"
 #include "DirectionalLight.h"
+#include "Model.h"
 #include "SpotLight.h"
 
 #pragma region MACROS
@@ -36,12 +34,12 @@ namespace ToToEng
 		Window* window;
 		unsigned int shader;
 		unsigned int shapeShader;
-		unsigned int shader3D;
 		int u_TransformLocation;
 		int u_ShapeTransformLocation;
 		int u_ColorLocation;
 		mat4 projection;
 
+		
 		static unsigned int compileShader(unsigned int type, const char* source);
 		static unsigned int createShader(const char* vShader, const char* fShader);
 		static ShaderProgramSource parseShader(const std::string& filepath);
@@ -49,6 +47,10 @@ namespace ToToEng
 		static bool glLogCall(const char* function, const char* file, int line);
 
 	public:
+		unsigned int shader3D;
+		unsigned int meshShader;
+		Model* model;
+		
 		Renderer(Window* window);
 		~Renderer();
 

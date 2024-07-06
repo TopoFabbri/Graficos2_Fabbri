@@ -9,14 +9,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59b83834-1b16-455b-92bb-7e2412bbcbcc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Source/Model/ModelImporter.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Source/Model/ModelImporter.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Headers/Mesh.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Mesh.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/Model.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Model.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/ModelTexture.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/ModelTexture.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Source/Model/Mesh.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Model/Mesh.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Source/Model/Model.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Model/Model.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Source/Model/ModelTexture.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Model/ModelTexture.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Source/Rendering/Renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Rendering/Renderer.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -268,7 +267,7 @@
       <workItem from="1720022573722" duration="19117000" />
       <workItem from="1720119210559" duration="15489000" />
       <workItem from="1720214955353" duration="4235000" />
-      <workItem from="1720219553729" duration="11280000" />
+      <workItem from="1720219553729" duration="14236000" />
     </task>
     <task id="LOCAL-00001" summary="Re-do singleton input">
       <option name="closed" value="true" />

@@ -1,6 +1,9 @@
 #include "Renderer.h"
 
 #include <fstream>
+#include <sstream>
+
+#include "Camera.h"
 
 namespace ToToEng
 {
@@ -22,6 +25,10 @@ namespace ToToEng
         std::cout << glGetString(GL_VERSION) << std::endl;
         shader3D = createShader(shaderSource.vertexSource.c_str(), shaderSource.fragmentSource.c_str());
 
+        shaderSource = parseShader("../res/shaders/Mesh.shader");
+        std::cout << glGetString(GL_VERSION) << std::endl;
+        meshShader = createShader(shaderSource.vertexSource.c_str(), shaderSource.fragmentSource.c_str());
+        
         glCall(u_TransformLocation = glGetUniformLocation(shader, "u_Transform"));
         _ASSERT(u_TransformLocation != -1);
 
@@ -43,6 +50,8 @@ namespace ToToEng
         setProjection(perspective(radians(45.f),
                                   static_cast<float>(window->getWidth()) / static_cast<float>(window->getHeight()),
                                   0.1f, 100.f));
+
+        model = new Model("../res/Backpack/backpack.obj", this);
     }
 
     Renderer::~Renderer()
@@ -246,12 +255,7 @@ namespace ToToEng
         glCall(glUniform1f(glGetUniformLocation(shader3D, (index + "outerCutoff").c_str()), light->getOuterCutoff()));
         glCall(glUniform3f(glGetUniformLocation(shader3D, (index + "attenuation").c_str()), light->getAttenuation().x, light->getAttenuation().y, light->getAttenuation().z));
     }
-
-    void Renderer::sendMaterial(Material mat)
-    {
-        
-    }
-
+    
     unsigned int Renderer::compileShader(unsigned int type, const char* source)
     {
         unsigned int id = glCreateShader(type);
