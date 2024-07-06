@@ -51,6 +51,8 @@ namespace ToToEng
 			for (Entity* entity : entities)
 				entity->draw();
 
+			renderer->model->Draw(renderer->shader3D);
+
 			renderer->endDraw();
 
 			glfwPollEvents();

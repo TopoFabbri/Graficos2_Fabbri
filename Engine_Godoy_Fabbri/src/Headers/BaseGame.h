@@ -2,6 +2,7 @@
 
 #include <list>
 
+#include "Camera.h"
 #include "CollisionManager.h"
 #include "Renderer.h"
 #include "Shape.h"
