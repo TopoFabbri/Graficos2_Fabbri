@@ -20,9 +20,11 @@ namespace ToToEng
 
 		mouseLastPos = { 0, 0 };
 		mouseDelta = { 0, 0 };
+		mouseScroll = { 0, 0 };
 
 		glfwSetCursorPosCallback(window, mouseCallback);
 		glfwSetKeyCallback(window, keyCallback);
+		glfwSetScrollCallback(window, scrollCallback);
 	}
 
 	Input* Input::getInstance()
@@ -81,9 +83,24 @@ namespace ToToEng
 		instance->mouseLastPos = glm::vec2(xPos, yPos);
 	}
 
+	void Input::updateScroll(double xPos, double yPos)
+	{
+		instance->mouseScroll = glm::vec2(xPos, yPos);
+	}
+
+	float Input::getMouseScroll()
+	{
+		return instance->mouseScroll.y;
+	}
+
 	void mouseCallback(GLFWwindow* window, const double xPos, const double yPos)
 	{
 		Input::updateCursor(xPos, yPos);
+	}
+
+	void scrollCallback(GLFWwindow* window, double xoffset, double yoffset)
+	{
+		Input::updateScroll(xoffset, yoffset);
 	}
 
 	void keyCallback(GLFWwindow* window, int key, int scancode, const int action, int mods)

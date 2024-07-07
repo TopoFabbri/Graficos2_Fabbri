@@ -1,11 +1,11 @@
 #include "Model.h"
 
-Model::Model(ToToEng::Renderer* renderer, std::string const& path, bool gamma): Entity3D(renderer)
+ToToEng::Model::Model(ToToEng::Renderer* renderer, std::string const& path, bool gamma): Entity3D(renderer)
 {
     ModelLoader::loadModel(path, meshes, gamma);
 }
 
-void Model::draw()
+void ToToEng::Model::draw()
 {
     for (unsigned int i = 0; i < meshes.size(); i++)
     {

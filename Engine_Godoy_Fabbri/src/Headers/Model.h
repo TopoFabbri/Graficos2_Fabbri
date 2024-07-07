@@ -6,14 +6,16 @@
 #include "Mesh.h"
 #include "ModelLoader.h"
 
-class TOTO_API Model : public ToToEng::Entity3D
+namespace ToToEng
 {
-public:
-    std::vector<Mesh> meshes;
-    // constructor, expects a filepath to a 3D model.
-    Model(ToToEng::Renderer *renderer, std::string const &path, bool gamma = false);
+    class TOTO_API Model : public Entity3D
+    {
+    public:
+        std::vector<Mesh> meshes;
+        // constructor, expects a filepath to a 3D model.
+        Model(Renderer *renderer, std::string const &path, bool gamma = false);
 
-    // draws the model, and thus all its meshes
-      void draw() override;
-};
-
+        // draws the model, and thus all its meshes
+        void draw() override;
+    };
+}

@@ -7,11 +7,14 @@
 
 Game::Game(int width, int height, const char* title) : BaseGame(width, height, title)
 {
+    camSpeed = 10.f;
+    
     DirectionalLight* light = new DirectionalLight();
     SpotLight* spotLight = new SpotLight();
 
     // entities.push_back(new Model(renderer, "../res/Backpack/backpack.obj", true));
-    entities.push_back(new Model(renderer, "../res/skull/craneo.OBJ"));
+    entities.push_back(new Model(renderer, "../res/CH_Dummy_HurtV2/CH_Dummy_HurtV2.fbx"));
+    entities.back()->transform.setScale({0.01f, 0.01f, 0.01f});    
 }
 
 Game::~Game()
@@ -20,23 +23,27 @@ Game::~Game()
 
 void Game::update()
 {
-    float speed = 10.f;
     float camSens = 5.f;
 
     if (Input::getKey(Input::a, Input::Repeated))
-        camera->moveRight(-speed * GameTime::getDelta());
+        camera->moveRight(-camSpeed * GameTime::getDelta());
     if (Input::getKey(Input::d, Input::Repeated))
-        camera->moveRight(speed * GameTime::getDelta());
+        camera->moveRight(camSpeed * GameTime::getDelta());
 
     if (Input::getKey(Input::w, Input::Repeated))
-        camera->moveForward(speed * GameTime::getDelta());
+        camera->moveForward(camSpeed * GameTime::getDelta());
     if (Input::getKey(Input::s, Input::Repeated))
-        camera->moveForward(-speed * GameTime::getDelta());
+        camera->moveForward(-camSpeed * GameTime::getDelta());
 
     if (Input::getKey(Input::e, Input::Repeated))
-        camera->moveUp(speed * GameTime::getDelta());
+        camera->moveUp(camSpeed * GameTime::getDelta());
     if (Input::getKey(Input::q, Input::Repeated))
-        camera->moveUp(-speed * GameTime::getDelta());
+        camera->moveUp(-camSpeed * GameTime::getDelta());
+
+    if (Input::getMouseScroll() > 0)
+        camSpeed *= 1.01f;
+    if (Input::getMouseScroll() < 0)
+        camSpeed *= 0.99f;
 
     if (Input::getKey(Input::esc, Input::Pressed))
         endGame();

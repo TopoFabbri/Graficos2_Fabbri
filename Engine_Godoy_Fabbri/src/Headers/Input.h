@@ -17,6 +17,7 @@ namespace ToToEng
 
         glm::vec2 mouseLastPos;
         glm::vec2 mouseDelta;
+        glm::vec2 mouseScroll;
 
         explicit Input();
 
@@ -73,8 +74,11 @@ namespace ToToEng
         static glm::vec2 getMouseDelta();
         static bool setCursorVisibility(bool visibility);
         static void updateCursor(double xPos, double yPos);
+        static void updateScroll(double xPos, double yPos);
+        static float getMouseScroll();
     };
 
     void mouseCallback(GLFWwindow* window, double xPos, double yPos);
     void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+    void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 }

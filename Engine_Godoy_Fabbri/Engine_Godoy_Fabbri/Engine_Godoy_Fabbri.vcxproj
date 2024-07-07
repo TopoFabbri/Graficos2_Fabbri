@@ -48,6 +48,38 @@
     <ClCompile Include="..\src\Source\Tools\Input.cpp" />
     <ClCompile Include="..\src\Source\Transform\Transform.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Headers\Animation.h" />
+    <ClInclude Include="..\src\Headers\BaseGame.h" />
+    <ClInclude Include="..\src\Headers\BoxCollider2D.h" />
+    <ClInclude Include="..\src\Headers\Camera.h" />
+    <ClInclude Include="..\src\Headers\CollisionManager.h" />
+    <ClInclude Include="..\src\Headers\DirectionalLight.h" />
+    <ClInclude Include="..\src\Headers\Entity.h" />
+    <ClInclude Include="..\src\Headers\Entity2D.h" />
+    <ClInclude Include="..\src\Headers\Entity3D.h" />
+    <ClInclude Include="..\src\Headers\Exports.h" />
+    <ClInclude Include="..\src\Headers\Game.h" />
+    <ClInclude Include="..\src\Headers\GameTime.h" />
+    <ClInclude Include="..\src\Headers\Input.h" />
+    <ClInclude Include="..\src\Headers\LightSource.h" />
+    <ClInclude Include="..\src\Headers\Material.h" />
+    <ClInclude Include="..\src\Headers\Mesh.h" />
+    <ClInclude Include="..\src\Headers\Model.h" />
+    <ClInclude Include="..\src\Headers\ModelLoader.h" />
+    <ClInclude Include="..\src\Headers\PointLight.h" />
+    <ClInclude Include="..\src\Headers\Renderer.h" />
+    <ClInclude Include="..\src\Headers\Shader.h" />
+    <ClInclude Include="..\src\Headers\Shape.h" />
+    <ClInclude Include="..\src\Headers\SpotLight.h" />
+    <ClInclude Include="..\src\Headers\Sprite.h" />
+    <ClInclude Include="..\src\Headers\stb_image.h" />
+    <ClInclude Include="..\src\Headers\TextureImporter.h" />
+    <ClInclude Include="..\src\Headers\Tile.h" />
+    <ClInclude Include="..\src\Headers\TpCamera.h" />
+    <ClInclude Include="..\src\Headers\Transform.h" />
+    <ClInclude Include="..\src\Headers\Window.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

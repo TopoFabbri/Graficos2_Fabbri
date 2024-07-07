@@ -9,6 +9,7 @@ class Game :
 {
 private:
 	std::list<vec3> rotations = std::list<vec3>();
+	 float camSpeed;
 	
 public:
 	Game(int width, int height, const char* title);
