@@ -10,7 +10,8 @@ Game::Game(int width, int height, const char* title) : BaseGame(width, height, t
     DirectionalLight* light = new DirectionalLight();
     SpotLight* spotLight = new SpotLight();
 
-    entities.push_back(new Model(renderer, "../res/CH_Dummy_HurtV2/CH_Dummy_HurtV2.fbx"));
+    // entities.push_back(new Model(renderer, "../res/Backpack/backpack.obj", true));
+    entities.push_back(new Model(renderer, "../res/skull/craneo.OBJ"));
 }
 
 Game::~Game()
