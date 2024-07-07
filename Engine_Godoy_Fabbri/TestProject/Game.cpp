@@ -1,6 +1,7 @@
 #include "Game.h"
 
 #include "Headers/Entity3D.h"
+#include "Headers/Model.h"
 #include "Headers/Sprite.h"
 #include "Headers/TpCamera.h"
 
@@ -8,6 +9,8 @@ Game::Game(int width, int height, const char* title) : BaseGame(width, height, t
 {
     DirectionalLight* light = new DirectionalLight();
     SpotLight* spotLight = new SpotLight();
+
+    entities.push_back(new Model(renderer, "../res/CH_Dummy_HurtV2/CH_Dummy_HurtV2.fbx"));
 }
 
 Game::~Game()

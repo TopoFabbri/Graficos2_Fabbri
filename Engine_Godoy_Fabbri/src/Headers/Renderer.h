@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Material.h"
 #include "DirectionalLight.h"
+#include "Mesh.h"
 #include "SpotLight.h"
 
 #pragma region MACROS
@@ -33,6 +34,8 @@ namespace ToToEng
 		Window* window;
 		unsigned int shader;
 		unsigned int shapeShader;
+		unsigned int shader3D;
+		unsigned int meshShader;
 		int u_TransformLocation;
 		int u_ShapeTransformLocation;
 		int u_ColorLocation;
@@ -45,8 +48,6 @@ namespace ToToEng
 		static bool glLogCall(const char* function, const char* file, int line);
 
 	public:
-		unsigned int shader3D;
-		unsigned int meshShader;
 		
 		Renderer(Window* window);
 		~Renderer();
@@ -63,8 +64,9 @@ namespace ToToEng
 		void drawShape(unsigned int& VAO, unsigned int indexQty, vec4 color, mat4 trans);
 		void drawMesh(unsigned int& VAO, unsigned int indexQty, mat4 trans);
 		void setProjection(mat4 projection);
-		void sendDirectionalLight(DirectionalLight* light, int i);
-		void sendPointLight(PointLight* light, int i);
-		void sendSpotLight(SpotLight* light, int i);
+		void sendDirectionalLight(DirectionalLight* light, int i, unsigned int shaderId);
+		void sendPointLight(PointLight* light, int i, unsigned int shaderId);
+		void sendSpotLight(SpotLight* light, int i, unsigned int shaderId);
+		void drawModel3D(unsigned int& VAO, unsigned int indexQty, mat4 trans, std::vector<Texture> textures);
 	};
 }

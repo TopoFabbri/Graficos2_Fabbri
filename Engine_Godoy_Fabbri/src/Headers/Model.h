@@ -1,40 +1,19 @@
 #pragma once
-
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-
-#include <string>
-#include <iostream>
 #include <vector>
 
+#include "Entity.h"
+#include "Entity3D.h"
 #include "Mesh.h"
+#include "ModelLoader.h"
 
-using namespace std;
-
-unsigned int TextureFromFile(const char* path, const string& directory, bool gamma = false);
-
-namespace ToToEng
+class TOTO_API Model : public ToToEng::Entity3D
 {
-    class Model
-    {
-    public:
-        vector<Texture> textures_loaded;
-        vector<Mesh> meshes;
-        string directory;
-        bool gammaCorrection;
-        Renderer* renderer;
+public:
+    std::vector<Mesh> meshes;
+    // constructor, expects a filepath to a 3D model.
+    Model(ToToEng::Renderer *renderer, std::string const &path, bool gamma = false);
 
-        Model(Renderer* renderer, string const& path, bool gamma = false);
+    // draws the model, and thus all its meshes
+      void draw() override;
+};
 
-        void draw();
-
-    private:
-        void loadModel(string const& path);
-        void processNode(aiNode* node, const aiScene* scene);
-        Mesh processMesh(aiMesh* mesh, const aiScene* scene);
-
-        // checks all material textures of a given type and loads the textures if they're not loaded yet.
-        // the required info is returned as a Texture struct.
-        vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName);
-    };
-}

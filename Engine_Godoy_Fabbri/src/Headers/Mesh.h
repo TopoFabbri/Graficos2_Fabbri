@@ -1,54 +1,41 @@
 #pragma once
-
-#include <glew.h> // holds all OpenGL type declarations
-
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-
-#include <string>
+#include <glew.h>
 #include <vector>
+#include <glm/vec2.hpp>
 
-#include "Renderer.h"
-#include "Transform.h"
 
-using namespace std;
+#include "Shader.h"
 
-#define MAX_BONE_INFLUENCE 4
-
-namespace ToToEng
+struct Vertex
 {
-    struct Vertex
-    {
-        vec3 Position;
-        vec3 Normal;
-        vec2 TexCoords;
-    };
+    glm::vec3 Position;
+    glm::vec3 Normal;
+    glm::vec2 TexCoords;
+    glm::vec3 Tangent;
+    glm::vec3 Bitangent;
+};
 
-    struct Texture
-    {
-        unsigned int id;
-        string type;
-        string path;
-    };
+struct Texture
+{
+    unsigned int id;
+    std::string type;
+    std::string path;
+};
 
-    class Mesh
-    {
-    public:
-        vector<Vertex> vertices;
-        vector<unsigned int> indices;
-        vector<Texture> textures;
-        unsigned int VAO;
+class Mesh
+{
+public:
+    std::vector<Vertex> vertices;
+    std::vector<unsigned int> indices;
+    std::vector<Texture> textures;
+    unsigned int VAO;
 
-        Transform transform;
+    Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
 
-        Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures);
+    void Draw(Shader& shader);
 
-        void Draw(Renderer* renderer);
+private:
+    unsigned int VBO, EBO;
 
-    private:
-        unsigned int VBO, EBO;
-
-        // initializes all the buffer objects/arrays
-        void setupMesh();
-    };
-}
+    void setupMesh();
+};

@@ -1371,7 +1371,7 @@
     </ClCompile>
     <ClCompile Include="..\src\Source\Model\Mesh.cpp" />
     <ClCompile Include="..\src\Source\Model\Model.cpp" />
-    <ClCompile Include="..\src\Source\Model\ModelImporter.cpp" />
+    <ClCompile Include="..\src\Source\Model\ModelLoader.cpp" />
     <ClCompile Include="..\src\Source\Rendering\Renderer.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1904,6 +1904,7 @@
     <ClInclude Include="..\src\Headers\Material.h" />
     <ClInclude Include="..\src\Headers\Mesh.h" />
     <ClInclude Include="..\src\Headers\Model.h" />
+    <ClInclude Include="..\src\Headers\ModelLoader.h" />
     <ClInclude Include="..\src\Headers\PointLight.h" />
     <ClInclude Include="..\src\Headers\SpotLight.h" />
     <ClInclude Include="..\src\Headers\TpCamera.h" />
@@ -1926,7 +1927,6 @@
     <ClInclude Include="..\src\Headers\Tile.h" />
     <ClInclude Include="..\src\Headers\Transform.h" />
     <ClInclude Include="..\src\Headers\Window.h" />
-    <ClInclude Include="..\src\Source\Model\ModelImporter.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\res\shaders\Basic.shader" />
