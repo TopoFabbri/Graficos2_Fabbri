@@ -43,12 +43,14 @@ unsigned int TextureFromFile(const char* path, const string& directory, bool gam
     return textureID;
 }
 
-Model::Model(string const &path, bool gamma): gammaCorrection(gamma)
+ToToEng::Model::Model(Renderer* renderer, string const &path, bool gamma): gammaCorrection(gamma)
 {
+    this->renderer = renderer;
+    
     loadModel(path);
 }
 
-void Model::loadModel(string const& path)
+void ToToEng::Model::loadModel(string const& path)
 {
     // read file via ASSIMP
     Assimp::Importer importer;
@@ -66,7 +68,7 @@ void Model::loadModel(string const& path)
     processNode(scene->mRootNode, scene);
 }
 
-void Model::processNode(aiNode* node, const aiScene* scene)
+void ToToEng::Model::processNode(aiNode* node, const aiScene* scene)
 {
     // process each mesh located at the current node
     for(unsigned int i = 0; i < node->mNumMeshes; i++)
@@ -84,9 +86,8 @@ void Model::processNode(aiNode* node, const aiScene* scene)
 
 }
 
-Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
+ToToEng::Mesh ToToEng::Model::processMesh(aiMesh* mesh, const aiScene* scene)
 {
-    // data to fill
     vector<Vertex> vertices;
     vector<unsigned int> indices;
     vector<Texture> textures;
@@ -118,16 +119,6 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
             vec.x = mesh->mTextureCoords[0][i].x; 
             vec.y = mesh->mTextureCoords[0][i].y;
             vertex.TexCoords = vec;
-            // tangent
-            vector.x = mesh->mTangents[i].x;
-            vector.y = mesh->mTangents[i].y;
-            vector.z = mesh->mTangents[i].z;
-            vertex.Tangent = vector;
-            // bitangent
-            vector.x = mesh->mBitangents[i].x;
-            vector.y = mesh->mBitangents[i].y;
-            vector.z = mesh->mBitangents[i].z;
-            vertex.Bitangent = vector;
         }
         else
             vertex.TexCoords = glm::vec2(0.0f, 0.0f);
@@ -168,39 +159,39 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
     return Mesh(vertices, indices, textures);
 }
 
-vector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName)
+vector<ToToEng::Texture> ToToEng::Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName)
 {
     vector<Texture> textures;
     for(unsigned int i = 0; i < mat->GetTextureCount(type); i++)
     {
         aiString str;
         mat->GetTexture(type, i, &str);
-        // check if texture was loaded before and if so, continue to next iteration: skip loading a new texture
+        
         bool skip = false;
         for(unsigned int j = 0; j < textures_loaded.size(); j++)
         {
             if(std::strcmp(textures_loaded[j].path.data(), str.C_Str()) == 0)
             {
                 textures.push_back(textures_loaded[j]);
-                skip = true; // a texture with the same filepath has already been loaded, continue to next one. (optimization)
+                skip = true;
                 break;
             }
         }
         if(!skip)
-        {   // if texture hasn't been loaded already, load it
+        {
             Texture texture;
             texture.id = TextureFromFile(str.C_Str(), this->directory);
             texture.type = typeName;
             texture.path = str.C_Str();
             textures.push_back(texture);
-            textures_loaded.push_back(texture);  // store it as texture loaded for entire model, to ensure we won't unnecessary load duplicate textures.
+            textures_loaded.push_back(texture);
         }
     }
     return textures;
 }
 
-void Model::Draw(glm::uint &shader)
+void ToToEng::Model::draw()
 {
-    for(unsigned int i = 0; i < meshes.size(); i++)
-        meshes[i].Draw(shader);
+    for (Mesh& mesh : meshes)
+        mesh.Draw(renderer);
 }

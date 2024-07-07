@@ -1,19 +1,3 @@
-/*
-░░░░░░░░░░░█▀▀░░█░░░░░░
-░░░░░░▄▀▀▀▀░░░░░█▄▄░░░░
-░░░░░░█░█░░░░░░░░░░▐░░░
-░░░░░░▐▐░░░░░░░░░▄░▐░░░
-░░░░░░█░░░░░░░░▄▀▀░▐░░░
-░░░░▄▀░░░░░░░░▐░▄▄▀░░░░
-░░▄▀░░░▐░░░░░█▄▀░▐░░░░░
-░░█░░░▐░░░░░░░░▄░█░░░░░
-░░░█▄░░▀▄░░░░▄▀▐░█░░░░░
-░░░█▐▀▀▀░▀▀▀▀░░▐░█░░░░░
-░░▐█▐▄░░▀░░░░░░▐░█▄▄░░░
-░░░▀▀▄░░░░░░░░▄▐▄▄▄▀░░░
-░░░░░░░░░░░░░░░░░░░░░░░
-*/
-
 #include "Game.h"
 
 #include "Headers/Entity3D.h"
@@ -24,39 +8,6 @@ Game::Game(int width, int height, const char* title) : BaseGame(width, height, t
 {
     DirectionalLight* light = new DirectionalLight();
     SpotLight* spotLight = new SpotLight();
-    
-    entities.push_back(new Entity3D(renderer));
-    entities.back()->transform.setPos({0.0f,  0.0f,  0.0f});
-
-    entities.push_back(new Entity3D(renderer));
-    entities.back()->transform.setPos({2.0f,  5.0f, -15.0f});
-    
-    entities.push_back(new Entity3D(renderer));
-    entities.back()->transform.setPos({-1.5f, -2.2f, -2.5f});
-    
-    entities.push_back(new Entity3D(renderer));
-    entities.back()->transform.setPos({-3.8f, -2.0f, -12.3f});
-    
-    entities.push_back(new Entity3D(renderer));
-    entities.back()->transform.setPos({2.4f, -0.4f, -3.5f});
-    
-    entities.push_back(new Entity3D(renderer));
-    entities.back()->transform.setPos({-1.7f,  3.0f, -7.5f});
-    
-    entities.push_back(new Entity3D(renderer));
-    entities.back()->transform.setPos({1.3f, -2.0f, -2.5f});
-    
-    entities.push_back(new Entity3D(renderer));
-    entities.back()->transform.setPos({1.5f,  2.0f, -2.5f});
-    
-    entities.push_back(new Entity3D(renderer));
-    entities.back()->transform.setPos({1.5f,  0.2f, -1.5f});
-    
-    entities.push_back(new Entity3D(renderer));
-    entities.back()->transform.setPos({-1.3f,  1.0f, -1.5f});
-
-    for (Entity* entity : entities)
-        rotations.push_back({rand() % 45, rand() % 45, rand() % 45});
 }
 
 Game::~Game()
@@ -96,14 +47,4 @@ void Game::update()
     SpotLight* light = static_cast<SpotLight*>(LightSource::lights.back());
     light->setDirection(camera->getForward());
     light->setPosition(camera->getPos());
-    
-    for (Entity* entity : entities)
-    {
-        entity->transform.rotateX(rotations.front().x * GameTime::getDelta());
-        entity->transform.rotateY(rotations.front().y * GameTime::getDelta());
-        entity->transform.rotateZ(rotations.front().z * GameTime::getDelta());
-        
-        rotations.push_back(rotations.front());
-        rotations.pop_front();
-    }
 }

@@ -8,6 +8,10 @@ namespace ToToEng
 
 		color = { 1, 1, 1, 1 };
 
+		positions = new float();
+		colors = new float();
+		textureCoords = new float();
+		indices = new unsigned int();
 		vertices = new float();
 
 		transform = Transform();
@@ -15,10 +19,10 @@ namespace ToToEng
 
 	Entity::~Entity()
 	{
-		delete positions;
-		delete colors;
-		delete vertices;
-		delete indices;
+			delete positions;
+			delete colors;
+			delete vertices;
+			delete indices;
 
 		Entity::deleteBuffers();
 	}

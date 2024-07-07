@@ -8,51 +8,47 @@
 #include <string>
 #include <vector>
 
+#include "Renderer.h"
+#include "Transform.h"
+
 using namespace std;
 
 #define MAX_BONE_INFLUENCE 4
 
-struct Vertex {
-    // position
-    glm::vec3 Position;
-    // normal
-    glm::vec3 Normal;
-    // texCoords
-    glm::vec2 TexCoords;
-    // tangent
-    glm::vec3 Tangent;
-    // bitangent
-    glm::vec3 Bitangent;
-	//bone indexes which will influence this vertex
-	int m_BoneIDs[MAX_BONE_INFLUENCE];
-	//weights from each bone
-	float m_Weights[MAX_BONE_INFLUENCE];
-};
+namespace ToToEng
+{
+    struct Vertex
+    {
+        vec3 Position;
+        vec3 Normal;
+        vec2 TexCoords;
+    };
 
-struct Texture {
-    unsigned int id;
-    string type;
-    string path;
-};
+    struct Texture
+    {
+        unsigned int id;
+        string type;
+        string path;
+    };
 
-class Mesh {
-public:
-    // mesh Data
-    vector<Vertex>       vertices;
-    vector<unsigned int> indices;
-    vector<Texture>      textures;
-    unsigned int VAO;
+    class Mesh
+    {
+    public:
+        vector<Vertex> vertices;
+        vector<unsigned int> indices;
+        vector<Texture> textures;
+        unsigned int VAO;
 
-    // constructor
-    Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures);
+        Transform transform;
 
-    // render the mesh
-    void Draw(glm::uint &shader);
+        Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures);
 
-private:
-    // render data 
-    unsigned int VBO, EBO;
+        void Draw(Renderer* renderer);
 
-    // initializes all the buffer objects/arrays
-    void setupMesh();
-};
+    private:
+        unsigned int VBO, EBO;
+
+        // initializes all the buffer objects/arrays
+        void setupMesh();
+    };
+}

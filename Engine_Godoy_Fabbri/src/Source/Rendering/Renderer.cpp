@@ -50,8 +50,6 @@ namespace ToToEng
         setProjection(perspective(radians(45.f),
                                   static_cast<float>(window->getWidth()) / static_cast<float>(window->getHeight()),
                                   0.1f, 100.f));
-
-        model = new Model("../res/Backpack/backpack.obj", this);
     }
 
     Renderer::~Renderer()
@@ -69,24 +67,31 @@ namespace ToToEng
         glCall(glfwSwapBuffers(window->getWindow()));
     }
 
+    void Renderer::bindTexture(const char* name, unsigned int &i, unsigned int &textureId)
+    {
+        glActiveTexture(GL_TEXTURE0 + i);
+        glUniform1i(glGetUniformLocation(meshShader, name), i);
+        glBindTexture(GL_TEXTURE_2D, textureId);
+    }
+
     void Renderer::genVertexBuffer(unsigned int& VBO, unsigned int& VAO, float vertices[], unsigned int id, unsigned int qty)
     {
         glCall(glGenVertexArrays(id, &VAO));
         glCall(glGenBuffers(id, &VBO));
-
+        
         glCall(glBindVertexArray(VAO));
 
         glCall(glBindBuffer(GL_ARRAY_BUFFER, VBO));
         glCall(glBufferData(GL_ARRAY_BUFFER, sizeof(float) * qty * 8, vertices, GL_STATIC_DRAW));
-
+        
         glCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), static_cast<void*>(0)));
         glCall(glEnableVertexAttribArray(0));
-
+        
         glCall(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), reinterpret_cast<void*>(3 * sizeof(float))));
-        glCall(glEnableVertexAttribArray(2));
-
+        glCall(glEnableVertexAttribArray(1));
+        
         glCall(glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), reinterpret_cast<void*>(6 * sizeof(float))));
-        glCall(glEnableVertexAttribArray(3));
+        glCall(glEnableVertexAttribArray(2));
     }
 
     void Renderer::genIndexBuffer(unsigned int& IBO, unsigned int indices[], unsigned int id, unsigned int qty)
@@ -148,8 +153,6 @@ namespace ToToEng
 
         int i = 0;
 
-        sendDirectionalLight(static_cast<DirectionalLight*>(LightSource::lights.front()), 0);
-        
         for (LightSource* light : LightSource::lights)
         {
             switch (light->getType())
@@ -190,7 +193,7 @@ namespace ToToEng
         glCall(glBindVertexArray(0));
         glCall(glUseProgram(0));
     }
-
+    
     void Renderer::drawShape(unsigned& VAO, unsigned indexQty, vec4 color, mat4 trans)
     {
         mat4 pvm = projection * Camera::main->getView() * trans;
@@ -208,6 +211,21 @@ namespace ToToEng
 
         glCall(glBindVertexArray(0));
         glCall(glUseProgram(0));
+    }
+
+    void Renderer::drawMesh(unsigned int& VAO, unsigned int indexQty, mat4 trans)
+    {
+        glUseProgram(meshShader);
+
+        glUniformMatrix4fv(glGetUniformLocation(meshShader, "model"), 1, GL_FALSE, value_ptr(trans));
+        glUniformMatrix4fv(glGetUniformLocation(meshShader, "view"), 1, GL_FALSE, value_ptr(Camera::main->getView()));
+        glUniformMatrix4fv(glGetUniformLocation(meshShader, "projection"), 1, GL_FALSE, value_ptr(projection));
+        
+        glBindVertexArray(VAO);
+        glDrawElements(GL_TRIANGLES, indexQty, GL_UNSIGNED_INT, nullptr);
+        glBindVertexArray(0);
+
+        glActiveTexture(GL_TEXTURE0);
     }
 
     void Renderer::setProjection(mat4 projection)

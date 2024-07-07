@@ -1,4 +1,4 @@
-  #pragma once
+#pragma once
 
 #include <glm/gtc/type_ptr.hpp>
 #include <string>
@@ -6,7 +6,6 @@
 #include "Window.h"
 #include "Material.h"
 #include "DirectionalLight.h"
-#include "Model.h"
 #include "SpotLight.h"
 
 #pragma region MACROS
@@ -38,7 +37,6 @@ namespace ToToEng
 		int u_ShapeTransformLocation;
 		int u_ColorLocation;
 		mat4 projection;
-
 		
 		static unsigned int compileShader(unsigned int type, const char* source);
 		static unsigned int createShader(const char* vShader, const char* fShader);
@@ -49,13 +47,13 @@ namespace ToToEng
 	public:
 		unsigned int shader3D;
 		unsigned int meshShader;
-		Model* model;
 		
 		Renderer(Window* window);
 		~Renderer();
 
 		void beginDraw();
 		void endDraw();
+		void bindTexture(const char* name, unsigned int &i, unsigned int &textureId);
 		void genVertexBuffer(unsigned int& VBO, unsigned int& VAO, float vertices[], unsigned int id, unsigned int qty);
 		void genIndexBuffer(unsigned int& IBO,
 			unsigned int indices[], unsigned int id, unsigned int qty);
@@ -63,6 +61,7 @@ namespace ToToEng
 		void drawEntity2D(unsigned int& VAO, unsigned int indexQty, vec4 color, mat4 trans, unsigned int texture);
 		void drawEntity3D(unsigned int& VAO, unsigned int indexQty, Material mat, mat4 trans);
 		void drawShape(unsigned int& VAO, unsigned int indexQty, vec4 color, mat4 trans);
+		void drawMesh(unsigned int& VAO, unsigned int indexQty, mat4 trans);
 		void setProjection(mat4 projection);
 		void sendDirectionalLight(DirectionalLight* light, int i);
 		void sendPointLight(PointLight* light, int i);

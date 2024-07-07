@@ -1,6 +1,7 @@
 #include "BaseGame.h"
 
 #include "CollisionManager.h"
+#include "Model.h"
 #include "Sprite.h"
 
 namespace ToToEng
@@ -38,6 +39,8 @@ namespace ToToEng
 
 	void BaseGame::run()
 	{
+		Model* model = new Model(renderer, "../res/Backpack/backpack.obj");
+
 		while (!window->shouldClose())
 		{
 			GameTime::update();
@@ -51,12 +54,14 @@ namespace ToToEng
 			for (Entity* entity : entities)
 				entity->draw();
 
-			renderer->model->Draw(renderer->shader3D);
-
+			model->draw();
+			
 			renderer->endDraw();
 
 			glfwPollEvents();
 		}
+
+		delete model;
 	}
 
 	void BaseGame::endGame()
