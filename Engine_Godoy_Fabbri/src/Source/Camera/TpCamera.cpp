@@ -3,10 +3,10 @@
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/ext/quaternion_geometric.hpp>
 
-ToToEng::TpCamera::TpCamera()
+ToToEng::TpCamera::TpCamera(glm::vec3 reference, glm::vec3 offset)
 {
-    offset = glm::vec3(0.0f, .5f, -2.f);
-    reference = glm::vec3(0.0f, 0.0f, 0.0f);
+    this->offset = offset;
+    this->reference = reference;
 }
 
 ToToEng::TpCamera::~TpCamera()
@@ -16,6 +16,11 @@ ToToEng::TpCamera::~TpCamera()
 void ToToEng::TpCamera::setReference(glm::vec3 reference)
 {
     this->reference = reference;
+}
+
+void ToToEng::TpCamera::setOffset(glm::vec3 offset)
+{
+    this->offset = offset;
 }
 
 void ToToEng::TpCamera::updateCamera()

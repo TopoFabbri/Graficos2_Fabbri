@@ -10,10 +10,11 @@ namespace ToToEng
         glm::vec3 offset;
         
     public:
-        TpCamera();
+        TpCamera(glm::vec3 reference = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 offset = glm::vec3(0.0f, 0.5f, -2.0f));
         ~TpCamera() override;
 
         void setReference(glm::vec3 reference);
+        void setOffset(glm::vec3 offset);
         void updateCamera();
     };
 }

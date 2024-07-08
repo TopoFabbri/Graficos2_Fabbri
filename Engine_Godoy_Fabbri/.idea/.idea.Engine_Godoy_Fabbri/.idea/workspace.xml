@@ -10,13 +10,11 @@
   <component name="ChangeListManager">
     <list default="true" id="59b83834-1b16-455b-92bb-7e2412bbcbcc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestProject/Game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TestProject/Game.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestProject/Game.h" beforeDir="false" afterPath="$PROJECT_DIR$/TestProject/Game.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/Input.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Input.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/Model.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Model.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Source/Model/Model.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Model/Model.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Source/Tools/Input.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Tools/Input.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Headers/TpCamera.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/TpCamera.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Source/Camera/TpCamera.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Camera/TpCamera.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Source/Game/BaseGame.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Game/BaseGame.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Source/Model/ModelLoader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Model/ModelLoader.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +49,42 @@
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/assimp/material.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/assimp/material.inl" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/assimp/mesh.h" root0="SKIP_HIGHLIGHTING" />
@@ -67,9 +101,9 @@
     <setting file="file://$PROJECT_DIR$/src/Source/Entities/Entity3D.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Source/Game/BaseGame.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Source/Materials/Material.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Source/Model/Mesh.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Source/Model/Mesh.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Source/Model/Model.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Source/Rendering/Renderer.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Source/Rendering/Renderer.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../VS19/VC/Tools/MSVC/14.29.30133/include/ostream" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../VS19/VC/Tools/MSVC/14.29.30133/include/vector" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../VS19/VC/Tools/MSVC/14.29.30133/include/xstring" root0="SKIP_HIGHLIGHTING" />
@@ -288,6 +322,7 @@
       <workItem from="1720219553729" duration="14236000" />
       <workItem from="1720271775135" duration="32592000" />
       <workItem from="1720320937676" duration="1871000" />
+      <workItem from="1720470361180" duration="5874000" />
     </task>
     <task id="LOCAL-00001" summary="Re-do singleton input">
       <option name="closed" value="true" />

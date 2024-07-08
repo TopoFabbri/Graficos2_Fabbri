@@ -3,12 +3,13 @@
 #include "CollisionManager.h"
 #include "Model.h"
 #include "Sprite.h"
+#include "TpCamera.h"
 
 namespace ToToEng
 {
 	BaseGame::BaseGame(int width, int height, const char* title)
 	{
-		camera = new Camera();
+		camera = new TpCamera();
 		window = new Window(width, height, title);
 		renderer = new Renderer(window);
 		collisionManager = new CollisionManager();
