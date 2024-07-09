@@ -9,7 +9,7 @@ namespace ToToEng
 {
 	BaseGame::BaseGame(int width, int height, const char* title)
 	{
-		camera = new TpCamera();
+		camera = new Camera();
 		window = new Window(width, height, title);
 		renderer = new Renderer(window);
 		collisionManager = new CollisionManager();

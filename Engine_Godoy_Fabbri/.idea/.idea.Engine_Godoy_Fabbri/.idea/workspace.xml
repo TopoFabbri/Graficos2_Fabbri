@@ -11,10 +11,17 @@
     <list default="true" id="59b83834-1b16-455b-92bb-7e2412bbcbcc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestProject/Game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TestProject/Game.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/TpCamera.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/TpCamera.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Source/Camera/TpCamera.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Camera/TpCamera.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/CH_Dummy_HurtV2/CH_Dummy_HurtV2.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/CH_Dummy_HurtV2/T_Dummy_BC.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/CH_Dummy_HurtV2/T_Dummy_N.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/bp/1001_AO.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/bp/1001_albedo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/bp/1001_metallic.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/bp/1001_normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/bp/1001_roughness.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/bp/Survival_BackPack_2.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Headers/ModelLoader.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/ModelLoader.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Source/Game/BaseGame.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Game/BaseGame.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Source/Model/ModelLoader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Model/ModelLoader.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,38 +52,6 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -322,7 +297,8 @@
       <workItem from="1720219553729" duration="14236000" />
       <workItem from="1720271775135" duration="32592000" />
       <workItem from="1720320937676" duration="1871000" />
-      <workItem from="1720470361180" duration="5874000" />
+      <workItem from="1720470361180" duration="10778000" />
+      <workItem from="1720483071453" duration="8075000" />
     </task>
     <task id="LOCAL-00001" summary="Re-do singleton input">
       <option name="closed" value="true" />

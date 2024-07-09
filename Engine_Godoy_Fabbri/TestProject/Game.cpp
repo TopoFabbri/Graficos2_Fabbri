@@ -7,20 +7,22 @@
 
 Game::Game(int width, int height, const char* title) : BaseGame(width, height, title)
 {
-    static_cast<TpCamera*>(camera)->setOffset({0.f, 1.7f, -5.f});
+    // static_cast<TpCamera*>(camera)->setOffset({0.f, 1.7f, -5.f});
     camSpeed = 10.f;
 
     DirectionalLight* light = new DirectionalLight();
     SpotLight* spotLight = new SpotLight();
 
-    entities.push_back(new Model(renderer, "../res/CH_Dummy_HurtV2/CH_Dummy_HurtV2.fbx", false));
-    entities.back()->transform.setScale({.01f, .01f, .01f});
-
-    entities.push_back(new Model(renderer, "../res/bp/Survival_BackPack_2.fbx", false));
-    entities.back()->transform.setPos({2.f, 0.f, 0.f});
-
+    entities.push_back(new Model(renderer, "../res/chicken/Chicken1.fbx", false));
+    
+    entities.push_back(new Model(renderer, "../res/pochita/pochita.fbx", false));
+    entities.back()->transform.setPos({-4.f, 0.f, 0.f});
+    
     entities.push_back(new Model(renderer, "../res/Backpack/backpack.obj", true));
-    entities.back()->transform.setPos({-2.f, 0.f, 0.f});
+    entities.back()->transform.setPos({0.f, 0.f, 4.f});
+    
+    entities.push_back(new Model(renderer, "../res/claire/source/LXG1NDL0BZ814059Q0RW9HZXE.obj", false));
+    entities.back()->transform.setPos({4.f, 0.f, 0.f});
 }
 
 Game::~Game()
@@ -74,8 +76,8 @@ void Game::update()
     if (abs(mouseDelta.y) > 0.0001f)
         camera->rotatePitch(camSens * mouseDelta.y * GameTime::getDelta());
 
-    static_cast<TpCamera*>(camera)->setReference(character->transform.getPos());
-    static_cast<TpCamera*>(camera)->updateCamera();
+    // static_cast<TpCamera*>(camera)->setReference(character->transform.getPos());
+    // static_cast<TpCamera*>(camera)->updateCamera();
     
     SpotLight* light = static_cast<SpotLight*>(LightSource::lights.back());
     light->setDirection(camera->getForward());
