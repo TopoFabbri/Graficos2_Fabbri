@@ -7,11 +7,16 @@
 
 Game::Game(int width, int height, const char* title) : BaseGame(width, height, title)
 {
+    // delete camera;
+    // camera = new TpCamera();
     // static_cast<TpCamera*>(camera)->setOffset({0.f, 1.7f, -5.f});
     camSpeed = 10.f;
 
-    DirectionalLight* light = new DirectionalLight();
+    // DirectionalLight* light = new DirectionalLight();
+    PointLight* pointLight = new PointLight();
     SpotLight* spotLight = new SpotLight();
+    pointLight->setPosition({-4.f, 0.f, 0.f});
+    pointLight->setDiffuse({1.0f, .0f, .0f});
 
     entities.push_back(new Model(renderer, "../res/chicken/Chicken1.fbx", false));
     
@@ -75,7 +80,7 @@ void Game::update()
         camera->rotateYaw(-camSens * mouseDelta.x * GameTime::getDelta());
     if (abs(mouseDelta.y) > 0.0001f)
         camera->rotatePitch(camSens * mouseDelta.y * GameTime::getDelta());
-
+    //
     // static_cast<TpCamera*>(camera)->setReference(character->transform.getPos());
     // static_cast<TpCamera*>(camera)->updateCamera();
     
