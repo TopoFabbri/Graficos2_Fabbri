@@ -9,9 +9,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59b83834-1b16-455b-92bb-7e2412bbcbcc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/projectSettingsUpdater.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestProject/Game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TestProject/Game.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Source/Light/SpotLight.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Light/SpotLight.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Backpack/ao.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Backpack/backpack.mtl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Backpack/diffuse.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Backpack/normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Backpack/roughness.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Backpack/source_attribution.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Backpack/specular.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Headers/Renderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Renderer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Source/Model/ModelLoader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Model/ModelLoader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Source/Rendering/Renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Rendering/Renderer.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +30,9 @@
   </component>
   <component name="CodyActiveAccount">
     <option name="activeAccountId" value="687bfdda-5e49-441f-afc2-b8734243afbc" />
+  </component>
+  <component name="DpaMonitoringSettings">
+    <option name="firstShow" value="false" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -42,14 +55,6 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/assimp/material.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/assimp/material.inl" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/assimp/mesh.h" root0="SKIP_HIGHLIGHTING" />
@@ -68,10 +73,9 @@
     <setting file="file://$PROJECT_DIR$/src/Source/Materials/Material.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Source/Model/Mesh.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Source/Model/Model.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/Archive/CPPProjects/Graficos2_Fabbri/Engine_Godoy_Fabbri/src/Source/Model/ModelLoader.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Archive/CPPProjects/Graficos2_Fabbri/Engine_Godoy_Fabbri/src/Source/Model/ModelLoader.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Source/Rendering/Renderer.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../VS19/VC/Tools/MSVC/14.29.30133/include/ostream" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../VS19/VC/Tools/MSVC/14.29.30133/include/vector" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../VS19/VC/Tools/MSVC/14.29.30133/include/xstring" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="false" />
   <component name="ProblemsViewState">
@@ -91,33 +95,30 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;C++ Project.TestProject.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ Project.Engine_Godoy_Fabbri.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ Project.TestProject.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.CodyProjectSettingsMigration&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;junie.allowlist&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\Administrator\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\Administrator\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\Administrator\\AppData\\Local\\Symbols\\src&quot;
-    ]
   }
 }</component>
-  <component name="RunManager" selected="C++ Project.TestProject">
+  <component name="RunManager" selected="C/C++ Project.TestProject">
     <configuration name="Engine_Godoy_Fabbri" type="CppProject" factoryName="C++ Project">
-      <configuration_1>
+      <configuration_1 setup="1">
         <option name="CONFIGURATION" value="Debug" />
         <option name="PLATFORM" value="x64" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" />
         <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
         <option name="EXE_PATH" value="$(LocalDebuggerCommand)" />
         <option name="PROGRAM_PARAMETERS" value="$(LocalDebuggerCommandArguments)" />
@@ -125,11 +126,11 @@
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" />
       </configuration_1>
-      <configuration_2>
+      <configuration_2 setup="1">
         <option name="CONFIGURATION" value="Debug" />
         <option name="PLATFORM" value="x86" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" />
         <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
         <option name="EXE_PATH" value="$(LocalDebuggerCommand)" />
         <option name="PROGRAM_PARAMETERS" value="$(LocalDebuggerCommandArguments)" />
@@ -137,11 +138,11 @@
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" />
       </configuration_2>
-      <configuration_3>
+      <configuration_3 setup="1">
         <option name="CONFIGURATION" value="Release" />
         <option name="PLATFORM" value="x64" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" />
         <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
         <option name="EXE_PATH" value="$(LocalDebuggerCommand)" />
         <option name="PROGRAM_PARAMETERS" value="$(LocalDebuggerCommandArguments)" />
@@ -149,11 +150,11 @@
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" />
       </configuration_3>
-      <configuration_4>
+      <configuration_4 setup="1">
         <option name="CONFIGURATION" value="Release" />
         <option name="PLATFORM" value="x86" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" />
         <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
         <option name="EXE_PATH" value="$(LocalDebuggerCommand)" />
         <option name="PROGRAM_PARAMETERS" value="$(LocalDebuggerCommandArguments)" />
@@ -161,18 +162,31 @@
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" />
       </configuration_4>
+      <configuration_5 setup="1">
+        <option name="CONFIGURATION" value="Debug" />
+        <option name="PLATFORM" value="Win32" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXE_PATH" value="$(LocalDebuggerCommand)" />
+        <option name="PROGRAM_PARAMETERS" value="$(LocalDebuggerCommandArguments)" />
+        <option name="WORKING_DIRECTORY" value="$(LocalDebuggerWorkingDirectory)" />
+        <option name="PASS_PARENT_ENVS" value="1" />
+        <option name="USE_EXTERNAL_CONSOLE" value="0" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="AUTO_DETECT" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" />
+      </configuration_5>
       <option name="DEFAULT_PROJECT_PATH" value="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" />
+      <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" />
       <option name="AUTO_SELECT_PRIORITY" value="0" />
       <method v="2">
         <option name="Build" />
       </method>
     </configuration>
     <configuration name="TestProject" type="CppProject" factoryName="C++ Project">
-      <configuration_1>
+      <configuration_1 setup="1">
         <option name="CONFIGURATION" value="Debug" />
         <option name="PLATFORM" value="x64" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TestProject/TestProject.vcxproj" />
         <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
         <option name="EXE_PATH" value="$(LocalDebuggerCommand)" />
         <option name="PROGRAM_PARAMETERS" value="$(LocalDebuggerCommandArguments)" />
@@ -180,11 +194,11 @@
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TestProject/TestProject.vcxproj" />
       </configuration_1>
-      <configuration_2>
+      <configuration_2 setup="1">
         <option name="CONFIGURATION" value="Debug" />
         <option name="PLATFORM" value="x86" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TestProject/TestProject.vcxproj" />
         <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
         <option name="EXE_PATH" value="$(LocalDebuggerCommand)" />
         <option name="PROGRAM_PARAMETERS" value="$(LocalDebuggerCommandArguments)" />
@@ -192,11 +206,11 @@
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TestProject/TestProject.vcxproj" />
       </configuration_2>
-      <configuration_3>
+      <configuration_3 setup="1">
         <option name="CONFIGURATION" value="Release" />
         <option name="PLATFORM" value="x64" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TestProject/TestProject.vcxproj" />
         <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
         <option name="EXE_PATH" value="$(LocalDebuggerCommand)" />
         <option name="PROGRAM_PARAMETERS" value="$(LocalDebuggerCommandArguments)" />
@@ -204,11 +218,11 @@
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TestProject/TestProject.vcxproj" />
       </configuration_3>
-      <configuration_4>
+      <configuration_4 setup="1">
         <option name="CONFIGURATION" value="Release" />
         <option name="PLATFORM" value="x86" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TestProject/TestProject.vcxproj" />
         <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
         <option name="EXE_PATH" value="$(LocalDebuggerCommand)" />
         <option name="PROGRAM_PARAMETERS" value="$(LocalDebuggerCommandArguments)" />
@@ -216,8 +230,22 @@
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TestProject/TestProject.vcxproj" />
       </configuration_4>
+      <configuration_5 setup="1">
+        <option name="CONFIGURATION" value="Debug" />
+        <option name="PLATFORM" value="Win32" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXE_PATH" value="$(LocalDebuggerCommand)" />
+        <option name="PROGRAM_PARAMETERS" value="$(LocalDebuggerCommandArguments)" />
+        <option name="WORKING_DIRECTORY" value="$(LocalDebuggerWorkingDirectory)" />
+        <option name="PASS_PARENT_ENVS" value="1" />
+        <option name="USE_EXTERNAL_CONSOLE" value="0" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="AUTO_DETECT" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TestProject/TestProject.vcxproj" />
+      </configuration_5>
       <option name="DEFAULT_PROJECT_PATH" value="$PROJECT_DIR$/TestProject/TestProject.vcxproj" />
+      <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TestProject/TestProject.vcxproj" />
       <option name="AUTO_SELECT_PRIORITY" value="0" />
       <method v="2">
         <option name="Build" />
@@ -290,6 +318,7 @@
       <workItem from="1720470361180" duration="10778000" />
       <workItem from="1720483071453" duration="8075000" />
       <workItem from="1720647087448" duration="2491000" />
+      <workItem from="1755728110886" duration="11808000" />
     </task>
     <task id="LOCAL-00001" summary="Re-do singleton input">
       <option name="closed" value="true" />
@@ -493,5 +522,23 @@
     <MESSAGE value="Imlpemented spot light" />
     <MESSAGE value="Added end game" />
     <option name="LAST_COMMIT_MESSAGE" value="Added end game" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.Tasks.TaskCanceledException" breakIfHandledByOtherCode="false" displayValue="System.Threading.Tasks.TaskCanceledException" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

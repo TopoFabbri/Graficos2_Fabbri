@@ -50,10 +50,23 @@ namespace ToToEng
         setProjection(perspective(radians(45.f),
                                   static_cast<float>(window->getWidth()) / static_cast<float>(window->getHeight()),
                                   0.1f, 100.f));
+
+        // Create a 1x1 white texture for fallback use
+        unsigned char whitePixel[4] = { 255, 255, 255, 255 };
+        glGenTextures(1, &defaultWhiteTex);
+        glBindTexture(GL_TEXTURE_2D, defaultWhiteTex);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, whitePixel);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glBindTexture(GL_TEXTURE_2D, 0);
     }
 
     Renderer::~Renderer()
     {
+        if (defaultWhiteTex)
+            glDeleteTextures(1, &defaultWhiteTex);
         glDeleteProgram(shader);
     }
 
@@ -283,9 +296,20 @@ namespace ToToEng
         
         GLint u_Material;
 
+        // Bind safe fallback textures for diffuse1 and specular1 so uniforms are always valid
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, defaultWhiteTex);
+        u_Material = glGetUniformLocation(meshShader, ("material.texture_diffuse1"));
+        glUniform1i(u_Material, 0);
+
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, defaultWhiteTex);
+        u_Material = glGetUniformLocation(meshShader, ("material.texture_specular1"));
+        glUniform1i(u_Material, 1);
+
         unsigned int diffuseNr = 1;
         unsigned int specularNr = 1;
-        for (unsigned int i = 0; i < textures.size(); i++)
+        for (int i = 0; static_cast<unsigned int>(i) < textures.size(); i++)
         {
             glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
             // retrieve texture number (the N in diffuse_textureN)
@@ -297,9 +321,11 @@ namespace ToToEng
                 number = std::to_string(specularNr++);
 
             u_Material = glGetUniformLocation(meshShader, ("material." + name + number).c_str());
-            glUniform1f(u_Material, i);
+            glUniform1i(u_Material, i);
             glBindTexture(GL_TEXTURE_2D, textures[i].id);
         }
+        // Reset active texture to a known state
+        glActiveTexture(GL_TEXTURE0);
 
         glCall(glUniform1f(glGetUniformLocation(meshShader, "material.shininess"), 32.0f));
         
@@ -325,15 +351,19 @@ namespace ToToEng
             i++;
         }
         
+        // Zero-fill remaining light slots without dynamic allocations
         for (int j = i; j < maxLights; j++)
         {
-            DirectionalLight* light = new DirectionalLight();
-            light->setAmbient({ 0.0f, 0.0f, 0.0f });
-            light->setDiffuse({ 0.0f, 0.0f, 0.0f });
-            light->setSpecular({ 0.0f, 0.0f, 0.0f });
-            sendDirectionalLight(light, j, meshShader);
-        
-            delete light;
+            std::string index = "lights[" + std::to_string(j) + "].";
+            glUniform1i(glGetUniformLocation(meshShader, (index + "type").c_str()), 0);
+            glUniform3f(glGetUniformLocation(meshShader, (index + "ambient").c_str()), 0.0f, 0.0f, 0.0f);
+            glUniform3f(glGetUniformLocation(meshShader, (index + "diffuse").c_str()), 0.0f, 0.0f, 0.0f);
+            glUniform3f(glGetUniformLocation(meshShader, (index + "specular").c_str()), 0.0f, 0.0f, 0.0f);
+            glUniform3f(glGetUniformLocation(meshShader, (index + "position").c_str()), 0.0f, 0.0f, 0.0f);
+            glUniform3f(glGetUniformLocation(meshShader, (index + "direction").c_str()), 0.0f, 0.0f, 0.0f);
+            glUniform3f(glGetUniformLocation(meshShader, (index + "attenuation").c_str()), 1.0f, 0.0f, 0.0f);
+            glUniform1f(glGetUniformLocation(meshShader, (index + "cutoff").c_str()), 0.0f);
+            glUniform1f(glGetUniformLocation(meshShader, (index + "outerCutoff").c_str()), 0.0f);
         }
         
         glUniform3f(glGetUniformLocation(meshShader, "viewPos"), Camera::main->getPos().x, Camera::main->getPos().y, Camera::main->getPos().z);

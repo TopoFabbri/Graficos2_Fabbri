@@ -23,11 +23,8 @@ Game::Game(int width, int height, const char* title) : BaseGame(width, height, t
     entities.push_back(new Model(renderer, "../res/pochita/pochita.fbx", false));
     entities.back()->transform.setPos({-4.f, 0.f, 0.f});
     
-    entities.push_back(new Model(renderer, "../res/Backpack/backpack.obj", true));
+    entities.push_back(new Model(renderer, "../res/Backpack/Survival_BackPack_2.fbx", true));
     entities.back()->transform.setPos({0.f, 0.f, 4.f});
-    
-    entities.push_back(new Model(renderer, "../res/claire/source/LXG1NDL0BZ814059Q0RW9HZXE.obj", false));
-    entities.back()->transform.setPos({4.f, 0.f, 0.f});
 }
 
 Game::~Game()

@@ -41,6 +41,9 @@ namespace ToToEng
 		int u_ColorLocation;
 		mat4 projection;
 		
+		// Fallback 1x1 white texture for safe sampling when a mesh lacks textures
+		unsigned int defaultWhiteTex = 0;
+		
 		static unsigned int compileShader(unsigned int type, const char* source);
 		static unsigned int createShader(const char* vShader, const char* fShader);
 		static ShaderProgramSource parseShader(const std::string& filepath);

@@ -1,6 +1,15 @@
 #include "ModelLoader.h"
 
+#include <fstream>
+#include <fstream>
 #include <stb_image.h>
+#include <algorithm>
+
+static std::string normalizePath(std::string p)
+{
+    for (auto& ch : p) { if (ch == '\\') ch = '/'; }
+    return p;
+}
 
 std::vector<Texture> ModelLoader::textures_loaded;
 std::string ModelLoader::directory = "";
@@ -16,8 +25,17 @@ void ModelLoader::loadModel(std::string const& path, std::vector<Mesh>& meshes, 
         std::cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << std::endl;
         return;
     }
-    // retrieve the directory path of the filepath
-    directory = path.substr(0, path.find_last_of('/'));
+    // retrieve the directory path of the filepath (robust across separators)
+    {
+        size_t posFwd = path.find_last_of('/');
+        size_t posBack = path.find_last_of('\\');
+        size_t pos = std::string::npos;
+        if (posFwd == std::string::npos) pos = posBack;
+        else if (posBack == std::string::npos) pos = posFwd;
+        else pos = std::max(posFwd, posBack);
+        directory = pos != std::string::npos ? path.substr(0, pos) : std::string();
+        directory = normalizePath(directory);
+    }
     
     // process ASSIMP's root node recursively
     processNode(scene->mRootNode, scene, meshes, gamma);
@@ -75,19 +93,27 @@ Mesh ModelLoader::processMesh(aiMesh* mesh, const aiScene* scene, std::vector<Me
             vec.x = mesh->mTextureCoords[0][i].x;
             vec.y = mesh->mTextureCoords[0][i].y;
             vertex.TexCoords = vec;
-            // tangent
-            vector.x = mesh->mTangents[i].x;
-            vector.y = mesh->mTangents[i].y;
-            vector.z = mesh->mTangents[i].z;
-            vertex.Tangent = vector;
-            // bitangent
-            vector.x = mesh->mBitangents[i].x;
-            vector.y = mesh->mBitangents[i].y;
-            vector.z = mesh->mBitangents[i].z;
-            vertex.Bitangent = vector;
+            // tangents/bitangents (guard presence)
+            if (mesh->HasTangentsAndBitangents()) {
+                vector.x = mesh->mTangents[i].x;
+                vector.y = mesh->mTangents[i].y;
+                vector.z = mesh->mTangents[i].z;
+                vertex.Tangent = vector;
+                // bitangent
+                vector.x = mesh->mBitangents[i].x;
+                vector.y = mesh->mBitangents[i].y;
+                vector.z = mesh->mBitangents[i].z;
+                vertex.Bitangent = vector;
+            } else {
+                vertex.Tangent = glm::vec3(0.0f);
+                vertex.Bitangent = glm::vec3(0.0f);
+            }
         }
-        else
+        else {
             vertex.TexCoords = glm::vec2(0.0f, 0.0f);
+            vertex.Tangent = glm::vec3(0.0f);
+            vertex.Bitangent = glm::vec3(0.0f);
+        }
 
         vertices.push_back(vertex);
     }
@@ -110,19 +136,26 @@ Mesh ModelLoader::processMesh(aiMesh* mesh, const aiScene* scene, std::vector<Me
 
     // 1. diffuse maps
     std::vector<Texture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse", gamma);
+    // If no classic diffuse maps, try BaseColor/Albedo and map it as diffuse for compatibility
+#ifdef aiTextureType_BASE_COLOR
+    if (diffuseMaps.empty()) {
+        std::vector<Texture> baseColorMaps = loadMaterialTextures(material, aiTextureType_BASE_COLOR, "texture_diffuse", gamma);
+        diffuseMaps.insert(diffuseMaps.end(), baseColorMaps.begin(), baseColorMaps.end());
+    }
+#endif
     textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
     // 2. specular maps
     std::vector<Texture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular", gamma);
     textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
     // 3. normal maps
-    std::vector<Texture> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal", gamma);
+    std::vector<Texture> normalMaps = loadMaterialTextures(material, aiTextureType_NORMALS, "texture_normal", gamma);
     textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
     // 4. height maps
-    std::vector<Texture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height", gamma);
+    std::vector<Texture> heightMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_height", gamma);
     textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 
     // return a mesh object created from the extracted mesh data
-    return Mesh(vertices, indices, textures);
+    return {vertices, indices, textures};
 }
 
 std::vector<Texture> ModelLoader::loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName, bool gamma)
@@ -132,11 +165,13 @@ std::vector<Texture> ModelLoader::loadMaterialTextures(aiMaterial* mat, aiTextur
     {
         aiString str;
         mat->GetTexture(type, i, &str);
+        // Build absolute, normalized path for stable caching
+        std::string fullPath = normalizePath(directory + std::string("/") + std::string(str.C_Str()));
         // check if texture was loaded before and if so, continue to next iteration: skip loading a new texture
         bool skip = false;
         for (unsigned int j = 0; j < textures_loaded.size(); j++)
         {
-            if (std::strcmp(textures_loaded[j].path.data(), str.C_Str()) == 0)
+            if (textures_loaded[j].path == fullPath)
             {
                 textures.push_back(textures_loaded[j]);
                 skip = true;
@@ -150,7 +185,7 @@ std::vector<Texture> ModelLoader::loadMaterialTextures(aiMaterial* mat, aiTextur
             Texture texture;
             texture.id = TextureFromFile(str.C_Str(), directory, gamma);
             texture.type = typeName;
-            texture.path = str.C_Str();
+            texture.path = fullPath;
             textures.push_back(texture);
             textures_loaded.push_back(texture);
             // store it as texture loaded for entire model, to ensure we won't unnecessary load duplicate textures.
@@ -161,15 +196,18 @@ std::vector<Texture> ModelLoader::loadMaterialTextures(aiMaterial* mat, aiTextur
 
 unsigned TextureFromFile(const char* path, const std::string& directory, bool gamma)
 {
-    std::string filename = std::string(path);
-    filename = directory + '/' + filename;
+    // Build full path robustly (normalize separators)
+    std::string filename = normalizePath(directory + '/' + std::string(path));
 
     unsigned int textureID;
     glGenTextures(1, &textureID);
-    stbi_set_flip_vertically_on_load(gamma);
+
+    // Do not misuse gamma for flipping; disable flipping here (caller can decide elsewhere if needed)
+    stbi_set_flip_vertically_on_load(0);
     
     int width, height, nrComponents;
     unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
+
     if (data)
     {
         GLenum format;
@@ -179,8 +217,11 @@ unsigned TextureFromFile(const char* path, const std::string& directory, bool ga
             format = GL_RGB;
         else if (nrComponents == 4)
             format = GL_RGBA;
+        else
+            format = GL_RGB;
 
         glBindTexture(GL_TEXTURE_2D, textureID);
+        // For now, keep internal format same as format; sRGB pipeline can be added separately per texture type
         glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
 
@@ -193,7 +234,7 @@ unsigned TextureFromFile(const char* path, const std::string& directory, bool ga
     }
     else
     {
-        std::cout << "Texture failed to load at path: " << path << std::endl;
+        std::cout << "Texture failed to load at path: " << filename << std::endl;
         stbi_image_free(data);
     }
 
