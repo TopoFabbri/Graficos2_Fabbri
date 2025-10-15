@@ -1,9 +1,10 @@
 #include "ModelLoader.h"
 
 #include <fstream>
-#include <fstream>
 #include <stb_image.h>
 #include <algorithm>
+
+#include "BaseGame.h"
 
 static std::string normalizePath(std::string p)
 {
@@ -13,7 +14,8 @@ static std::string normalizePath(std::string p)
 
 std::vector<Texture> ModelLoader::textures_loaded;
 std::string ModelLoader::directory = "";
-void ModelLoader::loadModel(std::string const& path, std::vector<Mesh>& meshes, bool gamma)
+
+void ModelLoader::loadModel(std::string const& path, std::vector<Mesh>& meshes, ToToEng::Transform* modelTransform, bool gamma)
 {
     // read file via ASSIMP
     Assimp::Importer importer;
@@ -36,29 +38,43 @@ void ModelLoader::loadModel(std::string const& path, std::vector<Mesh>& meshes, 
         directory = pos != std::string::npos ? path.substr(0, pos) : std::string();
         directory = normalizePath(directory);
     }
-    
+
     // process ASSIMP's root node recursively
-    processNode(scene->mRootNode, scene, meshes, gamma);
+    processNode(scene->mRootNode, scene, meshes, modelTransform, gamma);
 }
 
-void ModelLoader::processNode(aiNode* node, const aiScene* scene, std::vector<Mesh> &meshes, bool gamma)
+void ModelLoader::processNode(aiNode* node, const aiScene* scene, std::vector<Mesh>& meshes, ToToEng::Transform* parent,
+                              bool gamma)
 {
+    aiVector3t<float> pos;
+    aiVector3t<float> scale;
+    aiQuaterniont<float> rot;
+
+    node->mTransformation.Decompose(scale, rot, pos);
+
+    ToToEng::Transform* transform = new ToToEng::Transform(parent);
+
+    transform->setPos(vec3(pos.x, pos.y, pos.z));
+    transform->setRot(degrees(eulerAngles(quat(rot.w, rot.x, rot.y, rot.z))));
+    transform->setScale(vec3(scale.x, scale.y, scale.z));
+
     // process each mesh located at the current node
     for (unsigned int i = 0; i < node->mNumMeshes; i++)
     {
         // the node object only contains indices to index the actual objects in the scene. 
         // the scene contains all the data, node is just to keep stuff organized (like relations between nodes).
         aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-        meshes.push_back(processMesh(mesh, scene, meshes, gamma));
+
+        meshes.push_back(processMesh(mesh, scene, transform, gamma));
     }
     // after we've processed all of the meshes (if any) we then recursively process each of the children nodes
     for (unsigned int i = 0; i < node->mNumChildren; i++)
     {
-        processNode(node->mChildren[i], scene, meshes, gamma);
+        processNode(node->mChildren[i], scene, meshes, transform, gamma);
     }
 }
 
-Mesh ModelLoader::processMesh(aiMesh* mesh, const aiScene* scene, std::vector<Mesh> &meshes, bool gamma)
+Mesh ModelLoader::processMesh(aiMesh* mesh, const aiScene* scene, ToToEng::Transform* transform, bool gamma)
 {
     // data to fill
     std::vector<Vertex> vertices;
@@ -69,7 +85,7 @@ Mesh ModelLoader::processMesh(aiMesh* mesh, const aiScene* scene, std::vector<Me
     for (unsigned int i = 0; i < mesh->mNumVertices; i++)
     {
         Vertex vertex;
-        glm::vec3 vector;
+        vec3 vector;
         // we declare a placeholder vector since assimp uses its own vector class that doesn't directly convert to glm's vec3 class so we transfer the data to this placeholder glm::vec3 first.
         // positions
         vector.x = mesh->mVertices[i].x;
@@ -94,7 +110,8 @@ Mesh ModelLoader::processMesh(aiMesh* mesh, const aiScene* scene, std::vector<Me
             vec.y = mesh->mTextureCoords[0][i].y;
             vertex.TexCoords = vec;
             // tangents/bitangents (guard presence)
-            if (mesh->HasTangentsAndBitangents()) {
+            if (mesh->HasTangentsAndBitangents())
+            {
                 vector.x = mesh->mTangents[i].x;
                 vector.y = mesh->mTangents[i].y;
                 vector.z = mesh->mTangents[i].z;
@@ -104,12 +121,15 @@ Mesh ModelLoader::processMesh(aiMesh* mesh, const aiScene* scene, std::vector<Me
                 vector.y = mesh->mBitangents[i].y;
                 vector.z = mesh->mBitangents[i].z;
                 vertex.Bitangent = vector;
-            } else {
+            }
+            else
+            {
                 vertex.Tangent = glm::vec3(0.0f);
                 vertex.Bitangent = glm::vec3(0.0f);
             }
         }
-        else {
+        else
+        {
             vertex.TexCoords = glm::vec2(0.0f, 0.0f);
             vertex.Tangent = glm::vec3(0.0f);
             vertex.Bitangent = glm::vec3(0.0f);
@@ -138,14 +158,17 @@ Mesh ModelLoader::processMesh(aiMesh* mesh, const aiScene* scene, std::vector<Me
     std::vector<Texture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse", gamma);
     // If no classic diffuse maps, try BaseColor/Albedo and map it as diffuse for compatibility
 #ifdef aiTextureType_BASE_COLOR
-    if (diffuseMaps.empty()) {
-        std::vector<Texture> baseColorMaps = loadMaterialTextures(material, aiTextureType_BASE_COLOR, "texture_diffuse", gamma);
+    if (diffuseMaps.empty())
+    {
+        std::vector<Texture> baseColorMaps = loadMaterialTextures(material, aiTextureType_BASE_COLOR, "texture_diffuse",
+                                                                  gamma);
         diffuseMaps.insert(diffuseMaps.end(), baseColorMaps.begin(), baseColorMaps.end());
     }
 #endif
     textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
     // 2. specular maps
-    std::vector<Texture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular", gamma);
+    std::vector<Texture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular",
+                                                             gamma);
     textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
     // 3. normal maps
     std::vector<Texture> normalMaps = loadMaterialTextures(material, aiTextureType_NORMALS, "texture_normal", gamma);
@@ -155,10 +178,11 @@ Mesh ModelLoader::processMesh(aiMesh* mesh, const aiScene* scene, std::vector<Me
     textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 
     // return a mesh object created from the extracted mesh data
-    return {vertices, indices, textures};
+    return {vertices, indices, textures, transform};
 }
 
-std::vector<Texture> ModelLoader::loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName, bool gamma)
+std::vector<Texture> ModelLoader::loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName,
+                                                       bool gamma)
 {
     std::vector<Texture> textures;
     for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
@@ -204,7 +228,7 @@ unsigned TextureFromFile(const char* path, const std::string& directory, bool ga
 
     // Do not misuse gamma for flipping; disable flipping here (caller can decide elsewhere if needed)
     stbi_set_flip_vertically_on_load(0);
-    
+
     int width, height, nrComponents;
     unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
 

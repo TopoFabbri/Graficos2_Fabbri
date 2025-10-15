@@ -5,6 +5,7 @@
 
 
 #include "Shader.h"
+#include "Transform.h"
 
 struct Vertex
 {
@@ -30,7 +31,9 @@ public:
     std::vector<Texture> textures;
     unsigned int VAO;
 
-    Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
+    ToToEng::Transform* transform;
+    
+    Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures, ToToEng::Transform* transform);
 
     void Draw(Shader& shader);
 

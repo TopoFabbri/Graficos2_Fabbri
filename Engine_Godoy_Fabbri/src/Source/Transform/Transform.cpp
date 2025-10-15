@@ -7,8 +7,15 @@ namespace ToToEng
         transformMatrix = posMat * rotMat * scaleMat;
     }
 
-    Transform::Transform()
+    Transform::Transform(Transform* parent)
     {
+        if (parent != nullptr)
+            parent->addChild(this);
+
+        this->parent = parent;
+        
+        children = std::list<Transform*>();
+
         pos = {0.0f, 0.0f, 0.0f};
         setPos({0.0f, 0.0f, 0.0f});
         setScale({1.0f, 1.0f, 1.0f});
@@ -20,45 +27,89 @@ namespace ToToEng
 
     Transform::~Transform()
     {
+        children.clear();
     }
 
-    void Transform::moveForward(float dist)
+    void Transform::moveForward(const float dist)
     {
         setPos(pos + forward() * dist);
     }
 
-    void Transform::moveRight(float dist)
+    void Transform::moveRight(const float dist)
     {
         setPos(pos + right() * dist);
     }
 
-    void Transform::moveUp(float dist)
+    void Transform::moveUp(const float dist)
     {
         setPos(pos + up() * dist);
     }
 
-    vec3 Transform::getPos()
+    void Transform::addChild(Transform* child)
+    {
+        children.push_back(child);
+        child->setParent(this);
+    }
+
+    void Transform::removeChild(Transform* child)
+    {
+        children.remove(child);
+        child->setParent(nullptr);
+    }
+
+    Transform* Transform::getParent() const
+    {
+        return parent;
+    }
+
+    std::list<Transform*> Transform::getChildren(const bool childrenOfChildren)
+    {
+        if (children.empty() || !childrenOfChildren)
+            return children;
+
+        if (childrenOfChildren)
+        {
+            std::list<Transform*> allChildren;
+
+            for (Transform* child : children)
+            {
+                allChildren.push_back(child);
+
+                if (!child->getChildren().empty())
+                    allChildren.insert(allChildren.end(), child->getChildren(true).begin(),
+                                       child->getChildren(true).end());
+            }
+            return allChildren;
+        }
+
+        return children;
+    }
+
+    vec3 Transform::getPos() const
     {
         return pos;
     }
 
-    vec3 Transform::getScale()
+    vec3 Transform::getScale() const
     {
         return scale;
     }
 
-    vec3 Transform::getRot()
+    vec3 Transform::getRot() const
     {
         return rot;
     }
 
-    vec3 Transform::getPrevPos()
+    vec3 Transform::getPrevPos() const
     {
         return prevPos;
     }
 
-    mat4 Transform::getTransformMatrix()
+    mat4 Transform::getTransformMatrix() const
     {
+        if (parent != nullptr)
+            return parent->getTransformMatrix() * transformMatrix;
+        
         return transformMatrix;
     }
 
@@ -119,6 +170,11 @@ namespace ToToEng
         updateTransformMatrix();
     }
 
+    void Transform::setParent(Transform* parent)
+    {
+        this->parent = parent;
+    }
+
     void Transform::setPos(const vec3& v)
     {
         prevPos = pos;
@@ -166,33 +222,6 @@ namespace ToToEng
         scale = v;
 
         scaleMat = mat4(1.f);
-
-        scaleMat = glm::scale(scaleMat, scale);
-
-        updateTransformMatrix();
-    }
-
-    void Transform::setScaleX(float x)
-    {
-        scale.x = x;
-
-        scaleMat = glm::scale(scaleMat, scale);
-
-        updateTransformMatrix();
-    }
-
-    void Transform::setScaleY(float y)
-    {
-        scale.y = y;
-
-        scaleMat = glm::scale(scaleMat, scale);
-
-        updateTransformMatrix();
-    }
-
-    void Transform::setScaleZ(float z)
-    {
-        scale.z = z;
 
         scaleMat = glm::scale(scaleMat, scale);
 

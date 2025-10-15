@@ -1,5 +1,7 @@
 #pragma once
 
+#include <list>
+
 #include "glm/glm.hpp"
 #include <glm/gtc/type_ptr.hpp>
 
@@ -12,6 +14,9 @@ namespace ToToEng
 	class TOTO_API Transform
 	{
 	private:
+		Transform* parent;
+		std::list<Transform*> children;
+		
 		vec3 pos;
 		vec3 scale;
 		vec3 rot;
@@ -24,24 +29,35 @@ namespace ToToEng
 		mat4 scaleMat;
 		mat4 rotMat;
 		void updateTransformMatrix();
+		void translateX(float x);
+		void translateY(float y);
+		void translateZ(float z);
+		void rotateX(float x);
+		void rotateY(float y);
+		void rotateZ(float z);
 
 	public:
-		Transform();
+		Transform(Transform* parent = nullptr);
 		~Transform();
 
 		void moveForward(float dist);
 		void moveRight(float dist);
 		void moveUp(float dist);
+		void addChild(Transform* child);
+		void removeChild(Transform* child);
 
 #pragma region GETTERS
 
-		vec3 getPos();
-		vec3 getScale();
-		vec3 getRot();
-
-		vec3 getPrevPos();
+		Transform* getParent() const;
+		std::list<Transform*> getChildren(bool childrenOfChildren = false);
 		
-		mat4 getTransformMatrix();
+		vec3 getPos() const;
+		vec3 getScale() const;
+		vec3 getRot() const;
+
+		vec3 getPrevPos() const;
+		
+		mat4 getTransformMatrix() const;
 
 		vec3 up();
 		vec3 right();
@@ -54,21 +70,13 @@ namespace ToToEng
 #pragma endregion
 
 #pragma region SETTERS
-	
+
+		void setParent(Transform* parent);
 		void setPos(const vec3& v);
-		void translateX(float x);
-		void translateY(float y);
-		void translateZ(float z);
 
 		void setScale(const vec3& v);
-		void setScaleX(float x);
-		void setScaleY(float y);
-		void setScaleZ(float z);
 
 		void setRot(const vec3& v);
-		void rotateX(float x);
-		void rotateY(float y);
-		void rotateZ(float z);
 
 #pragma endregion
 	};

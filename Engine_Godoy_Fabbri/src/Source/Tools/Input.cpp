@@ -85,7 +85,7 @@ namespace ToToEng
 
 	void Input::updateScroll(double xPos, double yPos)
 	{
-		instance->mouseScroll = glm::vec2(xPos, yPos);
+		instance->mouseScroll += glm::vec2(xPos, yPos);
 	}
 
 	float Input::getMouseScroll()

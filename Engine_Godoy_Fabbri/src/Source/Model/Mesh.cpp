@@ -2,11 +2,13 @@
 
 #include "Model.h"
 
-Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned> indices, std::vector<Texture> textures)
+Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures,
+    ToToEng::Transform* transform)
 {
     this->vertices = vertices;
     this->indices = indices;
     this->textures = textures;
+    this->transform = transform;
 
     // now that we have all the required data, set the vertex buffers and its attribute pointers.
     setupMesh();
@@ -46,6 +48,6 @@ void Mesh::setupMesh()
     // vertex bitangent
     glEnableVertexAttribArray(4);
     glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, Bitangent));
-    
+
     glBindVertexArray(0);
 }

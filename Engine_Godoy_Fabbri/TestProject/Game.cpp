@@ -1,5 +1,7 @@
 #include "Game.h"
 
+#include <algorithm>
+
 #include "Headers/Entity3D.h"
 #include "Headers/Model.h"
 #include "Headers/Sprite.h"
@@ -18,13 +20,19 @@ Game::Game(int width, int height, const char* title) : BaseGame(width, height, t
     pointLight->setPosition({-4.f, 0.f, 0.f});
     pointLight->setDiffuse({1.0f, .0f, .0f});
 
-    entities.push_back(new Model(renderer, "../res/chicken/Chicken1.fbx", false));
+    // entities.push_back(new Model(renderer, "../res/chicken/Chicken1.fbx", false));
+    // entities.back()->transform->setScale({0.1f, 0.1f, 0.1f});
     
-    entities.push_back(new Model(renderer, "../res/pochita/pochita.fbx", false));
-    entities.back()->transform.setPos({-4.f, 0.f, 0.f});
+    // entities.push_back(new Model(renderer, "../res/pochita/pochita.fbx", false));
+    // entities.back()->transform->setPos({-4.f, 0.f, 0.f});
     
-    entities.push_back(new Model(renderer, "../res/Backpack/Survival_BackPack_2.fbx", true));
-    entities.back()->transform.setPos({0.f, 0.f, 4.f});
+    // entities.push_back(new Model(renderer, "../res/Backpack/Survival_BackPack_2.fbx", true));
+    // entities.back()->transform->setPos({0.f, 0.f, 0.f});
+    // entities.back()->transform->setScale({.1f, .1f, .1f});
+    
+    entities.push_back(new Model(renderer, "../res/Snowman.fbx", true));
+    entities.back()->transform->setPos({0.f, 0.f, 0.f});
+    // entities.back()->transform->setScale({0.1f, 0.1f, 0.1f});
 }
 
 Game::~Game()
@@ -37,21 +45,25 @@ void Game::update()
     Entity* character = entities.front();
 
     if (Input::getKey(Input::i, Input::Repeated))
-        character->transform.moveForward(-characterSpeed * GameTime::getDelta());
+        character->transform->moveForward(-characterSpeed * GameTime::getDelta());
     if (Input::getKey(Input::k, Input::Repeated))
-        character->transform.moveForward(characterSpeed * GameTime::getDelta());
+        character->transform->moveForward(characterSpeed * GameTime::getDelta());
 
     if (Input::getKey(Input::j, Input::Repeated))
-        character->transform.moveRight(characterSpeed * GameTime::getDelta());
+        character->transform->moveRight(characterSpeed * GameTime::getDelta());
     if (Input::getKey(Input::l, Input::Repeated))
-        character->transform.moveRight(-characterSpeed * GameTime::getDelta());
+        character->transform->moveRight(-characterSpeed * GameTime::getDelta());
 
     if (Input::getKey(Input::u, Input::Repeated))
-        character->transform.moveUp(-characterSpeed * GameTime::getDelta());
+        character->transform->moveUp(-characterSpeed * GameTime::getDelta());
     if (Input::getKey(Input::o, Input::Repeated))
-        character->transform.moveUp(characterSpeed * GameTime::getDelta());
+        character->transform->moveUp(characterSpeed * GameTime::getDelta());
 
     float camSens = 5.f;
+    
+    camSpeed = Input::getMouseScroll() * 5;
+
+    camSpeed = std::max<float>(camSpeed, 1);
 
     if (Input::getKey(Input::a, Input::Repeated))
         camera->moveRight(-camSpeed * GameTime::getDelta());
@@ -77,8 +89,8 @@ void Game::update()
         camera->rotateYaw(-camSens * mouseDelta.x * GameTime::getDelta());
     if (abs(mouseDelta.y) > 0.0001f)
         camera->rotatePitch(camSens * mouseDelta.y * GameTime::getDelta());
-    //
-    // static_cast<TpCamera*>(camera)->setReference(character->transform.getPos());
+    
+    // static_cast<TpCamera*>(camera)->setReference(character->transform->getPos());
     // static_cast<TpCamera*>(camera)->updateCamera();
     
     SpotLight* light = static_cast<SpotLight*>(LightSource::lights.back());

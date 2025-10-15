@@ -143,7 +143,7 @@ namespace ToToEng
 
     void Entity3D::draw()
     {
-        renderer->drawEntity3D(VAO, indexQty, *material, transform.getTransformMatrix());
+        renderer->drawEntity3D(VAO, indexQty, *material, transform->getTransformMatrix());
     }
 
     void Entity3D::updateVao()

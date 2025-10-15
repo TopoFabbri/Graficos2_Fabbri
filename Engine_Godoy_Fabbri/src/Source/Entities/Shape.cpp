@@ -38,7 +38,7 @@ ToToEng::Shape::Shape(Renderer* renderer) : Entity2D(renderer)
 
 	updateVao();
 
-	collider = new BoxCollider2D({0.f, 0.f}, {1.f, 1.f}, &transform, true);
+	collider = new BoxCollider2D({0.f, 0.f}, {1.f, 1.f}, transform, true);
 }
 
 ToToEng::Shape::~Shape()
@@ -47,5 +47,5 @@ ToToEng::Shape::~Shape()
 
 void ToToEng::Shape::draw()
 {
-	renderer->drawShape(VAO, indexQty, color, transform.getTransformMatrix());
+	renderer->drawShape(VAO, indexQty, color, transform->getTransformMatrix());
 }

@@ -34,7 +34,7 @@ namespace ToToEng
 	public:
 		vec4 color;
 		bool active;
-		Transform transform;
+		Transform* transform;
 
 		Entity(Renderer* renderer);
 		virtual ~Entity();

@@ -55,7 +55,7 @@ ToToEng::Entity2D::Entity2D(Renderer* renderer): Entity(renderer)
 
     updateVao();
 
-    collider = new BoxCollider2D({0.f, 0.f}, {1.f, 1.f}, &transform, true);
+    collider = new BoxCollider2D({0.f, 0.f}, {1.f, 1.f}, transform, true);
 }
 
 ToToEng::Entity2D::~Entity2D()

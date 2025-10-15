@@ -55,7 +55,7 @@ ToToEng::Sprite::Sprite(Renderer* renderer) : Entity2D(renderer)
     
     updateVao();
 
-    collider = new BoxCollider2D({0.f, 0.f}, {1.f, 1.f}, &transform, false);
+    collider = new BoxCollider2D({0.f, 0.f}, {1.f, 1.f}, transform, false);
 }
 
 ToToEng::Sprite::~Sprite()
@@ -64,7 +64,7 @@ ToToEng::Sprite::~Sprite()
 
 void ToToEng::Sprite::draw()
 {
-    renderer->drawEntity2D(VAO, indexQty, color, transform.getTransformMatrix(), texture);
+    renderer->drawEntity2D(VAO, indexQty, color, transform->getTransformMatrix(), texture);
 }
 
 void ToToEng::Sprite::loadTexture(const char* filePath)
