@@ -7,88 +7,73 @@
 
 namespace ToToEng
 {
-	BaseGame::BaseGame(int width, int height, const char* title)
-	{
-		camera = new Camera();
-		window = new Window(width, height, title);
-		renderer = new Renderer(window);
-		collisionManager = new CollisionManager();
+    BaseGame::BaseGame(int width, int height, const char* title)
+    {
+        camera = new Camera();
+        window = new Window(width, height, title);
+        renderer = new Renderer(window);
+        collisionManager = new CollisionManager();
 
-		Input::setCursorVisibility(false);
-		
-		GameTime::resetTime();
-	}
+        Input::setCursorVisibility(false);
 
-	BaseGame::~BaseGame()
-	{
-		delete renderer;
-		delete window;
-		delete camera;
-		delete collisionManager;
+        GameTime::resetTime();
+    }
 
-		const int size = static_cast<int>(entities.size());
-		
-		for (int i = 0; i < size; i++)
-		{
-			Entity* tmp = entities.front();
-			entities.pop_front();
-			delete tmp;
-		}
+    BaseGame::~BaseGame()
+    {
+        delete renderer;
+        delete window;
+        delete camera;
+        delete collisionManager;
 
-		entities.clear();
-	}
+        const int size = static_cast<int>(entities.size());
 
-	void BaseGame::run()
-	{
-		while (!window->shouldClose())
-		{
-			GameTime::update();
-			
-			for (Entity* entity : entities)
-				entity->update();
-			update();
-			
-			renderer->beginDraw();
+        for (int i = 0; i < size; i++)
+        {
+            Entity* tmp = entities.front();
+            entities.pop_front();
+            delete tmp;
+        }
 
-			for (Entity* entity : entities)
-				entity->draw();
+        entities.clear();
+    }
 
-			onDraw();
-			
-			renderer->endDraw();
+    void BaseGame::run()
+    {
+        while (!window->shouldClose())
+        {
+            GameTime::update();
 
-			glfwPollEvents();
-		}
-	}
+            for (Entity* entity : entities)
+                entity->update();
+            
+            update();
 
-	void BaseGame::endGame()
-	{
-		window->close();
-	}
+            renderer->beginDraw();
 
-	void BaseGame::drawLine(vec3 start, vec3 end, vec4 color)
-	{
-		renderer->drawLine(start, end, color);
-	}
+            for (Entity* entity : entities)
+                entity->draw();
 
-	void BaseGame::drawWireBox(vec3 center, vec3 size, vec4 color)
-	{
-		const vec3 aa = center - size / 2.f;
-		const vec3 bb = center + size / 2.f;
+            onDraw();
 
-		drawLine(aa, vec3(bb.x, aa.y, aa.z), color);
-		drawLine(aa, vec3(aa.x, bb.y, aa.z), color);
-		drawLine(aa, vec3(aa.x, aa.y, bb.z), color);
-		
-		drawLine(bb, vec3(aa.x, bb.y, bb.z), color);
-		drawLine(bb, vec3(bb.x, aa.y, bb.z), color);
-		drawLine(bb, vec3(bb.x, bb.y, aa.z), color);
+            renderer->endDraw();
 
-		drawLine({aa.x, aa.y, bb.z}, {bb.x, aa.y, bb.z}, color);
-		drawLine({aa.x, aa.y, bb.z}, {aa.x, bb.y, bb.z}, color);
-		drawLine({aa.x, bb.y, aa.z}, {aa.x, bb.y, bb.z}, color);
-		drawLine({aa.x, bb.y, aa.z}, {bb.x, bb.y, aa.z}, color);
-		drawLine({bb.x, aa.y, aa.z}, {bb.x, bb.y, aa.z}, color);
-		drawLine({bb.x, aa.y, aa.z}, {bb.x, aa.y, bb.z}, color);
-	}
+            glfwPollEvents();
+        }
+    }
+
+    void BaseGame::endGame()
+    {
+        window->close();
+    }
+
+    void BaseGame::drawLine(const vec3& start, const vec3& end, const vec4& color) const
+    {
+        renderer->drawLine(start, end, color);
+    }
+
+    void BaseGame::drawWireBox(vec3 min, vec3 max, const vec4& color) const
+    {
+        renderer->drawWireBox(min, max, color);
+    }
 }

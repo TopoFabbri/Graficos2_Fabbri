@@ -62,7 +62,8 @@ namespace ToToEng
 		void genIndexBuffer(unsigned int& IBO,
 			unsigned int indices[], unsigned int id, unsigned int qty);
 		void deleteBuffers(unsigned int& VBO, unsigned int& IBO, unsigned int& EBO, unsigned int id);
-		void drawLine(vec3 start, vec3 end, vec4 color);
+		void drawLine(const vec3& start, const vec3& end, const vec4& color);
+		void drawWireBox(vec3 min, vec3 max, const vec4& color);
 		void drawEntity2D(unsigned int& VAO, unsigned int indexQty, vec4 color, mat4 trans, unsigned int texture);
 		void drawEntity3D(unsigned int& VAO, unsigned int indexQty, Material mat, mat4 trans);
 		void drawShape(unsigned int& VAO, unsigned int indexQty, vec4 color, mat4 trans);

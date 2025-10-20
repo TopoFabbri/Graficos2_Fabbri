@@ -15,6 +15,7 @@ namespace ToToEng
         // constructor, expects a filepath to a 3D model.
         Model(Renderer *renderer, std::string const &path, bool gamma = false);
 
+        void update() override;
         // draws the model, and thus all its meshes
         void draw() override;
     };

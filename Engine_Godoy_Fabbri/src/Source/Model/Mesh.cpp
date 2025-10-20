@@ -1,9 +1,11 @@
 #include "Mesh.h"
 
+#include <algorithm>
+
 #include "Model.h"
 
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures,
-    ToToEng::Transform* transform)
+           ToToEng::Transform* transform)
 {
     this->vertices = vertices;
     this->indices = indices;
@@ -12,6 +14,35 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std:
 
     // now that we have all the required data, set the vertex buffers and its attribute pointers.
     setupMesh();
+}
+
+void Mesh::updateBoundingBox()
+{
+    vec3 min;
+    vec3 max;
+
+    min = transform->getTransformMatrix() * vec4(vertices[0].Position, 1.0f);
+    max = transform->getTransformMatrix() * vec4(vertices[0].Position, 1.0f);
+
+    for (Vertex vertex : vertices)
+    {
+        vec3 curVertex = transform->getTransformMatrix() * vec4(vertex.Position, 1.0f);
+
+        min.x = std::min(curVertex.x, min.x);
+        min.y = std::min(curVertex.y, min.y);
+        min.z = std::min(curVertex.z, min.z);
+
+        max.x = std::max(curVertex.x, max.x);
+        max.y = std::max(curVertex.y, max.y);
+        max.z = std::max(curVertex.z, max.z);
+    }
+
+    aabb = {min, max};
+}
+
+Box Mesh::getBox() const
+{
+    return aabb;
 }
 
 void Mesh::setupMesh()

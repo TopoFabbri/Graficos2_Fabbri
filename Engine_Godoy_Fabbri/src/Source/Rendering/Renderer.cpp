@@ -125,10 +125,10 @@ namespace ToToEng
         glDeleteProgram(shader);
     }
 
-    void Renderer::drawLine(vec3 start, vec3 end, vec4 color)
+    void Renderer::drawLine(const vec3& start, const vec3& end, const vec4& color)
     {
         // Prepare 2 vertices with position (x,y,z,w) and a per-vertex color (r,g,b,a)
-        float vertices[] = {
+        const float vertices[] = {
             start.x, start.y, start.z, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
             end.x,   end.y,   end.z,   1.0f, 1.0f, 1.0f, 1.0f, 1.0f
         };
@@ -163,6 +163,24 @@ namespace ToToEng
         glCall(glUseProgram(0));
         glDeleteBuffers(1, &VBO);
         glDeleteVertexArrays(1, &VAO);
+    }
+
+    void Renderer::drawWireBox(vec3 min, vec3 max, const vec4& color)
+    {
+        drawLine(min, vec3(max.x, min.y, min.z), color);
+        drawLine(min, vec3(min.x, max.y, min.z), color);
+        drawLine(min, vec3(min.x, min.y, max.z), color);
+		
+        drawLine(max, vec3(min.x, max.y, max.z), color);
+        drawLine(max, vec3(max.x, min.y, max.z), color);
+        drawLine(max, vec3(max.x, max.y, min.z), color);
+
+        drawLine({min.x, min.y, max.z}, {max.x, min.y, max.z}, color);
+        drawLine({min.x, min.y, max.z}, {min.x, max.y, max.z}, color);
+        drawLine({min.x, max.y, min.z}, {min.x, max.y, max.z}, color);
+        drawLine({min.x, max.y, min.z}, {max.x, max.y, min.z}, color);
+        drawLine({max.x, min.y, min.z}, {max.x, max.y, min.z}, color);
+        drawLine({max.x, min.y, min.z}, {max.x, min.y, max.z}, color);
     }
 
     void Renderer::drawEntity2D(unsigned int& VAO, unsigned int indexQty, vec4 color, mat4 trans, unsigned int texture)

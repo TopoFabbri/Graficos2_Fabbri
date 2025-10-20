@@ -23,6 +23,12 @@ struct Texture
     std::string path;
 };
 
+struct Box
+{
+    vec3 min;
+    vec3 max;
+};
+
 class Mesh
 {
 public:
@@ -30,12 +36,14 @@ public:
     std::vector<unsigned int> indices;
     std::vector<Texture> textures;
     unsigned int VAO;
+    Box aabb;
 
     ToToEng::Transform* transform;
     
     Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures, ToToEng::Transform* transform);
 
-    void Draw(Shader& shader);
+    void updateBoundingBox();
+    Box getBox() const;
 
 private:
     unsigned int VBO, EBO;

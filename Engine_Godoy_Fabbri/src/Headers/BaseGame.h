@@ -34,7 +34,7 @@ namespace ToToEng
         virtual void update() = 0;
         virtual void onDraw() = 0;
 
-        void drawLine(vec3 start, vec3 end, vec4 color);
-        void drawWireBox(vec3 center, vec3 size, vec4 color);
+        void drawLine(const vec3& start, const vec3& end, const vec4& color) const;
+        void drawWireBox(vec3 min, vec3 max, const vec4& color) const;
     };
 }
