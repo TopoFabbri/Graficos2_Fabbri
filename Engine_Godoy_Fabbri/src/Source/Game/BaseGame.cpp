@@ -43,11 +43,11 @@ namespace ToToEng
         while (!window->shouldClose())
         {
             GameTime::update();
+            
+            update();
 
             for (Entity* entity : entities)
                 entity->update();
-            
-            update();
 
             renderer->beginDraw();
 

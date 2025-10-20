@@ -32,7 +32,6 @@ Game::Game(int width, int height, const char* title) : BaseGame(width, height, t
     
     entities.push_back(new Model(renderer, "../res/Tank/Tank.fbx", true));
     entities.back()->transform->setPos({0.f, 0.f, 0.f});
-    entities.back()->transform->setRot({0.f, 0.f, 90.f});
 }
 
 Game::~Game()
@@ -45,19 +44,19 @@ void Game::update()
     Entity* character = entities.front();
 
     if (Input::getKey(Input::i, Input::Repeated))
-        character->transform->moveForward(-characterSpeed * GameTime::getDelta());
-    if (Input::getKey(Input::k, Input::Repeated))
         character->transform->moveForward(characterSpeed * GameTime::getDelta());
+    if (Input::getKey(Input::k, Input::Repeated))
+        character->transform->moveForward(-characterSpeed * GameTime::getDelta());
 
     if (Input::getKey(Input::j, Input::Repeated))
-        character->transform->moveRight(characterSpeed * GameTime::getDelta());
-    if (Input::getKey(Input::l, Input::Repeated))
         character->transform->moveRight(-characterSpeed * GameTime::getDelta());
+    if (Input::getKey(Input::l, Input::Repeated))
+        character->transform->moveRight(characterSpeed * GameTime::getDelta());
 
     if (Input::getKey(Input::u, Input::Repeated))
-        character->transform->moveUp(-characterSpeed * GameTime::getDelta());
-    if (Input::getKey(Input::o, Input::Repeated))
         character->transform->moveUp(characterSpeed * GameTime::getDelta());
+    if (Input::getKey(Input::o, Input::Repeated))
+        character->transform->moveUp(-characterSpeed * GameTime::getDelta());
 
     float camSens = 5.f;
     
@@ -100,9 +99,9 @@ void Game::update()
 
 void Game::onDraw()
 {
-    constexpr vec3 origin = {0.f, 0.f, 0.f};
+    Transform* trans = entities.front()->transform;
     
-    drawLine(origin, {100.f, 0.f, 0.f}, {1.f, 0.f, 0.f, .3f});
-    drawLine(origin, {0.f, 100.f, 0.f}, {0.f, 1.f, 0.f, .3f});
-    drawLine(origin, {0.f, 0.f, 100.f}, {0.f, 0.f, 1.f, .3f});
+    drawLine(trans->getPos(), trans->getPos() + trans->right() * 10.f, {1.f, 0.f, 0.f, .3f});
+    drawLine(trans->getPos(), trans->getPos() + trans->up() * 10.f, {0.f, 1.f, 0.f, .3f});
+    drawLine(trans->getPos(), trans->getPos() + trans->forward() * 10.f, {0.f, 0.f, 1.f, .3f});
 }

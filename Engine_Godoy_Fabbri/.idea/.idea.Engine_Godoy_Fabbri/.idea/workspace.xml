@@ -10,14 +10,11 @@
   <component name="ChangeListManager">
     <list default="true" id="59b83834-1b16-455b-92bb-7e2412bbcbcc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/BaseGame.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/BaseGame.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/Mesh.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Mesh.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestProject/Game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TestProject/Game.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Tank/Tank.fbx" beforeDir="false" afterPath="$PROJECT_DIR$/res/Tank/Tank.fbx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Headers/Model.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Model.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/Renderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Renderer.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Source/Game/BaseGame.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Game/BaseGame.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Source/Model/Mesh.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Model/Mesh.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Source/Model/Model.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Model/Model.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Source/Rendering/Renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Rendering/Renderer.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +48,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="cidr-memory-view://6" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/assimp/material.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/assimp/material.inl" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/assimp/mesh.h" root0="SKIP_HIGHLIGHTING" />
@@ -69,6 +67,7 @@
     <setting file="file://$PROJECT_DIR$/src/Source/Materials/Material.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Source/Model/Mesh.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Source/Model/Model.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/Archive/CPPProjects/Graficos2_Fabbri/Engine_Godoy_Fabbri/src/Source/Model/Model.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://D:/Archive/CPPProjects/Graficos2_Fabbri/Engine_Godoy_Fabbri/src/Source/Model/Model.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Source/Rendering/Renderer.cpp" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -91,7 +90,7 @@
   "keyToString": {
     "C++ Project.TestProject.executor": "Run",
     "C/C++ Project.Engine_Godoy_Fabbri.executor": "Run",
-    "C/C++ Project.TestProject.executor": "Debug",
+    "C/C++ Project.TestProject.executor": "Run",
     "RunOnceActivity.CodyProjectSettingsMigration": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",

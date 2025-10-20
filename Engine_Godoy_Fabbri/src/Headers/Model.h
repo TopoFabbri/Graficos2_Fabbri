@@ -12,6 +12,8 @@ namespace ToToEng
     {
     public:
         std::vector<Mesh> meshes;
+        Box aabb;
+        
         // constructor, expects a filepath to a 3D model.
         Model(Renderer *renderer, std::string const &path, bool gamma = false);
 
