@@ -30,9 +30,10 @@ Game::Game(int width, int height, const char* title) : BaseGame(width, height, t
     // entities.back()->transform->setPos({0.f, 0.f, 0.f});
     // entities.back()->transform->setScale({.1f, .1f, .1f});
     
-    entities.push_back(new Model(renderer, "../res/Snowman.fbx", true));
+    entities.push_back(new Model(renderer, "../res/Tank/Tank.fbx", true));
     entities.back()->transform->setPos({0.f, 0.f, 0.f});
-    // entities.back()->transform->setScale({0.1f, 0.1f, 0.1f});
+
+    static_cast<Model*>(entities.back())->meshes.front().transform->setRot({-90.f, -90.f, 180.f});
 }
 
 Game::~Game()
