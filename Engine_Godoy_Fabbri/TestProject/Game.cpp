@@ -32,8 +32,7 @@ Game::Game(int width, int height, const char* title) : BaseGame(width, height, t
     
     entities.push_back(new Model(renderer, "../res/Tank/Tank.fbx", true));
     entities.back()->transform->setPos({0.f, 0.f, 0.f});
-
-    static_cast<Model*>(entities.back())->meshes.front().transform->setRot({-90.f, -90.f, 180.f});
+    entities.back()->transform->setRot({0.f, 0.f, 90.f});
 }
 
 Game::~Game()
@@ -97,4 +96,13 @@ void Game::update()
     SpotLight* light = static_cast<SpotLight*>(LightSource::lights.back());
     light->setDirection(camera->getForward());
     light->setPosition(camera->getPos());
+}
+
+void Game::onDraw()
+{
+    constexpr vec3 origin = {0.f, 0.f, 0.f};
+    
+    drawLine(origin, {100.f, 0.f, 0.f}, {1.f, 0.f, 0.f, .3f});
+    drawLine(origin, {0.f, 100.f, 0.f}, {0.f, 1.f, 0.f, .3f});
+    drawLine(origin, {0.f, 0.f, 100.f}, {0.f, 0.f, 1.f, .3f});
 }

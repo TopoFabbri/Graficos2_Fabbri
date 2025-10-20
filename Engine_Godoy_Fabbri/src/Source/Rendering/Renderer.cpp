@@ -125,6 +125,46 @@ namespace ToToEng
         glDeleteProgram(shader);
     }
 
+    void Renderer::drawLine(vec3 start, vec3 end, vec4 color)
+    {
+        // Prepare 2 vertices with position (x,y,z,w) and a per-vertex color (r,g,b,a)
+        float vertices[] = {
+            start.x, start.y, start.z, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
+            end.x,   end.y,   end.z,   1.0f, 1.0f, 1.0f, 1.0f, 1.0f
+        };
+
+        unsigned int VAO = 0, VBO = 0;
+        glCall(glGenVertexArrays(1, &VAO));
+        glCall(glGenBuffers(1, &VBO));
+
+        glCall(glBindVertexArray(VAO));
+        glCall(glBindBuffer(GL_ARRAY_BUFFER, VBO));
+        glCall(glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW));
+
+        // layout(location = 0) -> vec4 position
+        glCall(glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0));
+        glCall(glEnableVertexAttribArray(0));
+        // layout(location = 1) -> vec4 color
+        glCall(glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(4 * sizeof(float))));
+        glCall(glEnableVertexAttribArray(1));
+
+        // Use the simple shape shader (position + color) and set transform and uniform color tint
+        mat4 pvm = projection * Camera::main->getView();
+        glCall(glUseProgram(shapeShader));
+        glCall(u_ColorLocation = glGetUniformLocation(shapeShader, "u_Color"));
+        glCall(glUniform4f(u_ColorLocation, color.x, color.y, color.z, color.w));
+        glCall(glUniformMatrix4fv(u_ShapeTransformLocation, 1, GL_FALSE, glm::value_ptr(pvm)));
+
+        glCall(glDrawArrays(GL_LINES, 0, 2));
+
+        // Cleanup
+        glCall(glBindVertexArray(0));
+        glCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
+        glCall(glUseProgram(0));
+        glDeleteBuffers(1, &VBO);
+        glDeleteVertexArrays(1, &VAO);
+    }
+
     void Renderer::drawEntity2D(unsigned int& VAO, unsigned int indexQty, vec4 color, mat4 trans, unsigned int texture)
     {
         mat4 pvm = projection * Camera::main->getView() * trans;
@@ -405,9 +445,10 @@ namespace ToToEng
 
     unsigned int Renderer::createShader(const char* vShader, const char* fShader)
     {
-        glCall(unsigned int program = glCreateProgram());
-        glCall(unsigned int vs = compileShader(GL_VERTEX_SHADER, vShader));
-        glCall(unsigned int fs = compileShader(GL_FRAGMENT_SHADER, fShader));
+        unsigned int program;
+        glCall(program = glCreateProgram());
+        unsigned int vs = compileShader(GL_VERTEX_SHADER, vShader);
+        unsigned int fs = compileShader(GL_FRAGMENT_SHADER, fShader);
 
         glCall(glAttachShader(program, vs));
         glCall(glAttachShader(program, fs));

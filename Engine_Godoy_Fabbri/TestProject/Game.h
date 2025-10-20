@@ -16,4 +16,5 @@ public:
 	~Game() override;
 
 	void update() override;
+	void onDraw() override;
 };

@@ -32,5 +32,9 @@ namespace ToToEng
         void endGame();
 
         virtual void update() = 0;
+        virtual void onDraw() = 0;
+
+        void drawLine(vec3 start, vec3 end, vec4 color);
+        void drawWireBox(vec3 center, vec3 size, vec4 color);
     };
 }
