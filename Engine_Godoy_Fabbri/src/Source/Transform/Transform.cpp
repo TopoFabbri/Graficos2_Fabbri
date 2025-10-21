@@ -76,8 +76,11 @@ namespace ToToEng
                 allChildren.push_back(child);
 
                 if (!child->getChildren().empty())
-                    allChildren.insert(allChildren.end(), child->getChildren(true).begin(),
-                                       child->getChildren(true).end());
+                {
+                    std::list<Transform*> tmpChildren = child->getChildren(true);
+                    
+                    allChildren.insert(allChildren.end(), tmpChildren.begin(), tmpChildren.end());
+                }
             }
             return allChildren;
         }

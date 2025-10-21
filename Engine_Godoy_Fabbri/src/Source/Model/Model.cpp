@@ -12,7 +12,7 @@ void ToToEng::Model::update()
 
     int counter = 0;
 
-    for (std::pair<Transform* const, Mesh*> mesh : meshes)
+    for (const std::pair<Transform* const, Mesh*> mesh : meshes)
     {
         mesh.second->updateBoundingBox();
 
@@ -31,6 +31,25 @@ void ToToEng::Model::update()
         aabb.max.y = std::max(aabb.max.y, mesh.second->getBox().max.y);
         aabb.max.z = std::max(aabb.max.z, mesh.second->getBox().max.z);
         counter++;
+    }
+
+    for (const std::pair<Transform* const, Mesh*> mesh : meshes)
+    {
+        std::list<Transform*> children = mesh.second->transform->getChildren(true);
+        
+        if (children.empty())
+            continue;
+
+        for (Transform* child : children)
+        {
+            mesh.second->aabb.min.x = std::min(meshes[child]->getBox().min.x, mesh.second->aabb.min.x);
+            mesh.second->aabb.min.y = std::min(meshes[child]->getBox().min.y, mesh.second->aabb.min.y);
+            mesh.second->aabb.min.z = std::min(meshes[child]->getBox().min.z, mesh.second->aabb.min.z);
+
+            mesh.second->aabb.max.x = std::max(meshes[child]->getBox().max.x, mesh.second->aabb.max.x);
+            mesh.second->aabb.max.y = std::max(meshes[child]->getBox().max.y, mesh.second->aabb.max.y);
+            mesh.second->aabb.max.z = std::max(meshes[child]->getBox().max.z, mesh.second->aabb.max.z);
+        }
     }
 }
 
