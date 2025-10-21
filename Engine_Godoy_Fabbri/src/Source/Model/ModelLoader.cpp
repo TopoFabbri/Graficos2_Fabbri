@@ -15,7 +15,7 @@ static std::string normalizePath(std::string p)
 std::vector<Texture> ModelLoader::textures_loaded;
 std::string ModelLoader::directory = "";
 
-void ModelLoader::loadModel(std::string const& path, std::vector<Mesh>& meshes, ToToEng::Transform* modelTransform, bool gamma)
+void ModelLoader::loadModel(std::string const& path, std::map<ToToEng::Transform*, Mesh*>& meshes, ToToEng::Transform* modelTransform, bool gamma)
 {
     // read file via ASSIMP
     Assimp::Importer importer;
@@ -43,7 +43,7 @@ void ModelLoader::loadModel(std::string const& path, std::vector<Mesh>& meshes, 
     processNode(scene->mRootNode, scene, meshes, modelTransform, gamma);
 }
 
-void ModelLoader::processNode(aiNode* node, const aiScene* scene, std::vector<Mesh>& meshes, ToToEng::Transform* parent,
+void ModelLoader::processNode(aiNode* node, const aiScene* scene, std::map<ToToEng::Transform*, Mesh*>& meshes, ToToEng::Transform* parent,
                               bool gamma)
 {
     aiVector3t<float> pos;
@@ -65,7 +65,8 @@ void ModelLoader::processNode(aiNode* node, const aiScene* scene, std::vector<Me
         // the scene contains all the data, node is just to keep stuff organized (like relations between nodes).
         aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
 
-        meshes.push_back(processMesh(mesh, scene, transform, gamma));
+        Mesh* newMesh = processMesh(mesh, scene, transform, gamma);
+        meshes[newMesh->transform] = newMesh;
     }
     // after we've processed all of the meshes (if any) we then recursively process each of the children nodes
     for (unsigned int i = 0; i < node->mNumChildren; i++)
@@ -74,7 +75,7 @@ void ModelLoader::processNode(aiNode* node, const aiScene* scene, std::vector<Me
     }
 }
 
-Mesh ModelLoader::processMesh(aiMesh* mesh, const aiScene* scene, ToToEng::Transform* transform, bool gamma)
+Mesh* ModelLoader::processMesh(aiMesh* mesh, const aiScene* scene, ToToEng::Transform* transform, bool gamma)
 {
     // data to fill
     std::vector<Vertex> vertices;
@@ -178,7 +179,7 @@ Mesh ModelLoader::processMesh(aiMesh* mesh, const aiScene* scene, ToToEng::Trans
     textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 
     // return a mesh object created from the extracted mesh data
-    return {vertices, indices, textures, transform};
+    return new Mesh{vertices, indices, textures, transform};
 }
 
 std::vector<Texture> ModelLoader::loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName,

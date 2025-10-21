@@ -1,4 +1,5 @@
 #pragma once
+#include <map>
 #include <vector>
 
 #include "Entity.h"
@@ -11,7 +12,7 @@ namespace ToToEng
     class TOTO_API Model : public Entity3D
     {
     public:
-        std::vector<Mesh> meshes;
+        std::map<Transform*, Mesh*> meshes;
         Box aabb;
         
         // constructor, expects a filepath to a 3D model.

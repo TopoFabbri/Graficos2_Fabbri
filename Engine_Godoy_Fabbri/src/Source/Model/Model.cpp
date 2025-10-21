@@ -12,24 +12,24 @@ void ToToEng::Model::update()
 
     int counter = 0;
 
-    for (Mesh& mesh : meshes)
+    for (std::pair<Transform* const, Mesh*> mesh : meshes)
     {
-        mesh.updateBoundingBox();
+        mesh.second->updateBoundingBox();
 
         if (counter == 0)
         {
-            aabb = mesh.getBox();
+            aabb = mesh.second->getBox();
             counter++;
             continue;
         }
 
-        aabb.min.x = std::min(aabb.min.x, mesh.getBox().min.x);
-        aabb.min.y = std::min(aabb.min.y, mesh.getBox().min.y);
-        aabb.min.z = std::min(aabb.min.z, mesh.getBox().min.z);
+        aabb.min.x = std::min(aabb.min.x, mesh.second->getBox().min.x);
+        aabb.min.y = std::min(aabb.min.y, mesh.second->getBox().min.y);
+        aabb.min.z = std::min(aabb.min.z, mesh.second->getBox().min.z);
 
-        aabb.max.x = std::max(aabb.max.x, mesh.getBox().max.x);
-        aabb.max.y = std::max(aabb.max.y, mesh.getBox().max.y);
-        aabb.max.z = std::max(aabb.max.z, mesh.getBox().max.z);
+        aabb.max.x = std::max(aabb.max.x, mesh.second->getBox().max.x);
+        aabb.max.y = std::max(aabb.max.y, mesh.second->getBox().max.y);
+        aabb.max.z = std::max(aabb.max.z, mesh.second->getBox().max.z);
         counter++;
     }
 }
@@ -37,11 +37,12 @@ void ToToEng::Model::update()
 void ToToEng::Model::draw()
 {
     renderer->drawWireBox(aabb.min, aabb.max, {0, 1, 1, 1});
-    for (Mesh& mesh : meshes)
+    
+    for (std::pair<Transform* const, Mesh*> mesh : meshes)
     {
-        renderer->drawWireBox(mesh.getBox().min, mesh.getBox().max, {0, 1, 1, 1});
+        renderer->drawWireBox(mesh.second->getBox().min, mesh.second->getBox().max, {0, 1, 1, 1});
 
-        renderer->drawModel3D(mesh.VAO, mesh.indices.size(),
-                              mesh.transform->getTransformMatrix(), mesh.textures);
+        renderer->drawModel3D(mesh.second->VAO, mesh.second->indices.size(),
+                              mesh.second->transform->getTransformMatrix(), mesh.second->textures);
     }
 }
