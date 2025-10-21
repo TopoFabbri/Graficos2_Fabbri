@@ -22,14 +22,14 @@ Game::Game(int width, int height, const char* title) : BaseGame(width, height, t
 
     // entities.push_back(new Model(renderer, "../res/chicken/Chicken1.fbx", false));
     // entities.back()->transform->setScale({0.1f, 0.1f, 0.1f});
-    
+
     // entities.push_back(new Model(renderer, "../res/pochita/pochita.fbx", false));
     // entities.back()->transform->setPos({-4.f, 0.f, 0.f});
-    
+
     // entities.push_back(new Model(renderer, "../res/Backpack/Survival_BackPack_2.fbx", true));
     // entities.back()->transform->setPos({0.f, 0.f, 0.f});
     // entities.back()->transform->setScale({.1f, .1f, .1f});
-    
+
     entities.push_back(new Model(renderer, "../res/Tank/Tank.fbx", true));
     entities.back()->transform->setPos({0.f, 0.f, 0.f});
 }
@@ -40,9 +40,10 @@ Game::~Game()
 
 void Game::update()
 {
-    float characterSpeed = 5.f;
-    Entity* character = entities.front();
+    constexpr float characterSpeed = 5.f;
+    const Entity* character = entities.front();
 
+    // Tank movement
     if (Input::getKey(Input::i, Input::Repeated))
         character->transform->moveForward(characterSpeed * GameTime::getDelta());
     if (Input::getKey(Input::k, Input::Repeated))
@@ -58,14 +59,15 @@ void Game::update()
     if (Input::getKey(Input::o, Input::Repeated))
         character->transform->moveUp(-characterSpeed * GameTime::getDelta());
 
-    // Tank rotation input
+    // Tank rotation
     if (Input::getKey(Input::n4, Input::Repeated))
         character->transform->rotateY(GameTime::getDelta() * 30.f);
     if (Input::getKey(Input::n6, Input::Repeated))
         character->transform->rotateY(GameTime::getDelta() * -30.f);
-    
-    // Turret input
-    Transform* turretTransform = character->transform->getChildren().front()->getChildren().front()->getChildren().front()->getChildren().front();
+
+    // Turret rotation
+    Transform* turretTransform = character->transform->getChildren().front()->getChildren().front()->getChildren().
+                                            front()->getChildren().front();
 
     if (Input::getKey(Input::n7, Input::Repeated))
         turretTransform->rotateY(GameTime::getDelta() * 30.f);
@@ -77,8 +79,9 @@ void Game::update()
     if (Input::getKey(Input::n5, Input::Repeated))
         turretTransform->rotateZ(GameTime::getDelta() * -30.f);
 
+    // Cam input
     float camSens = 5.f;
-    
+
     camSpeed = Input::getMouseScroll() * 5;
 
     camSpeed = std::max<float>(camSpeed, 1);
@@ -97,7 +100,7 @@ void Game::update()
         camera->moveUp(camSpeed * GameTime::getDelta());
     if (Input::getKey(Input::q, Input::Repeated))
         camera->moveUp(-camSpeed * GameTime::getDelta());
-    
+
     if (Input::getKey(Input::esc, Input::Pressed))
         endGame();
 
@@ -107,10 +110,10 @@ void Game::update()
         camera->rotateYaw(-camSens * mouseDelta.x * GameTime::getDelta());
     if (abs(mouseDelta.y) > 0.0001f)
         camera->rotatePitch(camSens * mouseDelta.y * GameTime::getDelta());
-    
+
     // static_cast<TpCamera*>(camera)->setReference(character->transform->getPos());
     // static_cast<TpCamera*>(camera)->updateCamera();
-    
+
     SpotLight* light = static_cast<SpotLight*>(LightSource::lights.back());
     light->setDirection(camera->getForward());
     light->setPosition(camera->getPos());
@@ -118,9 +121,9 @@ void Game::update()
 
 void Game::onDraw()
 {
-    Transform* trans = entities.front()->transform;
+    vec3 origin = {0.f, 0.f, 0.f};
     
-    drawLine(trans->getPos(), trans->getPos() + trans->right() * 10.f, {1.f, 0.f, 0.f, .3f});
-    drawLine(trans->getPos(), trans->getPos() + trans->up() * 10.f, {0.f, 1.f, 0.f, .3f});
-    drawLine(trans->getPos(), trans->getPos() + trans->forward() * 10.f, {0.f, 0.f, 1.f, .3f});
+    drawLine(origin, vec3{1.f, 0.f, 0.f} * 100.f, {1.f, 0.f, 0.f, .3f});
+    drawLine(origin, vec3{0.f, 1.f, 0.f} * 100.f, {0.f, 1.f, 0.f, .3f});
+    drawLine(origin, vec3{0.f, 0.f, 1.f} * 100.f, {0.f, 0.f, 1.f, .3f});
 }

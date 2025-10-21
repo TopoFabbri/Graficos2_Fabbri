@@ -12,9 +12,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestProject/Game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TestProject/Game.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/res/Tank/Tank.fbx" beforeDir="false" afterPath="$PROJECT_DIR$/res/Tank/Tank.fbx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/Input.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Input.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/Transform.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Transform.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Source/Transform/Transform.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Transform/Transform.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
