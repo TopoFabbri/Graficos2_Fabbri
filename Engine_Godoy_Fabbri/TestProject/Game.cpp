@@ -58,6 +58,25 @@ void Game::update()
     if (Input::getKey(Input::o, Input::Repeated))
         character->transform->moveUp(-characterSpeed * GameTime::getDelta());
 
+    // Tank rotation input
+    if (Input::getKey(Input::n4, Input::Repeated))
+        character->transform->rotateY(GameTime::getDelta() * 30.f);
+    if (Input::getKey(Input::n6, Input::Repeated))
+        character->transform->rotateY(GameTime::getDelta() * -30.f);
+    
+    // Turret input
+    Transform* turretTransform = character->transform->getChildren().front()->getChildren().front()->getChildren().front()->getChildren().front();
+
+    if (Input::getKey(Input::n7, Input::Repeated))
+        turretTransform->rotateY(GameTime::getDelta() * 30.f);
+    if (Input::getKey(Input::n9, Input::Repeated))
+        turretTransform->rotateY(GameTime::getDelta() * -30.f);
+
+    if (Input::getKey(Input::n8, Input::Repeated))
+        turretTransform->rotateZ(GameTime::getDelta() * 30.f);
+    if (Input::getKey(Input::n5, Input::Repeated))
+        turretTransform->rotateZ(GameTime::getDelta() * -30.f);
+
     float camSens = 5.f;
     
     camSpeed = Input::getMouseScroll() * 5;

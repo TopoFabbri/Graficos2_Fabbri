@@ -29,12 +29,6 @@ namespace ToToEng
 		mat4 scaleMat;
 		mat4 rotMat;
 		void updateTransformMatrix();
-		void translateX(float x);
-		void translateY(float y);
-		void translateZ(float z);
-		void rotateX(float x);
-		void rotateY(float y);
-		void rotateZ(float z);
 
 	public:
 		Transform(Transform* parent = nullptr);
@@ -43,6 +37,12 @@ namespace ToToEng
 		void moveForward(float dist);
 		void moveRight(float dist);
 		void moveUp(float dist);
+		void translateX(float x);
+		void translateY(float y);
+		void translateZ(float z);
+		void rotateX(float x);
+		void rotateY(float y);
+		void rotateZ(float z);
 		void addChild(Transform* child);
 		void removeChild(Transform* child);
 

@@ -246,7 +246,17 @@ namespace ToToEng
 
     void Transform::rotateX(float x)
     {
+        while (x > 360.0f)
+            x -= 360.0f;
+        while (x < 0.0f)
+            x += 360.0f;
+            
         rot.x += x;
+        
+        while (rot.x > 360.0f)
+            rot.x -= 360.0f;
+        while (rot.x < 0.0f)
+            rot.x += 360.0f;
 
         rotMat = rotate(rotMat, radians(x), vec3(1.f, 0.f, 0.f));
 
@@ -255,7 +265,17 @@ namespace ToToEng
 
     void Transform::rotateY(float y)
     {
+        while (y > 360.0f)
+            y -= 360.0f;
+        while (y < 0.0f)
+            y += 360.0f;
+            
         rot.y += y;
+        
+        while (rot.y > 360.0f)
+            rot.y -= 360.0f;
+        while (rot.y < 0.0f)
+            rot.y += 360.0f;
 
         rotMat = rotate(rotMat, radians(y), vec3(0.f, 1.f, 0.f));
 
@@ -263,9 +283,19 @@ namespace ToToEng
     }
 
     void Transform::rotateZ(float z)
-    {
+    {        
+        while (z > 360.0f)
+            z -= 360.0f;
+        while (z < 0.0f)
+            z += 360.0f;
+            
         rot.z += z;
 
+        while (rot.z > 360.0f)
+            rot.z -= 360.0f;
+        while (rot.z < 0.0f)
+            rot.z += 360.0f;
+        
         rotMat = rotate(rotMat, radians(z), vec3(0.f, 0.f, 1.f));
 
         updateTransformMatrix();

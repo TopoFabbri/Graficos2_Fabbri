@@ -51,6 +51,17 @@ namespace ToToEng
             x = GLFW_KEY_X,
             y = GLFW_KEY_Y,
             z = GLFW_KEY_Z,
+            n1 = GLFW_KEY_KP_1,
+            n2 = GLFW_KEY_KP_2,
+            n3 = GLFW_KEY_KP_3,
+            n4 = GLFW_KEY_KP_4,
+            n5 = GLFW_KEY_KP_5,
+            n6 = GLFW_KEY_KP_6,
+            n7 = GLFW_KEY_KP_7,
+            n8 = GLFW_KEY_KP_8,
+            n9 = GLFW_KEY_KP_9,
+            n0 = GLFW_KEY_KP_0,
+            enter = GLFW_KEY_ENTER,
         };
 
         enum Action
