@@ -10,17 +10,11 @@
   <component name="ChangeListManager">
     <list default="true" id="59b83834-1b16-455b-92bb-7e2412bbcbcc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestProject/Game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TestProject/Game.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestProject/Game.h" beforeDir="false" afterPath="$PROJECT_DIR$/TestProject/Game.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/BaseGame.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/BaseGame.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/Model.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Model.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Tank/Tank.fbx" beforeDir="false" afterPath="$PROJECT_DIR$/res/Tank/Tank.fbx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Headers/ModelLoader.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/ModelLoader.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/Renderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Renderer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Source/Game/BaseGame.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Game/BaseGame.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Source/Model/Model.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Model/Model.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Source/Model/ModelLoader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Model/ModelLoader.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Source/Rendering/Renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Rendering/Renderer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Source/Transform/Plane.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Transform/Plane.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +105,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "settings.editor.selected.configurable": "preferences.sourceCode.C++",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -325,7 +319,8 @@
       <workItem from="1760568871456" duration="3275000" />
       <workItem from="1760740183069" duration="902000" />
       <workItem from="1760986301831" duration="6456000" />
-      <workItem from="1761180209248" duration="4170000" />
+      <workItem from="1761180209248" duration="8307000" />
+      <workItem from="1761238256591" duration="1662000" />
     </task>
     <task id="LOCAL-00001" summary="Re-do singleton input">
       <option name="closed" value="true" />

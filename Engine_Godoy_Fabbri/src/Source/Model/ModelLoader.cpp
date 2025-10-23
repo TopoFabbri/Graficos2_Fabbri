@@ -15,8 +15,7 @@ static std::string normalizePath(std::string p)
 std::vector<Texture> ModelLoader::textures_loaded;
 std::string ModelLoader::directory = "";
 
-void ModelLoader::loadModel(std::string const& path, std::map<ToToEng::Transform*, Mesh*>& meshes,
-                            std::list<Plane*>& planes, ToToEng::Transform* modelTransform, bool gamma)
+void ModelLoader::loadModel(std::string const& path, std::map<ToToEng::Transform*, Mesh*>& meshes, std::list<Plane*>& planes, ToToEng::Transform* modelTransform, bool gamma)
 {
     // read file via ASSIMP
     Assimp::Importer importer;
@@ -44,9 +43,7 @@ void ModelLoader::loadModel(std::string const& path, std::map<ToToEng::Transform
     processNode(scene->mRootNode, scene, meshes, planes, modelTransform, gamma);
 }
 
-void ModelLoader::processNode(aiNode* node, const aiScene* scene, std::map<ToToEng::Transform*, Mesh*>& meshes,
-                              std::list<Plane*>& planes, ToToEng::Transform* parent,
-                              bool gamma)
+void ModelLoader::processNode(aiNode* node, const aiScene* scene, std::map<ToToEng::Transform*, Mesh*>& meshes, std::list<Plane*>& planes, ToToEng::Transform* parent, bool gamma)
 {
     aiVector3t<float> pos;
     aiVector3t<float> scale;
@@ -65,14 +62,10 @@ void ModelLoader::processNode(aiNode* node, const aiScene* scene, std::map<ToToE
     {
         aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
         std::string name = scene->mMeshes[node->mMeshes[i]]->mName.C_Str();
-        
-        if (name.find("plane") != std::string::npos && name.find("Plane") != std::string::npos)
+
+        if (name.find("plane") != std::string::npos || name.find("Plane") != std::string::npos)
         {
-            vec3 a = vec3(mesh->mVertices[0].x, mesh->mVertices[0].y, mesh->mVertices[0].z);
-            vec3 b = vec3(mesh->mVertices[1].x, mesh->mVertices[1].y, mesh->mVertices[1].z);
-            vec3 c = vec3(mesh->mVertices[2].x, mesh->mVertices[2].y, mesh->mVertices[2].z);
-            
-            planes.push_back(new Plane(a, b, c));
+            planes.push_back(processPlane(mesh, transform));
             continue;
         }
         // the node object only contains indices to index the actual objects in the scene. 
@@ -195,8 +188,20 @@ Mesh* ModelLoader::processMesh(aiMesh* mesh, const aiScene* scene, ToToEng::Tran
     return new Mesh{vertices, indices, textures, transform};
 }
 
-std::vector<Texture> ModelLoader::loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName,
-                                                       bool gamma)
+Plane* ModelLoader::processPlane(aiMesh* mesh, ToToEng::Transform* transform)
+{
+    vec3 a = {mesh->mVertices[0].x, mesh->mVertices[0].y, mesh->mVertices[0].z};
+    vec3 b = {mesh->mVertices[1].x, mesh->mVertices[1].y, mesh->mVertices[1].z};
+    vec3 c = {mesh->mVertices[2].x, mesh->mVertices[2].y, mesh->mVertices[2].z};
+
+    a = transform->getTransformMatrix() * vec4(a, 1.0f);
+    b = transform->getTransformMatrix() * vec4(b, 1.0f);
+    c = transform->getTransformMatrix() * vec4(c, 1.0f);
+
+    return new Plane(a, b, c);
+}
+
+std::vector<Texture> ModelLoader::loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName, bool gamma)
 {
     std::vector<Texture> textures;
     for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
@@ -277,9 +282,4 @@ unsigned TextureFromFile(const char* path, const std::string& directory, bool ga
     }
 
     return textureID;
-}
-
-bool stringContains(std::string str, std::string substr)
-{
-    return str.find(substr) != std::string::npos;
 }

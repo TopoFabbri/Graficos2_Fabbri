@@ -10,7 +10,7 @@ Plane::Plane(const glm::vec3& normal, const float distance)
 
 Plane::Plane(const glm::vec3& a, const glm::vec3& b, const glm::vec3& c)
 {
-    normal = glm::cross(b - a, c - a);
+    normal = glm::normalize(glm::cross(b - a, c - a));
     distance = -glm::dot(normal, a);
 }
 

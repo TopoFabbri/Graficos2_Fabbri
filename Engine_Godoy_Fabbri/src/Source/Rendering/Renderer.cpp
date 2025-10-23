@@ -190,9 +190,8 @@ namespace ToToEng
 
         vec3 up = vec3(0.0f, 1.0f, 0.0f);
 
-        if (abs(dot(plane.normal, up)) > 0.99f) {
+        if (abs(dot(plane.normal, up)) > 0.99f)
             up = vec3(1.0f, 0.0f, 0.0f);
-        }
 
         vec3 tangent = normalize(cross(up, plane.normal));
         vec3 bitangent = normalize(cross(plane.normal, tangent));

@@ -17,10 +17,11 @@ public:
     static bool gammaCorrection;
 
     static void loadModel(std::string const& path, std::map<ToToEng::Transform*, Mesh*>& meshes, std::list<Plane*>& planes, ToToEng::Transform* modelTransform, bool gamma = false);
-    
+
 private:
     static void processNode(aiNode* node, const aiScene* scene, std::map<ToToEng::Transform*, Mesh*>& meshes, std::list<Plane*>& planes, ToToEng::Transform* parent, bool gamma = false);
     static Mesh* processMesh(aiMesh* mesh, const aiScene* scene, ToToEng::Transform* transform, bool gamma = false);
+    static Plane* processPlane(aiMesh* mesh, ToToEng::Transform* transform);
     
     static std::vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName, bool gamma);
 };
