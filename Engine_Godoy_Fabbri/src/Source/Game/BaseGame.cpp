@@ -4,6 +4,8 @@
 #include "Model.h"
 #include "Sprite.h"
 #include "TpCamera.h"
+#include "Plane.h"
+#include <glm/geometric.hpp> // For glm::cross and glm::normalize
 
 namespace ToToEng
 {

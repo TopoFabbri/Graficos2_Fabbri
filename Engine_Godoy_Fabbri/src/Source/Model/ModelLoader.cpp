@@ -15,7 +15,8 @@ static std::string normalizePath(std::string p)
 std::vector<Texture> ModelLoader::textures_loaded;
 std::string ModelLoader::directory = "";
 
-void ModelLoader::loadModel(std::string const& path, std::map<ToToEng::Transform*, Mesh*>& meshes, ToToEng::Transform* modelTransform, bool gamma)
+void ModelLoader::loadModel(std::string const& path, std::map<ToToEng::Transform*, Mesh*>& meshes,
+                            std::list<Plane*>& planes, ToToEng::Transform* modelTransform, bool gamma)
 {
     // read file via ASSIMP
     Assimp::Importer importer;
@@ -40,10 +41,11 @@ void ModelLoader::loadModel(std::string const& path, std::map<ToToEng::Transform
     }
 
     // process ASSIMP's root node recursively
-    processNode(scene->mRootNode, scene, meshes, modelTransform, gamma);
+    processNode(scene->mRootNode, scene, meshes, planes, modelTransform, gamma);
 }
 
-void ModelLoader::processNode(aiNode* node, const aiScene* scene, std::map<ToToEng::Transform*, Mesh*>& meshes, ToToEng::Transform* parent,
+void ModelLoader::processNode(aiNode* node, const aiScene* scene, std::map<ToToEng::Transform*, Mesh*>& meshes,
+                              std::list<Plane*>& planes, ToToEng::Transform* parent,
                               bool gamma)
 {
     aiVector3t<float> pos;
@@ -61,9 +63,20 @@ void ModelLoader::processNode(aiNode* node, const aiScene* scene, std::map<ToToE
     // process each mesh located at the current node
     for (unsigned int i = 0; i < node->mNumMeshes; i++)
     {
+        aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+        std::string name = scene->mMeshes[node->mMeshes[i]]->mName.C_Str();
+        
+        if (name.find("plane") != std::string::npos && name.find("Plane") != std::string::npos)
+        {
+            vec3 a = vec3(mesh->mVertices[0].x, mesh->mVertices[0].y, mesh->mVertices[0].z);
+            vec3 b = vec3(mesh->mVertices[1].x, mesh->mVertices[1].y, mesh->mVertices[1].z);
+            vec3 c = vec3(mesh->mVertices[2].x, mesh->mVertices[2].y, mesh->mVertices[2].z);
+            
+            planes.push_back(new Plane(a, b, c));
+            continue;
+        }
         // the node object only contains indices to index the actual objects in the scene. 
         // the scene contains all the data, node is just to keep stuff organized (like relations between nodes).
-        aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
 
         Mesh* newMesh = processMesh(mesh, scene, transform, gamma);
         meshes[newMesh->transform] = newMesh;
@@ -71,7 +84,7 @@ void ModelLoader::processNode(aiNode* node, const aiScene* scene, std::map<ToToE
     // after we've processed all of the meshes (if any) we then recursively process each of the children nodes
     for (unsigned int i = 0; i < node->mNumChildren; i++)
     {
-        processNode(node->mChildren[i], scene, meshes, transform, gamma);
+        processNode(node->mChildren[i], scene, meshes, planes, transform, gamma);
     }
 }
 
@@ -264,4 +277,9 @@ unsigned TextureFromFile(const char* path, const std::string& directory, bool ga
     }
 
     return textureID;
+}
+
+bool stringContains(std::string str, std::string substr)
+{
+    return str.find(substr) != std::string::npos;
 }

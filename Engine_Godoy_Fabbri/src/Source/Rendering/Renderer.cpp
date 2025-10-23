@@ -4,6 +4,7 @@
 #include <sstream>
 
 #include "Camera.h"
+#include "Plane.h"
 
 namespace ToToEng
 {
@@ -181,6 +182,31 @@ namespace ToToEng
         drawLine({min.x, max.y, min.z}, {max.x, max.y, min.z}, color);
         drawLine({max.x, min.y, min.z}, {max.x, max.y, min.z}, color);
         drawLine({max.x, min.y, min.z}, {max.x, min.y, max.z}, color);
+    }
+    
+    void Renderer::drawPlaneAt(const Plane& plane, vec3 pos, const vec4& color, float size)
+    {
+        pos = plane.closestPointOnPlane(pos);
+
+        vec3 up = vec3(0.0f, 1.0f, 0.0f);
+
+        if (abs(dot(plane.normal, up)) > 0.99f) {
+            up = vec3(1.0f, 0.0f, 0.0f);
+        }
+
+        vec3 tangent = normalize(cross(up, plane.normal));
+        vec3 bitangent = normalize(cross(plane.normal, tangent));
+
+        vec3 corner1 = pos + size * tangent + size * bitangent;
+        vec3 corner2 = pos - size * tangent + size * bitangent;
+        vec3 corner3 = pos - size * tangent - size * bitangent;
+        vec3 corner4 = pos + size * tangent - size * bitangent;
+
+        drawLine(corner1, corner2, color);
+        drawLine(corner2, corner3, color);
+        drawLine(corner3, corner4, color);
+        drawLine(corner4, corner1, color);
+        drawLine(pos, pos + size / 2.f * plane.normal, color);
     }
 
     void Renderer::drawEntity2D(unsigned int& VAO, unsigned int indexQty, vec4 color, mat4 trans, unsigned int texture)

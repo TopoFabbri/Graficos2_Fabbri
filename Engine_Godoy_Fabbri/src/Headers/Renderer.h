@@ -7,6 +7,7 @@
 #include "Material.h"
 #include "DirectionalLight.h"
 #include "Mesh.h"
+#include "Plane.h"
 #include "SpotLight.h"
 
 #pragma region MACROS
@@ -64,6 +65,7 @@ namespace ToToEng
 		void deleteBuffers(unsigned int& VBO, unsigned int& IBO, unsigned int& EBO, unsigned int id);
 		void drawLine(const vec3& start, const vec3& end, const vec4& color);
 		void drawWireBox(vec3 min, vec3 max, const vec4& color);
+		void drawPlaneAt(const Plane& plane, vec3 pos, const vec4& color, float size);
 		void drawEntity2D(unsigned int& VAO, unsigned int indexQty, vec4 color, mat4 trans, unsigned int texture);
 		void drawEntity3D(unsigned int& VAO, unsigned int indexQty, Material mat, mat4 trans);
 		void drawShape(unsigned int& VAO, unsigned int indexQty, vec4 color, mat4 trans);

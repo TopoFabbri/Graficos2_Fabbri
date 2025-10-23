@@ -2,7 +2,7 @@
 
 ToToEng::Model::Model(Renderer* renderer, std::string const& path, bool gamma) : Entity3D(renderer)
 {
-    ModelLoader::loadModel(path, meshes, transform, gamma);
+    ModelLoader::loadModel(path, meshes, planes, transform, gamma);
     aabb = Box();
 }
 
@@ -57,11 +57,14 @@ void ToToEng::Model::draw()
 {
     renderer->drawWireBox(aabb.min, aabb.max, {0, 1, 1, 1});
     
-    for (std::pair<Transform* const, Mesh*> mesh : meshes)
+    for (const std::pair<Transform* const, Mesh*> mesh : meshes)
     {
         renderer->drawWireBox(mesh.second->getBox().min, mesh.second->getBox().max, {0, 1, 1, 1});
 
         renderer->drawModel3D(mesh.second->VAO, mesh.second->indices.size(),
                               mesh.second->transform->getTransformMatrix(), mesh.second->textures);
     }
+
+    for (const Plane* plane : planes)
+        renderer->drawPlaneAt(*plane, transform->getPos(), {1, 1, 0, 1}, 5.0f);
 }

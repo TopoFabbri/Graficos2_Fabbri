@@ -6,6 +6,7 @@
 #include "Entity3D.h"
 #include "Mesh.h"
 #include "ModelLoader.h"
+#include "Plane.h"
 
 namespace ToToEng
 {
@@ -13,6 +14,7 @@ namespace ToToEng
     {
     public:
         std::map<Transform*, Mesh*> meshes;
+        std::list<Plane*> planes;
         Box aabb;
         
         // constructor, expects a filepath to a 3D model.

@@ -9,6 +9,7 @@
 #include "Exports.h"
 #include "Input.h"
 #include "GameTime.h"
+#include "Plane.h"
 
 namespace ToToEng
 {

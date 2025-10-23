@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../src/Headers/BaseGame.h"
+#include "Headers/Plane.h"
 
 using namespace ToToEng;
 
