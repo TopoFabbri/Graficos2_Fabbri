@@ -62,7 +62,7 @@ ToToEng::Sprite::~Sprite()
 {
 }
 
-void ToToEng::Sprite::draw()
+void ToToEng::Sprite::draw(std::list<Plane*> scenePlanes)
 {
     renderer->drawEntity2D(VAO, indexQty, color, transform->getTransformMatrix(), texture);
 }

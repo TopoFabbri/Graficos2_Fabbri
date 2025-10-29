@@ -3,6 +3,7 @@
 #include <algorithm>
 
 #include "Headers/Entity3D.h"
+#include "Headers/GameTime.h"
 #include "Headers/Model.h"
 #include "Headers/Sprite.h"
 #include "Headers/TpCamera.h"
@@ -30,8 +31,8 @@ Game::Game(int width, int height, const char* title) : BaseGame(width, height, t
     // entities.back()->transform->setPos({0.f, 0.f, 0.f});
     // entities.back()->transform->setScale({.1f, .1f, .1f});
 
-    entities.push_back(new Model(renderer, "../res/Tank/Tank.fbx", true));
-    entities.back()->transform->setPos({0.f, 0.f, 0.f});
+    importModel("../res/Tank/Tank.fbx");
+    getEntities().back()->transform->setPos({0.f, 0.f, 0.f});
 }
 
 Game::~Game()
@@ -41,7 +42,7 @@ Game::~Game()
 void Game::update()
 {
     constexpr float characterSpeed = 5.f;
-    const Entity* character = entities.front();
+    const Entity* character = getEntities().front();
 
     // Tank movement
     if (Input::getKey(Input::i, Input::Repeated))

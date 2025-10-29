@@ -22,7 +22,7 @@ namespace ToToEng
         Sprite(Renderer* renderer);
         ~Sprite() override;
         
-        void draw() override;
+        void draw(std::list<Plane*> scenePlanes) override;
         void loadTexture(const char* filePath);
         void addAnimation(float duration, int frameQty, int animQty, const char* filePath);
         void addAnimation(float duration, int frameQty, int animQty, const char* filePath, int frameStart, int frameEnd);

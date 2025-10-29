@@ -30,6 +30,7 @@
     <ClCompile Include="..\src\Source\Entities\Shape.cpp" />
     <ClCompile Include="..\src\Source\Entities\Sprite.cpp" />
     <ClCompile Include="..\src\Source\Game\BaseGame.cpp" />
+    <ClCompile Include="..\src\Source\Game\Scene.cpp" />
     <ClCompile Include="..\src\Source\Light\DirectionalLight.cpp" />
     <ClCompile Include="..\src\Source\Light\LightSource.cpp" />
     <ClCompile Include="..\src\Source\Light\PointLight.cpp" />
@@ -71,6 +72,7 @@
     <ClInclude Include="..\src\Headers\Plane.h" />
     <ClInclude Include="..\src\Headers\PointLight.h" />
     <ClInclude Include="..\src\Headers\Renderer.h" />
+    <ClInclude Include="..\src\Headers\Scene.h" />
     <ClInclude Include="..\src\Headers\Shader.h" />
     <ClInclude Include="..\src\Headers\Shape.h" />
     <ClInclude Include="..\src\Headers\SpotLight.h" />

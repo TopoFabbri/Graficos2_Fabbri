@@ -42,7 +42,7 @@ namespace ToToEng
 		virtual void genBuffers();
 		virtual void deleteBuffers();
 		virtual void update();
-		virtual void draw() = 0;
+		virtual void draw(std::list<Plane*> scenePlanes) = 0;
 
 #pragma region Getters
 		vec4 getColor();

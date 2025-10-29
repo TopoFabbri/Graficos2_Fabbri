@@ -8,11 +8,11 @@
 #include "Shape.h"
 #include "Exports.h"
 #include "Input.h"
-#include "GameTime.h"
-#include "Plane.h"
 
 namespace ToToEng
 {
+    class Scene;
+
     class TOTO_API BaseGame
     {
     private:
@@ -21,8 +21,8 @@ namespace ToToEng
 
     protected:
         Renderer* renderer;
-        std::list<Entity*> entities = std::list<Entity*>();
         Camera* camera;
+        Scene* currentScene;
 
     public:
         BaseGame(int width, int height, const char* title);
@@ -30,12 +30,17 @@ namespace ToToEng
 
         void run();
 
-        void endGame();
+        void endGame() const;
 
         virtual void update() = 0;
         virtual void onDraw() = 0;
 
         void drawLine(const vec3& start, const vec3& end, const vec4& color) const;
         void drawWireBox(vec3 min, vec3 max, const vec4& color) const;
+
+        void importModel(const char* path) const;
+        void addEntity(Entity* entity) const;
+        void removeEntity(Entity* entity) const;
+        std::list<Entity*> getEntities() const;
     };
 }

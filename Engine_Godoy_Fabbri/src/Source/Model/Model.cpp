@@ -55,10 +55,10 @@ void ToToEng::Model::update()
     }
 }
 
-void ToToEng::Model::draw()
+void ToToEng::Model::draw(const std::list<Plane*> scenePlanes)
 {
     drawPlanes();
-    drawChildren(transform);
+    drawChildren(transform, scenePlanes);
 }
 
 void ToToEng::Model::drawPlanes() const
@@ -67,7 +67,7 @@ void ToToEng::Model::drawPlanes() const
         renderer->drawPlaneAt(*plane, transform->getPos(), {1, 1, 0, 1}, 5.0f);
 }
 
-bool ToToEng::Model::shouldRender(Transform* childTransform)
+bool ToToEng::Model::shouldRender(Transform* childTransform, const std::list<Plane*>& scenePlanes)
 {
     Box boundingBox = meshes[childTransform]->getBox();
     std::list<vec3> vertices = std::list<vec3>();
@@ -81,8 +81,8 @@ bool ToToEng::Model::shouldRender(Transform* childTransform)
     vertices.emplace_back(boundingBox.min.x, boundingBox.max.y, boundingBox.max.z);
     vertices.emplace_back(boundingBox.max.x, boundingBox.min.y, boundingBox.max.z);
     vertices.emplace_back(boundingBox.max.x, boundingBox.max.y, boundingBox.min.z);
-    
-    for (const Plane* plane : planes)
+
+    for (const Plane* plane : scenePlanes)
     {
         bool sameSide = false;
         
@@ -102,9 +102,9 @@ bool ToToEng::Model::shouldRender(Transform* childTransform)
     return true;
 }
 
-void ToToEng::Model::drawChildren(Transform* trans)
+void ToToEng::Model::drawChildren(Transform* trans, const std::list<Plane*>& scenePlanes)
 {
-    std::list<Transform*> children = trans->getChildren();
+    const std::list<Transform*> children = trans->getChildren();
     if (children.empty()) return;
     
     for (Transform* childTransform : children)
@@ -113,12 +113,12 @@ void ToToEng::Model::drawChildren(Transform* trans)
         {
             renderer->drawWireBox(meshes[childTransform]->getBox().min, meshes[childTransform]->getBox().max, {0, 1, 1, 1});
                 
-            if (!shouldRender(childTransform)) continue;
+            if (!shouldRender(childTransform, scenePlanes)) continue;
 
             renderer->drawModel3D(meshes[childTransform]->VAO, meshes[childTransform]->indices.size(), childTransform->getTransformMatrix(),
                 meshes[childTransform]->textures);
         }
 
-        drawChildren(childTransform);
+        drawChildren(childTransform, scenePlanes);
     }
 }

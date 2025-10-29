@@ -2,10 +2,10 @@
 
 #include "CollisionManager.h"
 #include "Model.h"
-#include "Sprite.h"
 #include "TpCamera.h"
-#include "Plane.h"
-#include <glm/geometric.hpp> // For glm::cross and glm::normalize
+
+#include "GameTime.h"
+#include "Scene.h"
 
 namespace ToToEng
 {
@@ -15,6 +15,7 @@ namespace ToToEng
         window = new Window(width, height, title);
         renderer = new Renderer(window);
         collisionManager = new CollisionManager();
+        currentScene = new Scene();
 
         Input::setCursorVisibility(false);
 
@@ -23,21 +24,11 @@ namespace ToToEng
 
     BaseGame::~BaseGame()
     {
+        delete currentScene;
         delete renderer;
         delete window;
         delete camera;
         delete collisionManager;
-
-        const int size = static_cast<int>(entities.size());
-
-        for (int i = 0; i < size; i++)
-        {
-            Entity* tmp = entities.front();
-            entities.pop_front();
-            delete tmp;
-        }
-
-        entities.clear();
     }
 
     void BaseGame::run()
@@ -48,13 +39,13 @@ namespace ToToEng
             
             update();
 
-            for (Entity* entity : entities)
+            for (Entity* entity : currentScene->getEntities())
                 entity->update();
 
             renderer->beginDraw();
 
-            for (Entity* entity : entities)
-                entity->draw();
+            for (Entity* entity : currentScene->getEntities())
+                entity->draw(currentScene->getPlanes());
 
             onDraw();
 
@@ -64,7 +55,7 @@ namespace ToToEng
         }
     }
 
-    void BaseGame::endGame()
+    void BaseGame::endGame() const
     {
         window->close();
     }
@@ -77,5 +68,25 @@ namespace ToToEng
     void BaseGame::drawWireBox(vec3 min, vec3 max, const vec4& color) const
     {
         renderer->drawWireBox(min, max, color);
+    }
+
+    void BaseGame::importModel(const char* path) const
+    {
+        currentScene->importModel(renderer, path, true);
+    }
+
+    void BaseGame::addEntity(Entity* entity) const
+    {
+        currentScene->addEntity(entity);
+    }
+
+    void BaseGame::removeEntity(Entity* entity) const
+    {
+        currentScene->removeEntity(entity);
+    }
+
+    std::list<Entity*> BaseGame::getEntities() const
+    {
+        return currentScene->getEntities();
     }
 }
