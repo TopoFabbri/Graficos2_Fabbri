@@ -38,12 +38,6 @@ std::list<Plane*> ToToEng::Scene::getPlanes()
 void ToToEng::Scene::importModel(Renderer* renderer, std::string const& path, bool gamma)
 {
     Model* model = new Model(renderer, path, gamma);
-
-    std::cout << model->planes.size() << std::endl;
-    
-    for (Plane* plane : model->planes)
-        addPlane(plane);
-    
     addEntity(model);
 }
 

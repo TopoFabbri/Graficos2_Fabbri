@@ -329,6 +329,11 @@ namespace ToToEng
         this->projection = projection;
     }
 
+    mat4 Renderer::getProjection() const
+    {
+        return projection;
+    }
+
     void Renderer::sendDirectionalLight(DirectionalLight* light, int i, unsigned int shaderId)
     {
         std::string index = "lights[" + std::to_string(i) + "].";

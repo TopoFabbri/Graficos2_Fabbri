@@ -141,7 +141,7 @@ namespace ToToEng
         delete material;
     }
 
-    void Entity3D::draw(std::list<Plane*> scenePlanes)
+    void Entity3D::draw(std::list<Plane*> frustumPlanes)
     {
         renderer->drawEntity3D(VAO, indexQty, *material, transform->getTransformMatrix());
     }

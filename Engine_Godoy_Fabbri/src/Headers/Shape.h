@@ -12,6 +12,6 @@ namespace ToToEng
 		Shape(Renderer* renderer);
 		~Shape() override;
 
-		void draw(std::list<Plane*> scenePlanes) override;
+		void draw(std::list<Plane*> frustumPlanes) override;
 	};
 }

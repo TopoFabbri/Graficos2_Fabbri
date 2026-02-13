@@ -87,7 +87,7 @@ void ToToEng::Entity2D::updateVao()
     genBuffers();
 }
 
-void ToToEng::Entity2D::draw(std::list<Plane*> scenePlanes)
+void ToToEng::Entity2D::draw(std::list<Plane*> frustumPlanes)
 {
 }
 

@@ -25,7 +25,7 @@ namespace ToToEng
 
 		void updateVao() override;
 
-		void draw(std::list<Plane*> scenePlanes) override;
+		void draw(std::list<Plane*> frustumPlanes) override;
 
 		void setTrigger(bool isTrigger);
 	};

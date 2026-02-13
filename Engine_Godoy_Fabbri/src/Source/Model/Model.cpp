@@ -55,10 +55,9 @@ void ToToEng::Model::update()
     }
 }
 
-void ToToEng::Model::draw(const std::list<Plane*> scenePlanes)
+void ToToEng::Model::draw(const std::list<Plane*> frustumPlanes)
 {
-    drawPlanes();
-    drawChildren(transform, scenePlanes);
+    drawChildren(transform, frustumPlanes);
 }
 
 void ToToEng::Model::drawPlanes() const
@@ -67,42 +66,40 @@ void ToToEng::Model::drawPlanes() const
         renderer->drawPlaneAt(*plane, transform->getPos(), {1, 1, 0, 1}, 5.0f);
 }
 
-bool ToToEng::Model::shouldRender(Transform* childTransform, const std::list<Plane*>& scenePlanes)
+bool ToToEng::Model::shouldRender(Transform* childTransform, const std::list<Plane*>& frustumPlanes)
 {
     Box boundingBox = meshes[childTransform]->getBox();
-    std::list<vec3> vertices = std::list<vec3>();
+    vec3 vertices[8];
 
-    const vec3 camPos = Camera::main->getPos();
-    vertices.push_back(boundingBox.min);
-    vertices.emplace_back(boundingBox.max.x, boundingBox.min.y, boundingBox.min.z);
-    vertices.emplace_back(boundingBox.min.x, boundingBox.max.y, boundingBox.min.z);
-    vertices.emplace_back(boundingBox.min.x, boundingBox.min.y, boundingBox.max.z);
-    vertices.push_back(boundingBox.max);
-    vertices.emplace_back(boundingBox.min.x, boundingBox.max.y, boundingBox.max.z);
-    vertices.emplace_back(boundingBox.max.x, boundingBox.min.y, boundingBox.max.z);
-    vertices.emplace_back(boundingBox.max.x, boundingBox.max.y, boundingBox.min.z);
+    vertices[0] = boundingBox.min;
+    vertices[1] = {boundingBox.max.x, boundingBox.min.y, boundingBox.min.z};
+    vertices[2] = {boundingBox.min.x, boundingBox.max.y, boundingBox.min.z};
+    vertices[3] = {boundingBox.min.x, boundingBox.min.y, boundingBox.max.z};
+    vertices[4] = boundingBox.max;
+    vertices[5] = {boundingBox.min.x, boundingBox.max.y, boundingBox.max.z};
+    vertices[6] = {boundingBox.max.x, boundingBox.min.y, boundingBox.max.z};
+    vertices[7] = {boundingBox.max.x, boundingBox.max.y, boundingBox.min.z};
 
-    for (const Plane* plane : scenePlanes)
+    for (const Plane* plane : frustumPlanes)
     {
-        bool sameSide = false;
-        
-        for (vec3 vertex : vertices)
+        bool allOutside = true;
+        for (const vec3& vertex : vertices)
         {
-            if (plane->sameSide(camPos, vertex))
+            if (plane->distanceToPoint(vertex) <= 0.0f)
             {
-                sameSide = true;
+                allOutside = false;
                 break;
             }
         }
 
-        if (!sameSide)
+        if (allOutside)
             return false;
     }
 
     return true;
 }
 
-void ToToEng::Model::drawChildren(Transform* trans, const std::list<Plane*>& scenePlanes)
+void ToToEng::Model::drawChildren(Transform* trans, const std::list<Plane*>& frustumPlanes)
 {
     const std::list<Transform*> children = trans->getChildren();
     if (children.empty()) return;
@@ -111,14 +108,14 @@ void ToToEng::Model::drawChildren(Transform* trans, const std::list<Plane*>& sce
     {
         if (meshes.find(childTransform) != meshes.end())
         {
+            if (!shouldRender(childTransform, frustumPlanes)) continue;
+
             renderer->drawWireBox(meshes[childTransform]->getBox().min, meshes[childTransform]->getBox().max, {0, 1, 1, 1});
                 
-            if (!shouldRender(childTransform, scenePlanes)) continue;
-
             renderer->drawModel3D(meshes[childTransform]->VAO, meshes[childTransform]->indices.size(), childTransform->getTransformMatrix(),
                 meshes[childTransform]->textures);
         }
 
-        drawChildren(childTransform, scenePlanes);
+        drawChildren(childTransform, frustumPlanes);
     }
 }

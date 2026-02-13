@@ -22,11 +22,11 @@ namespace ToToEng
 
         void update() override;
         // draws the model, and thus all its meshes
-        void draw(std::list<Plane*> scenePlanes) override;
+        void draw(std::list<Plane*> frustumPlanes) override;
         
     protected:
         void drawPlanes() const;
-        bool shouldRender(ToToEng::Transform* childTransform, const std::list<Plane*>& scenePlanes);
-        void drawChildren(Transform* trans, const std::list<Plane*>& scenePlanes);
+        bool shouldRender(ToToEng::Transform* childTransform, const std::list<Plane*>& frustumPlanes);
+        void drawChildren(Transform* trans, const std::list<Plane*>& frustumPlanes);
     };
 }

@@ -26,10 +26,16 @@ namespace ToToEng
         forward = glm::vec3(0.0f, 0.0f, 1.0f);
         up = glm::vec3(0.0f, 1.0f, 0.0f);
         rot = glm::vec3(0.0f, 180.0f, 0.0f);
+
+        frustumPlanes = std::list<Plane*>();
     }
 
     Camera::~Camera()
     {
+        for (const Plane* plane : frustumPlanes)
+            delete plane;
+        frustumPlanes.clear();
+
         if (main == this)
             main = nullptr;
     }
@@ -81,5 +87,60 @@ namespace ToToEng
         rot.x = glm::clamp(rot.x + amount, -89.9f, 89.9f);
         
         updateRotation();
+    }
+
+    void Camera::updateFrustum(const glm::mat4& projection)
+    {
+        const glm::mat4 view = getView();
+        const glm::mat4 vp = projection * view;
+
+        for (const Plane* plane : frustumPlanes)
+            delete plane;
+        frustumPlanes.clear();
+
+        // Extract planes and flip them to use the same logic as bsp (outward normals)
+        // Left
+        frustumPlanes.push_back(new Plane(
+            -glm::vec3(vp[0][3] + vp[0][0], vp[1][3] + vp[1][0], vp[2][3] + vp[2][0]),
+            -(vp[3][3] + vp[3][0])
+        ));
+        // Right
+        frustumPlanes.push_back(new Plane(
+            -glm::vec3(vp[0][3] - vp[0][0], vp[1][3] - vp[1][0], vp[2][3] - vp[2][0]),
+            -(vp[3][3] - vp[3][0])
+        ));
+        // Bottom
+        frustumPlanes.push_back(new Plane(
+            -glm::vec3(vp[0][3] + vp[0][1], vp[1][3] + vp[1][1], vp[2][3] + vp[2][1]),
+            -(vp[3][3] + vp[3][1])
+        ));
+        // Top
+        frustumPlanes.push_back(new Plane(
+            -glm::vec3(vp[0][3] - vp[0][1], vp[1][3] - vp[1][1], vp[2][3] - vp[2][1]),
+            -(vp[3][3] - vp[3][1])
+        ));
+        // Near
+        frustumPlanes.push_back(new Plane(
+            -glm::vec3(vp[0][3] + vp[0][2], vp[1][3] + vp[1][2], vp[2][3] + vp[2][2]),
+            -(vp[3][3] + vp[3][2])
+        ));
+        // Far
+        frustumPlanes.push_back(new Plane(
+            -glm::vec3(vp[0][3] - vp[0][2], vp[1][3] - vp[1][2], vp[2][3] - vp[2][2]),
+            -(vp[3][3] - vp[3][2])
+        ));
+
+        // Normalize planes
+        for (Plane* plane : frustumPlanes)
+        {
+            const float length = glm::length(plane->normal);
+            plane->normal /= length;
+            plane->distance /= length;
+        }
+    }
+
+    std::list<Plane*> Camera::getFrustumPlanes() const
+    {
+        return frustumPlanes;
     }
 }

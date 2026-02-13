@@ -9,25 +9,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59b83834-1b16-455b-92bb-7e2412bbcbcc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Headers/Scene.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Source/Game/Scene.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Engine_Godoy_Fabbri/Engine_Godoy_Fabbri.vcxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestProject/Game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TestProject/Game.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/Tank/Tank.fbx" beforeDir="false" afterPath="$PROJECT_DIR$/res/Tank/Tank.fbx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/BaseGame.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/BaseGame.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Headers/Camera.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Camera.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Headers/Entity.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Entity.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Headers/Entity2D.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Entity2D.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Headers/Entity3D.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Entity3D.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Headers/Model.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Model.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Headers/Renderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Renderer.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Headers/Shape.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Shape.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/Sprite.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Sprite.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Source/Camera/Camera.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Camera/Camera.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Source/Entities/Entity2D.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Entities/Entity2D.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Source/Entities/Entity3D.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Entities/Entity3D.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Source/Entities/Shape.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Entities/Shape.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Source/Entities/Sprite.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Entities/Sprite.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Source/Game/BaseGame.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Game/BaseGame.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Source/Model/Model.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Model/Model.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Source/Rendering/Renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Rendering/Renderer.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +35,10 @@
   </component>
   <component name="DpaMonitoringSettings">
     <option name="firstShow" value="false" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="70" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -61,6 +61,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="cidr-memory-view://2" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/assimp/material.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/assimp/material.inl" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/assimp/mesh.h" root0="SKIP_HIGHLIGHTING" />
@@ -83,6 +84,10 @@
     <setting file="file://$PROJECT_DIR$/src/Source/Model/Model.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Source/Rendering/Renderer.cpp" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="false" />
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -104,6 +109,7 @@
     "C/C++ Project.Engine_Godoy_Fabbri.executor": "Run",
     "C/C++ Project.TestProject.executor": "Run",
     "RunOnceActivity.CodyProjectSettingsMigration": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -118,7 +124,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.sourceCode.C++",
+    "settings.editor.selected.configurable": "settings.sync",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }

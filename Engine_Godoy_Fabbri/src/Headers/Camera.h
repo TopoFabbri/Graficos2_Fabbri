@@ -1,8 +1,10 @@
 #pragma once
 #include <glm/fwd.hpp>
 #include <glm/vec3.hpp>
+#include <list>
 
 #include "Exports.h"
+#include "Plane.h"
 
 namespace ToToEng
 {
@@ -13,6 +15,8 @@ namespace ToToEng
 		glm::vec3 forward;
 		glm::vec3 up;
 		glm::vec3 rot;
+
+		std::list<Plane*> frustumPlanes;
 
 		glm::vec3 getRight();
 		void updateRotation();
@@ -34,5 +38,8 @@ namespace ToToEng
 		
 		void rotateYaw(float amount);
 		void rotatePitch(float amount);
+
+		void updateFrustum(const glm::mat4& projection);
+		std::list<Plane*> getFrustumPlanes() const;
 	};
 }

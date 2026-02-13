@@ -75,5 +75,6 @@ namespace ToToEng
 		void sendPointLight(PointLight* light, int i, unsigned int shaderId);
 		void sendSpotLight(SpotLight* light, int i, unsigned int shaderId);
 		void drawModel3D(unsigned int& VAO, unsigned int indexQty, mat4 trans, std::vector<Texture> textures);
+		mat4 getProjection() const;
 	};
 }

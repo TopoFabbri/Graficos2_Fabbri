@@ -44,8 +44,10 @@ namespace ToToEng
 
             renderer->beginDraw();
 
+            camera->updateFrustum(renderer->getProjection());
+
             for (Entity* entity : currentScene->getEntities())
-                entity->draw(currentScene->getPlanes());
+                entity->draw(camera->getFrustumPlanes());
 
             onDraw();
 

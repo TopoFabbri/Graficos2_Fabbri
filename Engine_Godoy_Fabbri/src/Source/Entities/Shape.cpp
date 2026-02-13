@@ -45,7 +45,7 @@ ToToEng::Shape::~Shape()
 {
 }
 
-void ToToEng::Shape::draw(std::list<Plane*> scenePlanes)
+void ToToEng::Shape::draw(std::list<Plane*> frustumPlanes)
 {
 	renderer->drawShape(VAO, indexQty, color, transform->getTransformMatrix());
 }
