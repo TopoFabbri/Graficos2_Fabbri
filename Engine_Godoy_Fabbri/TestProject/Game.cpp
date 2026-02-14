@@ -112,6 +112,14 @@ void Game::update()
     if (abs(mouseDelta.y) > 0.0001f)
         camera->rotatePitch(camSens * mouseDelta.y * GameTime::getDelta());
 
+    // Frustum FOV control
+    if (Input::getKey(Input::up, Input::Repeated))
+        camera->setFrustumFov(camera->getFrustumFov() + 20.f * GameTime::getDelta());
+    if (Input::getKey(Input::down, Input::Repeated))
+        camera->setFrustumFov(camera->getFrustumFov() - 20.f * GameTime::getDelta());
+
+    camera->setFrustumFov(glm::clamp(camera->getFrustumFov(), 1.0f, 179.0f));
+
     // static_cast<TpCamera*>(camera)->setReference(character->transform->getPos());
     // static_cast<TpCamera*>(camera)->updateCamera();
 

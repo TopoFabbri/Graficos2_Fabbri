@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "Renderer.h"
 
 #include <iostream>
 #include <glm/ext/matrix_transform.hpp>
@@ -26,6 +27,11 @@ namespace ToToEng
         forward = glm::vec3(0.0f, 0.0f, 1.0f);
         up = glm::vec3(0.0f, 1.0f, 0.0f);
         rot = glm::vec3(0.0f, 180.0f, 0.0f);
+
+        frustumFov = 45.0f;
+        nearPlane = 0.1f;
+        farPlane = 100.0f;
+        aspect = 1.0f;
 
         frustumPlanes = std::list<Plane*>();
     }
@@ -89,8 +95,13 @@ namespace ToToEng
         updateRotation();
     }
 
-    void Camera::updateFrustum(const glm::mat4& projection)
+    void Camera::updateFrustum(float aspect, float near, float far)
     {
+        this->aspect = aspect;
+        this->nearPlane = near;
+        this->farPlane = far;
+
+        const glm::mat4 projection = glm::perspective(glm::radians(frustumFov), aspect, near, far);
         const glm::mat4 view = getView();
         const glm::mat4 vp = projection * view;
 
@@ -137,10 +148,55 @@ namespace ToToEng
             plane->normal /= length;
             plane->distance /= length;
         }
+
+        // Calculate corners
+        const glm::mat4 invVP = glm::inverse(vp);
+        const glm::vec4 ndcCorners[8] = {
+            {-1, -1, -1, 1}, { 1, -1, -1, 1}, {-1,  1, -1, 1}, { 1,  1, -1, 1},
+            {-1, -1,  1, 1}, { 1, -1,  1, 1}, {-1,  1,  1, 1}, { 1,  1,  1, 1}
+        };
+
+        for (int i = 0; i < 8; i++)
+        {
+            glm::vec4 corner = invVP * ndcCorners[i];
+            frustumCorners[i] = glm::vec3(corner) / corner.w;
+        }
     }
 
     std::list<Plane*> Camera::getFrustumPlanes() const
     {
         return frustumPlanes;
+    }
+
+    void Camera::setFrustumFov(float fov)
+    {
+        frustumFov = fov;
+    }
+
+    float Camera::getFrustumFov() const
+    {
+        return frustumFov;
+    }
+
+    void Camera::drawFrustum(Renderer* renderer)
+    {
+        const glm::vec4 color = {1.0f, 1.0f, 1.0f, 1.0f};
+        // Near plane
+        renderer->drawLine(frustumCorners[0], frustumCorners[1], color);
+        renderer->drawLine(frustumCorners[1], frustumCorners[3], color);
+        renderer->drawLine(frustumCorners[3], frustumCorners[2], color);
+        renderer->drawLine(frustumCorners[2], frustumCorners[0], color);
+
+        // Far plane
+        renderer->drawLine(frustumCorners[4], frustumCorners[5], color);
+        renderer->drawLine(frustumCorners[5], frustumCorners[7], color);
+        renderer->drawLine(frustumCorners[7], frustumCorners[6], color);
+        renderer->drawLine(frustumCorners[6], frustumCorners[4], color);
+
+        // Connecting lines
+        renderer->drawLine(frustumCorners[0], frustumCorners[4], color);
+        renderer->drawLine(frustumCorners[1], frustumCorners[5], color);
+        renderer->drawLine(frustumCorners[2], frustumCorners[6], color);
+        renderer->drawLine(frustumCorners[3], frustumCorners[7], color);
     }
 }

@@ -44,7 +44,9 @@ namespace ToToEng
 
             renderer->beginDraw();
 
-            camera->updateFrustum(renderer->getProjection());
+            float aspect = static_cast<float>(window->getWidth()) / static_cast<float>(window->getHeight());
+            camera->updateFrustum(aspect, 0.1f, 100.0f);
+            camera->drawFrustum(renderer);
 
             for (Entity* entity : currentScene->getEntities())
                 entity->draw(camera->getFrustumPlanes());

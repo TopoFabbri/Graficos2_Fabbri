@@ -8,6 +8,8 @@
 
 namespace ToToEng
 {
+	class Renderer;
+
 	class TOTO_API Camera
 	{
 	protected:
@@ -15,6 +17,12 @@ namespace ToToEng
 		glm::vec3 forward;
 		glm::vec3 up;
 		glm::vec3 rot;
+
+		float frustumFov;
+		float nearPlane;
+		float farPlane;
+		float aspect;
+		glm::vec3 frustumCorners[8];
 
 		std::list<Plane*> frustumPlanes;
 
@@ -39,7 +47,12 @@ namespace ToToEng
 		void rotateYaw(float amount);
 		void rotatePitch(float amount);
 
-		void updateFrustum(const glm::mat4& projection);
+		void updateFrustum(float aspect, float near, float far);
 		std::list<Plane*> getFrustumPlanes() const;
+
+		void setFrustumFov(float fov);
+		float getFrustumFov() const;
+
+		void drawFrustum(Renderer* renderer);
 	};
 }

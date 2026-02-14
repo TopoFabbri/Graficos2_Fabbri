@@ -10,20 +10,11 @@
   <component name="ChangeListManager">
     <list default="true" id="59b83834-1b16-455b-92bb-7e2412bbcbcc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Engine_Godoy_Fabbri/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestProject/Game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TestProject/Game.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Headers/Camera.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Camera.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/Entity.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Entity.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/Entity2D.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Entity2D.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/Entity3D.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Entity3D.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/Model.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Model.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/Renderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Renderer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Headers/Shape.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Shape.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Headers/Input.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Headers/Input.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Source/Camera/Camera.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Camera/Camera.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Source/Entities/Entity2D.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Entities/Entity2D.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Source/Entities/Entity3D.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Entities/Entity3D.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Source/Entities/Shape.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Entities/Shape.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Source/Game/BaseGame.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Game/BaseGame.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Source/Model/Model.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Model/Model.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Source/Rendering/Renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source/Rendering/Renderer.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +108,7 @@
     "WebServerToolWindowFactoryState": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "frustum-culling",
     "junie.onboarding.icon.badge.shown": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",

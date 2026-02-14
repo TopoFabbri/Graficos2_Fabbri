@@ -61,6 +61,8 @@ namespace ToToEng
             n8 = GLFW_KEY_KP_8,
             n9 = GLFW_KEY_KP_9,
             n0 = GLFW_KEY_KP_0,
+            up = GLFW_KEY_UP,
+            down = GLFW_KEY_DOWN,
             enter = GLFW_KEY_ENTER,
         };
 
